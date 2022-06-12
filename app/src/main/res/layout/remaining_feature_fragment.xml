@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/appinforimg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/iconinforel"
+        android:layout_marginBottom="-145dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slider_img_3" />
+
+    <RelativeLayout
+        android:id="@+id/iconinforel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/picture_bg">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp">
+
+            <RelativeLayout
+                android:id="@+id/widerangerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/widerangetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Wide Range"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/widerangeicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/widerangetext"
+                    android:background="@drawable/circlebackground"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_engine" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/affordeableservicesrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/widerangerel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/affordeableservicetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Affordable Services"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/affordeableserviceicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/affordeableservicetext"
+                    android:background="@drawable/circlebackground"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_services" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/makesrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/affordeableservicesrel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/makestext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="All Makes And Models"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/makesicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/makestext"
+                    android:background="@drawable/circlebackground"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_car" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/experiencedrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/makesrel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/experiencedtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Experienced Technicians"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/experiencedicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/experiencedtext"
+                    android:background="@drawable/circlebackground"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_technicians" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/equipmentrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/experiencedrel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/equipmenttext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Diagnostic Equipment"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/equipmenticon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/equipmenttext"
+                    android:background="@drawable/circlebackground"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_diagnostics" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

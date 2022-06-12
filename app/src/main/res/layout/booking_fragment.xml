@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/upperbackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-57dp"
+        android:background="@drawable/top_br_bg" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:overScrollMode="never"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/personalinfotext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Personal Information"
+                    android:textColor="#312E4F"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/firstnametextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/personalinfotext"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp"
+                    android:text="First name"
+                    android:textColor="#8C8984"
+                    android:textSize="13sp" />
+
+                <RelativeLayout
+                    android:id="@+id/firstnamerel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/firstnametextview">
+
+                    <EditText
+                        android:id="@+id/firstnameedittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:minWidth="300dp"
+                        android:textColor="#333333" />
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/firstnamegreencheck"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_centerVertical="true"-->
+                    <!--                        android:layout_marginStart="-23dp"-->
+                    <!--                        android:layout_toEndOf="@+id/firstnameedittext"-->
+                    <!--                        android:src="@drawable/green_check_box"-->
+                    <!--                        android:visibility="gone" />-->
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/firstnameredcheck"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_centerVertical="true"-->
+                    <!--                        android:layout_marginStart="-23dp"-->
+                    <!--                        android:layout_toEndOf="@+id/firstnameedittext"-->
+                    <!--                        android:src="@drawable/red_corss_check_icon" />-->
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/firsttexterror"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/firstnamerel"
+                    android:layout_marginStart="5dp"
+                    android:text="There should be no space in first name"
+                    android:textColor="#8C8984"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/lastnametextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/firsttexterror"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Last name"
+                    android:textColor="#8C8984"
+                    android:textSize="13sp" />
+
+                <RelativeLayout
+                    android:id="@+id/lastnamerel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lastnametextview">
+
+                    <EditText
+                        android:id="@+id/lastnameedittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:minWidth="300dp"
+                        android:textColor="#333333" />
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/lastnamegreencheck"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_centerVertical="true"-->
+                    <!--                        android:layout_marginStart="-23dp"-->
+                    <!--                        android:layout_toEndOf="@+id/lastnameedittext"-->
+                    <!--                        android:src="@drawable/green_check_box"-->
+                    <!--                        android:visibility="gone" />-->
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/lastnameredcheck"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_centerVertical="true"-->
+                    <!--                        android:layout_marginStart="-23dp"-->
+                    <!--                        android:layout_toEndOf="@+id/lastnameedittext"-->
+                    <!--                        android:src="@drawable/red_corss_check_icon" />-->
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/lasttexterror"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lastnamerel"
+                    android:layout_marginStart="5dp"
+                    android:text="There should be no space in last name"
+                    android:textColor="#8C8984"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/emailtextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lasttexterror"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Email"
+                    android:textColor="#8C8984"
+                    android:textSize="13sp" />
+
+                <RelativeLayout
+                    android:id="@+id/emailrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/emailtextview">
+
+                    <EditText
+                        android:id="@+id/emailedittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:minWidth="300dp"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <ImageView
+                        android:id="@+id/emailgreencheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-23dp"
+                        android:layout_toEndOf="@+id/emailedittext"
+                        android:src="@drawable/green_check_box"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/emailredcheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-23dp"
+                        android:layout_toEndOf="@+id/emailedittext"
+                        android:src="@drawable/red_corss_check_icon" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/phonenumbertextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/emailrel"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Phone number"
+                    android:textColor="#8C8984"
+                    android:textSize="13sp" />
+
+                <RelativeLayout
+                    android:id="@+id/phonerel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phonenumbertextview">
+
+                    <EditText
+                        android:id="@+id/phoneedittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number"
+                        android:inputType="phone"
+                        android:minWidth="300dp"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <ImageView
+                        android:id="@+id/phonegreencheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-23dp"
+                        android:layout_toEndOf="@+id/phoneedittext"
+                        android:src="@drawable/green_check_box"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/phoneredcheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-23dp"
+                        android:layout_toEndOf="@+id/phoneedittext"
+                        android:src="@drawable/red_corss_check_icon" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/plustext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phonerel"
+                    android:text="Enter Number with Plus(+)"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plustext"
+                    android:layout_marginTop="20dp"
+                    android:text="Vehicle Information"
+                    android:textColor="#312E4F"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:id="@+id/allmakesrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text">
+
+                    <Spinner
+                        android:id="@+id/selectmakespinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="All Makes"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/selectmakespinner"
+                        android:layout_toStartOf="@+id/selectmakespinner"
+                        android:layout_toEndOf="@+id/selectmakespinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectmaketext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectmakespinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Make!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/nomaketextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Makes Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectmakespinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/allmodelsrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/allmakesrel">
+
+                    <Spinner
+                        android:id="@+id/selectmodelspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="All Models"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/selectmodelspinner"
+                        android:layout_toStartOf="@+id/selectmodelspinner"
+                        android:layout_toEndOf="@+id/selectmodelspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectmodeltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectmodelspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Model!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/nomodeltextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Models Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectmodelspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/yearmodelrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/allmodelsrel">
+
+                    <Spinner
+                        android:id="@+id/selectyearspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/selectyearspinner"
+                        android:layout_toStartOf="@+id/selectyearspinner"
+                        android:layout_toEndOf="@+id/selectyearspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectyeartext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectyearspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Year!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/noyeartextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Years Model Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectyearspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selectbranchrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/yearmodelrel">
+
+                    <Spinner
+                        android:id="@+id/selectbranchspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="Branch"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/selectbranchspinner"
+                        android:layout_toStartOf="@+id/selectbranchspinner"
+                        android:layout_toEndOf="@+id/selectbranchspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectbranchtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectbranchspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Branch!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/nobranchtextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Branch Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectbranchspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selectpreferredrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectbranchrel">
+
+                    <Spinner
+                        android:id="@+id/selectpreferredspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="Branch"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/selectpreferredspinner"
+                        android:layout_toStartOf="@+id/selectpreferredspinner"
+                        android:layout_toEndOf="@+id/selectpreferredspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectpreferredtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectpreferredspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Preferred!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/nopreferredtextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Preferred Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectpreferredspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selectservicesrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectpreferredrel">
+
+                    <Spinner
+                        android:id="@+id/selectservicesspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="Branch"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/selectservicesspinner"
+                        android:layout_toStartOf="@+id/selectservicesspinner"
+                        android:layout_toEndOf="@+id/selectservicesspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selectservicetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectservicesspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Service!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/noservicestextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No Branch Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-35dp"
+                        android:layout_toEndOf="@+id/selectservicesspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selectdaterel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectservicesrel"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/selectdatetextview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:hint="Date"
+                        android:minWidth="310dp"
+                        android:paddingEnd="25dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/selectdatetextview"
+                        android:layout_toStartOf="@+id/selectdatetextview"
+                        android:layout_toEndOf="@+id/selectdatetextview"
+                        android:background="#EDEDEC" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@+id/selectdatetextview"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-25dp"
+                        android:layout_toEndOf="@+id/selectdatetextview"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selecttimerel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectdaterel"
+                    android:layout_marginTop="10dp">
+
+                    <Spinner
+                        android:id="@+id/selecttimeslotsspinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="-16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:hint="Branch"
+                        android:minWidth="324dp"
+                        android:overlapAnchor="false"
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/selecttimeslotsspinner"
+                        android:layout_toStartOf="@+id/selecttimeslotsspinner"
+                        android:layout_toEndOf="@+id/selecttimeslotsspinner"
+                        android:background="#EDEDEC" />
+
+                    <TextView
+                        android:id="@+id/selecttimeslottext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selecttimeslotsspinner"
+                        android:layout_marginTop="2dp"
+                        android:text="Please Select Time Slot!"
+                        android:textColor="#B71C1C"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/notimetextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:background="@drawable/spinner_background"
+                        android:padding="15dp"
+                        android:text="No TimeSlots Found!"
+                        android:textColor="#8C8984"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-25dp"
+                        android:layout_toEndOf="@+id/selecttimeslotsspinner"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/union" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selecttimerel"
+                    android:background="#FFF2C9"
+                    android:minWidth="300dp"
+                    android:padding="10dp"
+                    android:text="Please note that the date and time you requested may not be available. We will contact you to confirm your actual appointment details"
+                    android:textColor="#BC9449"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

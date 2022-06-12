@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/language_screen_bg"
+    tools:context=".Activities.LanguageActivity">
+
+    <ImageView
+        android:id="@+id/logoicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/group_9669" />
+
+    <ImageView
+        android:id="@+id/transaltionicon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/lang_icon" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/transaltionicon"
+        android:layout_alignParentBottom="true"
+        android:minWidth="190dp">
+
+        <RelativeLayout
+            android:id="@+id/englishbtnrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/arabicbtnrel"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/red_round_btn_background"
+            android:elevation="10dp">
+
+            <Button
+                android:id="@+id/englishbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:fontFamily="@font/helvetica"
+                android:text="ENGLISH"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/arabicbtnrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/grey_round_btn_background"
+            android:elevation="10dp">
+
+            <Button
+                android:id="@+id/arabicbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:fontFamily="@font/helvetica"
+                android:text="عربي"
+                android:textAlignment="center"
+                android:textColor="#333333" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

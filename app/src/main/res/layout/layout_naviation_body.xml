@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#262A33">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/group_9669" />
+
+    <TextView
+        android:id="@+id/nametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/helvetica"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/nametext"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/navigation_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomrel"
+        android:layout_below="@+id/line"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:childDivider="@null"
+        android:divider="@null"
+        android:groupIndicator="@null" />
+
+    <RelativeLayout
+        android:id="@+id/bottomrel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:id="@+id/myaccountrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/usericon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_user" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/usericon"
+                android:fontFamily="@font/helvetica"
+                android:text="My Account"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/middleline"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_below="@+id/myaccountrel"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF" />
+
+        <RelativeLayout
+            android:id="@+id/loginrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/middleline"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/loginicon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/sign_in_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/loginicon"
+                android:fontFamily="@font/helvetica"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/logoutrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginrel"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/logouticon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/logout_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/logouticon"
+                android:fontFamily="@font/helvetica"
+                android:text="LogOut"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

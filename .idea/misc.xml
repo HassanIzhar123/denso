@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/circlebackground.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/firstbtnbackground.xml" value="0.15486111111111112" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/grey_round_btn_background.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_back_btn.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_brand.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_call.xml" value="0.13333333333333333" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_car.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_carowner.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_diagnostics.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_direction.xml" value="0.20277777777777778" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_ease_of_use.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_email.xml" value="0.20277777777777778" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_engine.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_fastdelievery.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_hide.xml" value="0.14427083333333332" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_map.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_menu.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_next_icon.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_pin.xml" value="0.20277777777777778" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_right_btn.xml" value="0.16180555555555556" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_search.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_services.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_show.xml" value="0.14427083333333332" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_speed.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_success.xml" value="0.25277777777777777" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_technicians.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_time.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_trust.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/ic_user.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/icon_no_data.xml" value="0.13518518518518519" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/infowindow_background.xml" value="0.20277777777777778" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/login_edittext_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/red_round_btn_background.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/red_round_button_background.xml" value="0.14427083333333332" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/round_black_background.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/round_btn_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/round_button_background.xml" value="0.14427083333333332" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/secondbtnbackground.xml" value="0.15486111111111112" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/secondbtnredbackground.xml" value="0.15486111111111112" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/spinner_background.xml" value="0.15486111111111112" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/drawable/sqaure_background.xml" value="0.2101851851851852" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/font/roboto.xml" value="0.24814814814814815" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_arabic_language_error.xml" value="0.152" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_forgot_password.xml" value="0.32730560578661844" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_introduction.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_language.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_main.xml" value="0.12708333333333333" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_my_account.xml" value="0.15602605863192182" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_sign_up.xml" value="0.152" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_splash.xml" value="0.176" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_successful_booking.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/activity_sucessfull_signup.xml" value="0.15789473684210525" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/app_information_fragment.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/booking_fragment.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/booking_row.xml" value="0.24947916666666667" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/change_password_success_dialog.xml" value="0.24947916666666667" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/custom_spinner_items.xml" value="0.24947916666666667" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/feature_fragment.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/fragment_contacts.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/fragment_services.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/fragment_whydenso.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/infowindowlayout.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/layout_naviation_body.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/loading_dialog.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/maps_fragment.xml" value="0.176" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/navigationdrawerlayout.xml" value="0.152" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/recyclerrow.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/remaining_feature_fragment.xml" value="0.264" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/services_row.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/servicing_fragment.xml" value="0.176" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/success_dialog.xml" value="0.24947916666666667" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/user_fragment.xml" value="0.176" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/layout/why_services_row.xml" value="0.4" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/Ahmed/app/src/main/res/menu/menu_bottom.xml" value="0.25" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/drawable/ic_catalog.xml" value="0.16612377850162866" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/drawable/ic_gallery.xml" value="0.16612377850162866" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/drawable/spinner_background.xml" value="0.16612377850162866" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/activity_dashboard.xml" value="0.11805555555555555" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/activity_successful_booking.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/app_information_fragment.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/booking_fragment.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/feature_fragment.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/fragment_contacts.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/fragment_services.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/fragment_whydenso.xml" value="0.136" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/infowindowlayout.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/layout_naviation_body.xml" value="0.2" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/loading_dialog.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/maps_fragment.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/navigationdrawerlayout.xml" value="0.11805555555555555" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/remaining_feature_fragment.xml" value="0.15756578947368421" />
+        <entry key="..\:/Personal Files/fiverr/Countries/Pakistan/DensoApp/app/src/main/res/layout/servicing_fragment.xml" value="0.15756578947368421" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

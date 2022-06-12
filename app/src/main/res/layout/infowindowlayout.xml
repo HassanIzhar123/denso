@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/cityname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:text="City"
+            android:textColor="#FE2B00"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_cancel"/>
+        <TextView
+            android:id="@+id/middleline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/cityname"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#000" />
+
+        <RelativeLayout
+            android:id="@+id/middlelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/middleline">
+
+            <RelativeLayout
+                android:id="@+id/maprel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/mapicon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sqaure_background"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_map" />
+
+                <TextView
+                    android:id="@+id/maptext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/mapicon"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Map"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/timerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/maprel"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/timeicon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sqaure_background"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_time" />
+
+                <TextView
+                    android:id="@+id/timetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/timeicon"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Time"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timerel"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/callicon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sqaure_background"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_call" />
+
+                <TextView
+                    android:id="@+id/calltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/callicon"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Call"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/middlelayout"
+            android:layout_marginTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <RelativeLayout
+                android:id="@+id/bookingbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/infowindow_background"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/bookingimg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_direction" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@+id/bookingimg"
+                    android:text="Booking" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/emailrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/bookingbtn"
+                android:background="@drawable/infowindow_background"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/emailimg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_email" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@+id/emailimg"
+                    android:text="Email" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/directionbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/emailrel"
+                android:background="@drawable/infowindow_background"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/directionimg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_pin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@+id/directionimg"
+                    android:text="Direction" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

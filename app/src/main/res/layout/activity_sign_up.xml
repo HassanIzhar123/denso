@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SignUpActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/top_br_bg"
+        android:padding="20dp">
+
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_btn" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_toEndOf="@+id/backbtn"
+            android:text="REGISTER YOUR NEW ACCOUNT"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/logoicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/group_9669" />
+
+                <EditText
+                    android:id="@+id/firstname_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/logoicon"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp"
+                    android:hint="First Name"
+                    android:padding="10dp"
+                    android:textColor="#000" />
+
+                <EditText
+                    android:id="@+id/lastname_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/firstname_edittext"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp"
+                    android:hint="Last Name"
+                    android:padding="10dp"
+                    android:textColor="#000" />
+
+                <EditText
+                    android:id="@+id/email_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/lastname_edittext"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp"
+                    android:hint="Enter Email"
+                    android:padding="10dp"
+                    android:textColor="#000" />
+
+                <RelativeLayout
+                    android:id="@+id/password_edittext_rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/email_edittext"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp">
+
+                    <EditText
+                        android:id="@+id/password_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@null"
+                        android:elevation="10dp"
+                        android:hint="Enter Password"
+                        android:layout_toStartOf="@+id/passwordbtnrel"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="50dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="#000" />
+
+                    <RelativeLayout
+                        android:id="@+id/passwordbtnrel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true">
+
+                        <ImageButton
+                            android:id="@+id/showbtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_show" />
+
+                        <ImageButton
+                            android:id="@+id/hidebtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:visibility="gone"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_hide" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/confirm_password_edittext_rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/password_edittext_rel"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp">
+
+                    <EditText
+                        android:id="@+id/confirm_password_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_toStartOf="@+id/confirmbtnrel"
+                        android:background="@null"
+                        android:elevation="10dp"
+                        android:hint="Confirm Password"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="50dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="#000" />
+
+                    <RelativeLayout
+                        android:id="@+id/confirmbtnrel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true">
+
+                        <ImageButton
+                            android:id="@+id/confirmshowbtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_show" />
+
+                        <ImageButton
+                            android:id="@+id/confirmhidebtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:visibility="gone"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_hide" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/signupbtnrel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/confirm_password_edittext_rel"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_btn_background"
+                    android:elevation="10dp">
+
+                    <Button
+                        android:id="@+id/signupbtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:text="Sign Up"
+                        android:textAlignment="center" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/bookservicesrel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/signupbtnrel"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp">
+
+                        <TextView
+                            android:id="@+id/alreadytext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="Already have an account?"
+                            android:textAlignment="center"
+                            android:textColor="#938D9B"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/signinbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_toEndOf="@+id/alreadytext"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:text="Sign In"
+                            android:textColor="#FF2548" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

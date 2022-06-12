@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CFCBC6"
+    tools:context=".Activities.SucessfullSignupActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/successcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:minWidth="250dp"
+        android:minHeight="400dp"
+        android:padding="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/successimg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                android:src="@drawable/ic_success" />
+
+            <TextView
+                android:id="@+id/suceestext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/successimg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Success"
+                android:textColor="#2C3D49"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/congratztext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/suceestext"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Congratulation"
+                android:textColor="#F40011"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/suceesdesctext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/congratztext"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="The Account activiationlink has been generated, please check you email!"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/gobackbtnrel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/successcard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round_btn_background"
+        android:minWidth="300dp">
+
+        <Button
+            android:id="@+id/gobackbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:minWidth="300dp"
+            android:text="GO To Dashbaord"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

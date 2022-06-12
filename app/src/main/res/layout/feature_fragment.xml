@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/appinforimg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/iconinforel"
+        android:layout_marginBottom="-145dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slider_img_2" />
+
+    <RelativeLayout
+        android:id="@+id/iconinforel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/picture_bg">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/followingoperations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:text="THE SYSTEM UPHOLDS THE FOLLOWING VALUES AS A GUIDELINES TO ITS OPERATION:"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/firstrel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/followingoperations"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/brandmiddle">
+
+                    <ImageView
+                        android:id="@+id/brandicon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_brand" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/brandicon"
+                        android:text="Branch Value Denso"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/brandmiddle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/brandmiddle">
+
+                    <ImageView
+                        android:id="@+id/speedicon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_speed" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/speedicon"
+                        android:text="Speed"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/secondrel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/firstrel"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/easemiddle">
+
+                    <ImageView
+                        android:id="@+id/carownericon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_carowner" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/carownericon"
+                        android:text="Car Owner Centered"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/easemiddle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/easemiddle">
+
+                    <ImageView
+                        android:id="@+id/easeicon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_ease_of_use" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/easeicon"
+                        android:text="Ease Of Use"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/thirdrel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/secondrel"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/thirdbrandmiddle">
+
+                    <ImageView
+                        android:id="@+id/trusticon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_trust" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/trusticon"
+                        android:text="Trust"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/thirdbrandmiddle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/thirdbrandmiddle">
+
+                    <ImageView
+                        android:id="@+id/fasticon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/circlebackground"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_fastdelievery" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/fasticon"
+                        android:text="Fast Delivery"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
