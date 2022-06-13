@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\HassanIzhar\\Desktop\\denso\\AppSignedJks.jks')
+            storePassword '12345678'
+            keyPassword '1234567'
+            keyAlias 'key0'
+        }
+    }
     compileSdk 31
 
     defaultConfig {

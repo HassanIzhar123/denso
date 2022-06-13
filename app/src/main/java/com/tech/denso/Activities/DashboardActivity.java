@@ -53,7 +53,7 @@ public class DashboardActivity extends AppCompatActivity {
     //    CardView othercard;
     SmoothBottomBar bottomBar;
     ViewPager viewpager;
-    RelativeLayout logoutrel, myaccountrel, loginrel;
+    RelativeLayout logoutrel, myhistoryrel, loginrel;
     public static ImageButton sendbtn;
     SendData sendData;
     public ListenFromActivity activityListener;
@@ -89,7 +89,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottomBar = findViewById(R.id.bottombar);
         viewpager = findViewById(R.id.viewpager);
         bottombarrel = findViewById(R.id.bottombarrel);
-        myaccountrel = findViewById(R.id.myaccountrel);
+        myhistoryrel = findViewById(R.id.myhistoryrel);
         navigation_menu = findViewById(R.id.navigation_menu);
         navigationbtn = findViewById(R.id.navigationbtn);
         nav_view = findViewById(R.id.nav_view);
@@ -159,7 +159,9 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", false);
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).removeAllValues();
-                startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+                Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
+                i.putExtra("clickedlogout",true);
+                startActivity(i);
             }
         });
         loginrel.setOnClickListener(new View.OnClickListener() {
@@ -183,20 +185,27 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (null != activityListener) {
-                    Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
-                    if (loggedbol) {
-                        activityListener.doSomethingInFragment();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please SignUp Or Login!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                    }
+                    activityListener.doSomethingInFragment();
                 }
             }
         });
-        myaccountrel.setOnClickListener(new View.OnClickListener() {
+        myhistoryrel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this, MyAccountActivity.class));
+//                startActivity(new Intent(DashboardActivity.this, MyAccountActivity.class));
+
+                Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
+                if (loggedbol) {
+                    mDrawerLayout.closeDrawer(nav_view);
+                    viewpager.setCurrentItem(3);
+                    bottomBar.setActiveItem(3);
+                    DashboardActivity.titletextview.setText("MY ACCOUNT");
+                    sendbtn.setVisibility(View.GONE);
+                } else {
+                    Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
+                    i.putExtra("clickedonuser", true);
+                    startActivityForResult(i, 1);
+                }
             }
         });
     }
@@ -214,6 +223,7 @@ public class DashboardActivity extends AppCompatActivity {
         fragments.add(UserFragment.newInstance(3, "Page # 4"));
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
         viewpager.setAdapter(adapterViewPager);
+        viewpager.setOffscreenPageLimit(4);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelect(int position) {
@@ -272,6 +282,7 @@ public class DashboardActivity extends AppCompatActivity {
                 if (check) {
 //                    Toast.makeText(getApplicationContext(), "Back here", Toast.LENGTH_SHORT).show();
                     bottomBar.setActiveItem(0);
+                    viewpager.setCurrentItem(0);
                 }
             }
         }

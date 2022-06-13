@@ -181,6 +181,35 @@ public class MapsFragment extends Fragment {
         });
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (mMapView != null) {
+//            mMapView.onResume();
+//        }
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        if (mMapView != null)
+//            mMapView.onPause();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        if (mMapView != null)
+//            mMapView.onDestroy();
+//    }
+//
+//    @Override
+//    public void onLowMemory() {
+//        super.onLowMemory();
+//        if (mMapView != null)
+//            mMapView.onLowMemory();
+//    }
+
     private void GetLocationData(Bundle savedInstanceState) {
         String url = new Const().getBaseUrl() + "/api/locations/";
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

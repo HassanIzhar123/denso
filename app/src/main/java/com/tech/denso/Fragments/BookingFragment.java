@@ -1,8 +1,11 @@
 package com.tech.denso.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -63,6 +67,7 @@ import com.tech.denso.Interfaces.ListenFromActivity;
 import com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.BookingBranchSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingMakeSpinnerModel.BookingMakeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingModelsSpinnerModel.BookingModelsSpinnerModel;
+import com.tech.denso.Models.BookingsModel.BookingSendModel;
 import com.tech.denso.Models.BookingsModel.BookingTimeSpinnerModel.BookingTimeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingYearSpinnerModel.BookingYearSpinnerModel;
 import com.tech.denso.Models.Locations.Datum;
@@ -198,11 +203,34 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 && !(timeslot.equals("HH:MM"))
                 && isEmailValid(emailedittext.getText().toString()) && isPhoneNumberValid(phoneedittext.getText().toString()) &&
                 !isFirstNameHavingSpaceOrNot(firstnameedittext.getText().toString()) && !isFirstNameHavingSpaceOrNot(lastnamedittext.getText().toString()))) {
-            Toast.makeText(getContext(), "All Condition fullfilled", Toast.LENGTH_SHORT).show();
             com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum dat = (com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum) selectbranchspinner.getSelectedItem();
-            SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
-                    , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
-                    make, "Waitaing", model, mserviceodel, year, false, branch, timeslot, selectdatetextview.getText().toString().trim());
+            Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
+            if (loggedbol) {
+                Toast.makeText(getContext(), "All Condition fullfilled", Toast.LENGTH_SHORT).show();
+                SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
+                        , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
+                        make, "Waiting", model, mserviceodel, year, false, branch, timeslot, selectdatetextview.getText().toString().trim());
+            } else {
+                Toast.makeText(getContext(), "Please SignUp Or Login First!", Toast.LENGTH_SHORT).show();
+                BookingSendModel bookingmodel = new BookingSendModel();
+                bookingmodel.setFirstName(firstnameedittext.getText().toString().trim());
+                bookingmodel.setLastName(lastnamedittext.getText().toString().trim());
+                bookingmodel.setEmail(emailedittext.getText().toString().trim());
+                bookingmodel.setPhoneNumber(phoneedittext.getText().toString().trim());
+                bookingmodel.setMake(make);
+                bookingmodel.setStatus("Waiting");
+                bookingmodel.setModel(model);
+                bookingmodel.setService(mserviceodel);
+                bookingmodel.setYear(year);
+                bookingmodel.setIsListed(String.valueOf(false));
+                bookingmodel.setBranch(branch);
+                bookingmodel.setTimeSlot(timeslot);
+                bookingmodel.setDate(selectdatetextview.getText().toString().trim());
+                Intent i = new Intent(getContext(), LoginActivity.class);
+                i.putExtra("bookingfromfragment", true);
+                i.putExtra("bookingmodel", bookingmodel);
+                startActivityForResult(i, 2);
+            }
 //            SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
 //                    , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
 //                    caredittext.getText().toString().trim(), yearsedittext.getText().toString().trim()
@@ -210,6 +238,22 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 //                    listedcheckbox.isChecked(), descriptionedittext.getText().toString().trim(),
 //                    dat.getAddress().trim()
 //                    , selectdatetextview.getText().toString().trim(), selecttimetextiew.getText().toString().trim());
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                Boolean check = data.getBooleanExtra("comingbackbooking", false);
+                if (check) {
+                    BookingSendModel bookingmodel = (BookingSendModel) data.getSerializableExtra("bookingmodel");
+                    SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
+                            , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+                            bookingmodel.getMake(), bookingmodel.getStatus(), bookingmodel.getModel(), bookingmodel.getService(), bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()), bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
+                }
+            }
         }
     }
 

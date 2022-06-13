@@ -49,11 +49,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed() {
         if (getIntent() != null) {
             Boolean check = getIntent().getBooleanExtra("clickedonuser", false);
+            Boolean logout = getIntent().getBooleanExtra("clickedlogout", false);
             if (check) {
                 Intent intent = new Intent();
                 intent.putExtra("comingback", true);
                 setResult(RESULT_OK, intent);
                 finish();
+            } else if (logout) {
+                Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+                startActivity(i);
             }
         }
         super.onBackPressed();
@@ -78,7 +82,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                if (getIntent() != null) {
+                    Log.e("onsignupclciked","checked here");
+                    i.putExtra("clickedonuser", getIntent().getBooleanExtra("clickedonuser", false));
+                    finish();
+                }
+                startActivity(i);
             }
         });
         forgotpasswordbtn.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +159,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             if (!bol) {
                                                 startActivity(new Intent(LoginActivity.this, IntroductionActivity.class));
                                             } else {
-                                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                                Boolean bookingfromfragment = getIntent().getBooleanExtra("bookingfromfragment", false);
+                                                if (bookingfromfragment) {
+                                                    Intent intent = new Intent();
+                                                    intent.putExtra("comingbackbooking", true);
+                                                    intent.putExtra("bookingmodel", getIntent().getSerializableExtra("bookingmodel"));
+                                                    setResult(RESULT_OK, intent);
+                                                    finish();
+                                                } else {
+                                                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                                }
                                             }
                                         }
                                     }, 3000);
