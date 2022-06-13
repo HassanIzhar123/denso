@@ -105,6 +105,10 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     //    public ListenFromActivity activityListener;
     TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selectservicetext, selecttimeslottext;
 
+    public void refreshList(String userList) {
+        Toast.makeText(getContext(), "Come here", Toast.LENGTH_SHORT).show();
+    }
+
     public static BookingFragment newInstance() {
         BookingFragment fragmentFirst = new BookingFragment();
         return fragmentFirst;

@@ -58,6 +58,18 @@ public class DashboardActivity extends AppCompatActivity {
     SendData sendData;
     public ListenFromActivity activityListener;
     TextView nametext;
+//    private Fragment fragmentInstance;
+//
+//    void someMethodReceivedNewList() {
+//        // where you receive new list in activity
+//        if (fragmentInstance != null)
+//            fragmentInstance.refreshList(userList);
+//
+//    }
+//
+//    void someMethodToLoadFragment() {
+//        fragmentInstance = new YourFragment1();
+//    }
 
     @Override
     protected void onResume() {
@@ -160,7 +172,7 @@ public class DashboardActivity extends AppCompatActivity {
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", false);
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).removeAllValues();
                 Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
-                i.putExtra("clickedlogout",true);
+                i.putExtra("clickedlogout", true);
                 startActivity(i);
             }
         });
@@ -234,6 +246,7 @@ public class DashboardActivity extends AppCompatActivity {
                         DashboardActivity.titletextview.setText("MY ACCOUNT");
                         sendbtn.setVisibility(View.GONE);
                     } else {
+                        viewpager.setCurrentItem(position);
                         Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
                         i.putExtra("clickedonuser", true);
                         startActivityForResult(i, 1);
@@ -280,7 +293,7 @@ public class DashboardActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Boolean check = data.getBooleanExtra("comingback", false);
                 if (check) {
-//                    Toast.makeText(getApplicationContext(), "Back here", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Back here", Toast.LENGTH_SHORT).show();
                     bottomBar.setActiveItem(0);
                     viewpager.setCurrentItem(0);
                 }

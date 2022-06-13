@@ -1,5 +1,6 @@
 package com.tech.denso.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -64,6 +65,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(this, "freelancing", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -88,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     i.putExtra("clickedonuser", getIntent().getBooleanExtra("clickedonuser", false));
                     finish();
                 }
-                startActivity(i);
+                startActivityForResult(i,1);
             }
         });
         forgotpasswordbtn.setOnClickListener(new View.OnClickListener() {
