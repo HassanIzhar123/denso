@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
@@ -24,12 +24,14 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_marginStart="-30dp"
+            android:layout_toEndOf="@+id/btnrel"
             android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_cancel"/>
+            android:src="@drawable/ic_cancel" />
+
         <TextView
             android:id="@+id/middleline"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_below="@+id/cityname"
             android:layout_marginTop="10dp"
@@ -132,6 +134,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/btnrel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/middlelayout"

@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Helper.TaskRunner;
+import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Models.SignUpModel.SignUpModel;
 import com.tech.denso.R;
 
@@ -50,9 +51,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        CallBackModel.getInstance().onBackCallBack();
         finish();
-//        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
     }
 
     @Override
@@ -165,13 +165,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         @Override
                                         public void run() {
                                             dialog.cancel();
-                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
-                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
-                                            Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
-                                            if (!bol) {
-                                                startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
+                                            if (getIntent().getBooleanExtra("clickedonuser", false)) {
+                                                CallBackModel.getInstance().onSignUpClicked();
                                             } else {
-                                                startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
+                                                new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
+                                                new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
+                                                Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
+                                                if (!bol) {
+                                                    startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
+                                                } else {
+                                                    startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
+                                                }
                                             }
                                         }
                                     }, 3000);

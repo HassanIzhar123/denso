@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "freelancing", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -35,6 +35,7 @@ import com.tech.denso.Fragments.UserFragment;
 import com.tech.denso.Fragments.WhyDensoFragment;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
+import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Interfaces.ListenFromActivity;
 import com.tech.denso.R;
 
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements CallBackModel.OnCustomStateListener {
     RecyclerView navigation_menu;
     private DrawerLayout mDrawerLayout;
     ImageButton navigationbtn;
@@ -58,18 +59,6 @@ public class DashboardActivity extends AppCompatActivity {
     SendData sendData;
     public ListenFromActivity activityListener;
     TextView nametext;
-//    private Fragment fragmentInstance;
-//
-//    void someMethodReceivedNewList() {
-//        // where you receive new list in activity
-//        if (fragmentInstance != null)
-//            fragmentInstance.refreshList(userList);
-//
-//    }
-//
-//    void someMethodToLoadFragment() {
-//        fragmentInstance = new YourFragment1();
-//    }
 
     @Override
     protected void onResume() {
@@ -86,6 +75,19 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    public void OnBack() {
+        if (bottomBar != null && viewpager != null) {
+            bottomBar.setActiveItem(0);
+            viewpager.setCurrentItem(0);
+        }
+    }
+
+    @Override
+    public void OnSignUp() {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
@@ -93,6 +95,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (null != activityListener) {
             activityListener.doSomethingInFragment();
         }
+        CallBackModel.getInstance().setListener(DashboardActivity.this);
         new Const().setEmail(new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreference("Email"));
         new Const().setPassword(new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreference("Password"));
         new Const().setFirstname(new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreference("Firstname"));
