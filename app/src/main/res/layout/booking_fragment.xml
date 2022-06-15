@@ -485,7 +485,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectbranchspinner"
                         android:layout_toStartOf="@+id/selectbranchspinner"
                         android:layout_toEndOf="@+id/selectbranchspinner"
@@ -549,7 +549,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectpreferredspinner"
                         android:layout_toStartOf="@+id/selectpreferredspinner"
                         android:layout_toEndOf="@+id/selectpreferredspinner"
@@ -613,7 +613,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectservicesspinner"
                         android:layout_toStartOf="@+id/selectservicesspinner"
                         android:layout_toEndOf="@+id/selectservicesspinner"
@@ -672,7 +672,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectdatetextview"
                         android:layout_toStartOf="@+id/selectdatetextview"
                         android:layout_toEndOf="@+id/selectdatetextview"
@@ -715,7 +715,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selecttimeslotsspinner"
                         android:layout_toStartOf="@+id/selecttimeslotsspinner"
                         android:layout_toEndOf="@+id/selecttimeslotsspinner"

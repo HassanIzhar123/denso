@@ -115,6 +115,15 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         sendbtn = findViewById(R.id.sendbtn);
         navigation_menu.setAdapter(null);
 
+        Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
+        if (loggedbol) {
+            myhistoryrel.setVisibility(View.VISIBLE);
+            logoutrel.setVisibility(View.VISIBLE);
+        } else {
+            myhistoryrel.setVisibility(View.GONE);
+            logoutrel.setVisibility(View.GONE);
+        }
+
         ArrayList<String> array = new ArrayList<>();
         array.add("Home");
         array.add("Services");
@@ -158,9 +167,9 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 } else if (value.equals("B2B Login")) {
                     open_Webpage("https://shop.dj-auto.com/");
                 } else if (value.equals("E-Catalog")) {
-                    open_Webpage("https://djauto-service.com/ecatalog");
+                    open_Webpage("https://djauto-service.com/ecatalog/");
                 } else if (value.equals("Our Gallery")) {
-                    open_Webpage("https://djauto-service.com/gallery");
+                    open_Webpage("https://djauto-service.com/gallery/");
                 } else if (value.equals("Contact")) {
                     LoadFragment(DashboardActivity.this, new ContactFragment());
                     findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
