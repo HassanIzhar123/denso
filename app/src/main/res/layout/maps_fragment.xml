@@ -76,6 +76,9 @@
                     android:id="@+id/branchspinner"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:dropDownWidth="match_parent"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown"
                     android:background="@null" />
 
                 <ImageButton

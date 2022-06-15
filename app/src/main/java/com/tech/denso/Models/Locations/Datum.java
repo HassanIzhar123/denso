@@ -1,39 +1,45 @@
-
 package com.tech.denso.Models.Locations;
 
-
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Datum {
 
+    @SerializedName("_id")
+    @Expose
     private String id;
-
+    @SerializedName("create_date")
+    @Expose
     private String createDate;
-    //@SerializedName("cityName")
-
+    @SerializedName("cityName")
+    @Expose
     private String cityName;
-    //@SerializedName("email")
-
+    @SerializedName("email")
+    @Expose
     private String email;
-    //@SerializedName("phoneNumber")
-
-    private Integer phoneNumber;
-    //@SerializedName("address")
-
+    @SerializedName("phoneNumber")
+    @Expose
+    private Long phoneNumber;
+    @SerializedName("address")
+    @Expose
     private String address;
-    //@SerializedName("openingSaturday")
-
+    @SerializedName("openingSaturday")
+    @Expose
     private String openingSaturday;
-    //@SerializedName("tillThursday")
-
+    @SerializedName("tillThursday")
+    @Expose
     private String tillThursday;
-    //@SerializedName("latitude")
-
+    @SerializedName("latitude")
+    @Expose
     private Double latitude;
-    //@SerializedName("longitude")
-
+    @SerializedName("longitude")
+    @Expose
     private Double longitude;
-    //@SerializedName("__v")
-
+    @SerializedName("postCode")
+    @Expose
+    private Integer postCode;
+    @SerializedName("__v")
+    @Expose
     private Integer v;
 
     public String getId() {
@@ -68,11 +74,11 @@ public class Datum {
         this.email = email;
     }
 
-    public Integer getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -114,6 +120,14 @@ public class Datum {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Integer getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(Integer postCode) {
+        this.postCode = postCode;
     }
 
     public Integer getV() {

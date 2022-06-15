@@ -22,6 +22,7 @@
             android:textSize="15sp" />
 
         <ImageButton
+            android:id="@+id/exitbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-30dp"
@@ -40,8 +41,9 @@
 
         <RelativeLayout
             android:id="@+id/middlelayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/exitbtn"
             android:layout_below="@+id/middleline">
 
             <RelativeLayout

@@ -99,7 +99,6 @@ public class MapsFragment extends Fragment {
         nobranchtext = view.findViewById(R.id.nobranchtext);
         search_branch_edittext = view.findViewById(R.id.search_branch_edittext);
         mMapView = (MapView) view.findViewById(R.id.mapView);
-
         new TaskRunner().executeAsync(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
@@ -208,15 +207,10 @@ public class MapsFragment extends Fragment {
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("responsedata", "" + response);
                 Gson gson = new Gson();
                 LocationsModel responsedata = gson.fromJson(response, LocationsModel.class);
                 List<com.tech.denso.Models.Locations.Datum> datums = responsedata.getData();
-//                List<com.tech.denso.Models.Locations.Datum> data = responsedata.getData();
-//                for (int i = 0; i < data.size(); i++) {
-//                    if (data.get(i).getEmail().equals(new Const().getEmail())) {
-//                        datums.add(data.get(i));
-//                    }
-//                }
                 datumstemp = datums;
                 CustomAdapter[] customAdapter = null;
                 if (datums.size() > 0) {
@@ -224,6 +218,7 @@ public class MapsFragment extends Fragment {
                     branchspinner.setVisibility(View.VISIBLE);
                     customAdapter = new CustomAdapter[]{new CustomAdapter(getContext(), datums)};
                     branchspinner.setAdapter(customAdapter[0]);
+                    branchspinner.setDropDownWidth(branchspinner.getWidth());
                     branchspinner.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
