@@ -160,16 +160,16 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         String mserviceodel = getService();
         String timeslot = getTimeSlot();
         if (isEditTextEmptyOrnot(firstnameedittext)) {
-            firstnameedittext.setError("Firstname Field cannot be Empty!");
+            firstnameedittext.setError(getString(R.string.firstnameerror));
         }
         if (isEditTextEmptyOrnot(lastnamedittext)) {
-            lastnamedittext.setError("Lastname Field cannot be Empty!");
+            lastnamedittext.setError(getString(R.string.lastnameerror));
         }
         if (isEditTextEmptyOrnot(emailedittext)) {
-            emailedittext.setError("Email Field cannot be Empty!");
+            emailedittext.setError(getString(R.string.emailerror));
         }
         if (isEditTextEmptyOrnot(phoneedittext)) {
-            phoneedittext.setError("Phone Number Field cannot be Empty!");
+            phoneedittext.setError(getString(R.string.phonenumbererror));
         }
         if (make.equals("All Makes")) {
             selectmaketext.setVisibility(View.VISIBLE);
@@ -193,7 +193,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
             selecttimeslottext.setVisibility(View.VISIBLE);
         }
         if (nobranchtextview.getVisibility() == View.VISIBLE) {
-            Toast.makeText(getContext(), "There is no branch! you cant set any booking!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.BookingFragment_nobrancherror, Toast.LENGTH_SHORT).show();
         }
         if (!isEditTextEmptyOrnot(firstnameedittext) && !isEditTextEmptyOrnot(lastnamedittext)
                 && !isEditTextEmptyOrnot(emailedittext)
@@ -518,8 +518,8 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     }
 
     private void Showbranch() {
-        ArrayList<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum> list = new ArrayList();
-        com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum datum = new com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum();
+        ArrayList<com.tech.denso.Models.Locations.Datum> list = new ArrayList();
+        com.tech.denso.Models.Locations.Datum datum = new com.tech.denso.Models.Locations.Datum();
         datum.setBranchName("Select Branch");
         list.add(datum);
         final BookingBranchSpinnerAdapter[] customAdapter = {new BookingBranchSpinnerAdapter(getContext(), list)};
@@ -535,25 +535,28 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 
             }
         });
-        String url = new Const().getBaseUrl() + "/api/branches/";
+        String url = new Const().getBaseUrl() + "/api/locations/";
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                new TaskRunner().executeAsync(new Callable<List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum>>() {
+                new TaskRunner().executeAsync(new Callable<List<com.tech.denso.Models.Locations.Datum>>() {
                     @Override
-                    public List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum> call() {
+                    public List<com.tech.denso.Models.Locations.Datum> call() {
                         Gson gson = new Gson();
-                        BookingBranchSpinnerModel responsedata = gson.fromJson(response, BookingBranchSpinnerModel.class);
+                        LocationsModel responsedata = gson.fromJson(response, LocationsModel.class);
                         list.addAll(responsedata.getData());
+//                        Gson gson = new Gson();
+//                        BookingBranchSpinnerModel responsedata = gson.fromJson(response, BookingBranchSpinnerModel.class);
+//                        list.addAll(responsedata.getData());
                         return list;
                     }
-                }, new TaskRunner.Callback<List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum>>() {
+                }, new TaskRunner.Callback<List<com.tech.denso.Models.Locations.Datum>>() {
                     @Override
                     public void onStart() {
                     }
 
                     @Override
-                    public void onComplete(List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum> result) {
+                    public void onComplete(List<com.tech.denso.Models.Locations.Datum> result) {
                         Log.e("datumvaluecheclk", "" + result);
                         if (result.size() <= 1) {
                             nobranchtextview.setVisibility(View.VISIBLE);

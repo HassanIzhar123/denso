@@ -37,9 +37,9 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         RelativeLayout bookingbtn = (RelativeLayout) view.findViewById(R.id.bookingbtn);
         RelativeLayout emailrel = (RelativeLayout) view.findViewById(R.id.emailrel);
         RelativeLayout directionbtn = (RelativeLayout) view.findViewById(R.id.directionbtn);
-        cityname.setText(array.get(position).getCityName());
+        cityname.setText(array.get(position).getBranchName());
         maptext.setText(array.get(position).getAddress());
-        timetext.setText(array.get(position).getCityName());
+        timetext.setText(mContext.getResources().getString(R.string.openingtime) + array.get(position).getOpeningSaturday() + mContext.getResources().getString(R.string.to) + array.get(position).getTillThursday());
         calltext.setText(String.valueOf(array.get(position).getPhoneNumber()));
         bookingbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         directionbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = "http://maps.google.com/maps?saddr=" + "9982878"+","+"76285774"+"&daddr="+"9992084"+","+"76286455";
+                String uri = "http://maps.google.com/maps?saddr=" + "9982878" + "," + "76285774" + "&daddr=" + "9992084" + "," + "76286455";
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 mContext.startActivity(intent);

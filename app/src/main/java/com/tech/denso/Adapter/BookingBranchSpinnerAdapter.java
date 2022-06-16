@@ -13,10 +13,10 @@ import java.util.List;
 
 public class BookingBranchSpinnerAdapter extends BaseAdapter {
     Context context;
-    List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum> datums;
+    List<com.tech.denso.Models.Locations.Datum> datums;
     LayoutInflater inflter;
 
-    public BookingBranchSpinnerAdapter(Context context, List<com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum> datums) {
+    public BookingBranchSpinnerAdapter(Context context, List<com.tech.denso.Models.Locations.Datum> datums) {
         this.context = context;
         this.datums = datums;
         inflter = (LayoutInflater.from(context));
@@ -28,7 +28,7 @@ public class BookingBranchSpinnerAdapter extends BaseAdapter {
     }
 
     @Override
-    public com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum getItem(int i) {
+    public com.tech.denso.Models.Locations.Datum getItem(int i) {
         return datums.get(i);
     }
 

@@ -42,7 +42,7 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.custom_spinner_items, null);
         TextView names = (TextView) view.findViewById(R.id.textView);
-        names.setText(datums.get(i).getAddress());
+        names.setText(datums.get(i).getBranchName());
         return view;
     }
 }
