@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+//    id 'android-string-extractor'
 }
 
 android {
@@ -55,4 +56,5 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
+    implementation('io.apptik.widget:multiselectspinner:1.0.12')
 }

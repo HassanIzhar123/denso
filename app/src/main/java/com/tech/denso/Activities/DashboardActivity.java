@@ -32,6 +32,7 @@ import com.tech.denso.Fragments.SendData;
 import com.tech.denso.Fragments.ServicesFragment;
 import com.tech.denso.Fragments.ServicingFragment;
 import com.tech.denso.Fragments.UserFragment;
+import com.tech.denso.Fragments.WarrantyFragment;
 import com.tech.denso.Fragments.WhyDensoFragment;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
@@ -221,8 +222,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
                 if (loggedbol) {
                     mDrawerLayout.closeDrawer(nav_view);
-                    viewpager.setCurrentItem(3);
-                    bottomBar.setActiveItem(3);
+                    viewpager.setCurrentItem(4);
+                    bottomBar.setActiveItem(4);
                     DashboardActivity.titletextview.setText("MY ACCOUNT");
                     sendbtn.setVisibility(View.GONE);
                 } else {
@@ -244,14 +245,15 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         fragments.add(BookingFragment.newInstance());
         fragments.add(MapsFragment.newInstance(1, "Page # 2"));
         fragments.add(ServicingFragment.newInstance(2, "Page # 3"));
-        fragments.add(UserFragment.newInstance(3, "Page # 4"));
+        fragments.add(WarrantyFragment.newInstance(3, "Page # 4"));
+        fragments.add(UserFragment.newInstance(4, "Page # 5"));
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
         viewpager.setAdapter(adapterViewPager);
-        viewpager.setOffscreenPageLimit(4);
+        viewpager.setOffscreenPageLimit(5);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelect(int position) {
-                if (position == 3) {
+                if (position == 4) {
                     Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
                     if (loggedbol) {
                         viewpager.setCurrentItem(position);
@@ -286,6 +288,9 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                     DashboardActivity.titletextview.setText("SERVICING");
                     sendbtn.setVisibility(View.GONE);
                 } else if (position == 3) {
+                    DashboardActivity.titletextview.setText("WARRANTY CLAIM");
+                    sendbtn.setVisibility(View.GONE);
+                } else if (position == 4) {
                     DashboardActivity.titletextview.setText("MY ACCOUNT");
                     sendbtn.setVisibility(View.GONE);
                 }
@@ -305,7 +310,6 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
             if (resultCode == RESULT_OK) {
                 Boolean check = data.getBooleanExtra("comingback", false);
                 if (check) {
-                    Toast.makeText(getApplicationContext(), "Back here", Toast.LENGTH_SHORT).show();
                     bottomBar.setActiveItem(0);
                     viewpager.setCurrentItem(0);
                 }
