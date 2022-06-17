@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -167,7 +168,6 @@ public class MapsFragment extends Fragment {
                         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
                 }
-
                 mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getContext(), responsedata));
             }
         });

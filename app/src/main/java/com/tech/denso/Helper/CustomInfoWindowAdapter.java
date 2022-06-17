@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.core.view.MotionEventCompat;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -41,16 +45,40 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         maptext.setText(array.get(position).getAddress());
         timetext.setText(mContext.getResources().getString(R.string.openingtime) + array.get(position).getOpeningSaturday() + mContext.getResources().getString(R.string.to) + array.get(position).getTillThursday());
         calltext.setText(String.valueOf(array.get(position).getPhoneNumber()));
-        bookingbtn.setOnClickListener(new View.OnClickListener() {
+//        bookingbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        emailrel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        bookingbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = MotionEventCompat.getActionMasked(event);
+                switch (action){
+                    case MotionEvent.ACTION_UP:
+                        Toast.makeText(mContext, "boooking buttin clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
-        emailrel.setOnClickListener(new View.OnClickListener() {
+        emailrel.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = MotionEventCompat.getActionMasked(event);
+                switch (action){
+                    case MotionEvent.ACTION_UP:
+                        Toast.makeText(mContext, "email buttin clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
         directionbtn.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +94,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     @Override
     public View getInfoWindow(Marker marker) {
-        rendowWindowText(marker, mWindow);
+//        rendowWindowText(marker, mWindow);
         return mWindow;
     }
 
