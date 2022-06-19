@@ -2,8 +2,11 @@ package com.tech.denso.Fragments;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 //import android.location.LocationRequest;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -74,6 +78,7 @@ public class MapsFragment extends Fragment {
     List<com.tech.denso.Models.Locations.Datum> datumstemp = new ArrayList<>();
     ArrayList<com.tech.denso.Models.Locations.Datum> finalarr = new ArrayList<>();
     TextView nobranchtext;
+    CardView whatsappbtn;
 
     public static MapsFragment newInstance(int page, String title) {
         MapsFragment fragmentFirst = new MapsFragment();
@@ -94,6 +99,7 @@ public class MapsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.maps_fragment, container, false);
+        whatsappbtn = view.findViewById(R.id.whatsappbtn);
         loadingrel = view.findViewById(R.id.loadingrel);
         branchspinner = view.findViewById(R.id.branchspinner);
         spinneropener = view.findViewById(R.id.spinneropener);
@@ -136,6 +142,23 @@ public class MapsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 branchspinner.performClick();
+            }
+        });
+        whatsappbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String contact = "+00 9876543210"; // use country code with your phone number
+                String url = "https://api.whatsapp.com/send?phone=" + contact;
+                try {
+                    PackageManager pm = getContext().getPackageManager();
+                    pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Toast.makeText(getContext(), "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         });
         return view;
@@ -243,11 +266,12 @@ public class MapsFragment extends Fragment {
                         finalarr.clear();
                         spinnerbol = true;
                         for (int i = 0; i < datumstemp.size(); i++) {
-                            if (datumstemp.get(i).getAddress().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            if (datumstemp.get(i).getBranchName().toLowerCase().contains(s.toString().toLowerCase())
+                                    && datumstemp.get(i).getBranchName().toLowerCase().startsWith(s.toString().toLowerCase())) {
                                 finalarr.add(datumstemp.get(i));
                             }
                         }
-                        if (finalCustomAdapter != null) {
+                        if (finalarr.size() !=0 && finalCustomAdapter != null) {
                             if (finalCustomAdapter.length > 0) {
                                 nobranchtext.setVisibility(View.GONE);
                                 branchspinner.setVisibility(View.VISIBLE);

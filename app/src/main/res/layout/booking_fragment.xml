@@ -48,7 +48,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/personalinfotext"
-                    android:layout_marginStart="5dp"
                     android:layout_marginTop="20dp"
                     android:text="First name"
                     android:textColor="#8C8984"
@@ -63,29 +62,21 @@
                     <EditText
                         android:id="@+id/firstnameedittext"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:background="@null"
                         android:hint="First Name"
                         android:minWidth="300dp"
-                        android:textColor="#333333" />
+                        android:textColor="#333333"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/firstnamegreencheck"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_centerVertical="true"-->
-                    <!--                        android:layout_marginStart="-23dp"-->
-                    <!--                        android:layout_toEndOf="@+id/firstnameedittext"-->
-                    <!--                        android:src="@drawable/green_check_box"-->
-                    <!--                        android:visibility="gone" />-->
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/firstnameredcheck"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_centerVertical="true"-->
-                    <!--                        android:layout_marginStart="-23dp"-->
-                    <!--                        android:layout_toEndOf="@+id/firstnameedittext"-->
-                    <!--                        android:src="@drawable/red_corss_check_icon" />-->
+                    <View
+                        android:id="@+id/firstnameview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/firstnameedittext"
+                        android:layout_alignStart="@+id/firstnameedittext"
+                        android:layout_alignEnd="@+id/firstnameedittext"
+                        android:background="@drawable/underline_textview" />
 
                 </RelativeLayout>
 
@@ -105,7 +96,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/firsttexterror"
-                    android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:text="Last name"
                     android:textColor="#8C8984"
@@ -120,29 +110,21 @@
                     <EditText
                         android:id="@+id/lastnameedittext"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:background="@null"
                         android:hint="Last Name"
                         android:minWidth="300dp"
-                        android:textColor="#333333" />
+                        android:textColor="#333333"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/lastnamegreencheck"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_centerVertical="true"-->
-                    <!--                        android:layout_marginStart="-23dp"-->
-                    <!--                        android:layout_toEndOf="@+id/lastnameedittext"-->
-                    <!--                        android:src="@drawable/green_check_box"-->
-                    <!--                        android:visibility="gone" />-->
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/lastnameredcheck"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_centerVertical="true"-->
-                    <!--                        android:layout_marginStart="-23dp"-->
-                    <!--                        android:layout_toEndOf="@+id/lastnameedittext"-->
-                    <!--                        android:src="@drawable/red_corss_check_icon" />-->
+                    <View
+                        android:id="@+id/lastnameview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/lastnameedittext"
+                        android:layout_alignStart="@+id/lastnameedittext"
+                        android:layout_alignEnd="@+id/lastnameedittext"
+                        android:background="@drawable/underline_textview" />
 
                 </RelativeLayout>
 
@@ -151,7 +133,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lastnamerel"
-                    android:layout_marginStart="5dp"
                     android:text="There should be no space in last name"
                     android:textColor="#8C8984"
                     android:textSize="10sp"
@@ -162,7 +143,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lasttexterror"
-                    android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:text="Email"
                     android:textColor="#8C8984"
@@ -177,11 +157,22 @@
                     <EditText
                         android:id="@+id/emailedittext"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:background="@null"
                         android:hint="Email"
                         android:minWidth="300dp"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#333333"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+
+                    <View
+                        android:id="@+id/emailview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/emailedittext"
+                        android:layout_alignStart="@+id/emailedittext"
+                        android:layout_alignEnd="@+id/emailedittext"
+                        android:background="@drawable/underline_textview" />
 
                     <ImageView
                         android:id="@+id/emailgreencheck"
@@ -209,7 +200,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/emailrel"
-                    android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:text="Phone number"
                     android:textColor="#8C8984"
@@ -224,12 +214,23 @@
                     <EditText
                         android:id="@+id/phoneedittext"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:background="@null"
                         android:hint="Phone Number"
                         android:inputType="phone"
                         android:minWidth="300dp"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#333333"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+
+                    <View
+                        android:id="@+id/phoneview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/phoneedittext"
+                        android:layout_alignStart="@+id/phoneedittext"
+                        android:layout_alignEnd="@+id/phoneedittext"
+                        android:background="@drawable/underline_textview" />
 
                     <ImageView
                         android:id="@+id/phonegreencheck"
@@ -293,12 +294,13 @@
                         android:textColor="#333333" />
 
                     <View
-                        android:layout_width="wrap_content"
+                        android:id="@+id/selectmakeview"
+                        android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectmakespinner"
-                        android:layout_toStartOf="@+id/selectmakespinner"
-                        android:layout_toEndOf="@+id/selectmakespinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectmakespinner"
+                        android:layout_alignEnd="@+id/selectmakespinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectmaketext"
@@ -357,12 +359,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selectmodelview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectmodelspinner"
-                        android:layout_toStartOf="@+id/selectmodelspinner"
-                        android:layout_toEndOf="@+id/selectmodelspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectmodelspinner"
+                        android:layout_alignEnd="@+id/selectmodelspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectmodeltext"
@@ -420,12 +423,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selectyearview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectyearspinner"
-                        android:layout_toStartOf="@+id/selectyearspinner"
-                        android:layout_toEndOf="@+id/selectyearspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectyearspinner"
+                        android:layout_alignEnd="@+id/selectyearspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectyeartext"
@@ -484,12 +488,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selectbranchview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectbranchspinner"
-                        android:layout_toStartOf="@+id/selectbranchspinner"
-                        android:layout_toEndOf="@+id/selectbranchspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectbranchspinner"
+                        android:layout_alignEnd="@+id/selectbranchspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectbranchtext"
@@ -548,12 +553,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selectpreferredview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectpreferredspinner"
-                        android:layout_toStartOf="@+id/selectpreferredspinner"
-                        android:layout_toEndOf="@+id/selectpreferredspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectpreferredspinner"
+                        android:layout_alignEnd="@+id/selectpreferredspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectpreferredtext"
@@ -612,12 +618,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selectservicesview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectservicesspinner"
-                        android:layout_toStartOf="@+id/selectservicesspinner"
-                        android:layout_toEndOf="@+id/selectservicesspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectservicesspinner"
+                        android:layout_alignEnd="@+id/selectservicesspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selectservicetext"
@@ -667,16 +674,17 @@
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:hint="Date"
-                        android:minWidth="310dp"
+                        android:minWidth="300dp"
                         android:paddingEnd="25dp" />
 
                     <View
+                        android:id="@+id/selectdateview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selectdatetextview"
-                        android:layout_toStartOf="@+id/selectdatetextview"
-                        android:layout_toEndOf="@+id/selectdatetextview"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selectdatetextview"
+                        android:layout_alignEnd="@+id/selectdatetextview"
+                        android:background="@drawable/underline_textview" />
 
                     <ImageView
                         android:layout_width="30dp"
@@ -714,12 +722,13 @@
                         android:textColor="#333333" />
 
                     <View
+                        android:id="@+id/selecttimeslotview"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/selecttimeslotsspinner"
-                        android:layout_toStartOf="@+id/selecttimeslotsspinner"
-                        android:layout_toEndOf="@+id/selecttimeslotsspinner"
-                        android:background="#EDEDEC" />
+                        android:layout_alignStart="@+id/selecttimeslotsspinner"
+                        android:layout_alignEnd="@+id/selecttimeslotsspinner"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/selecttimeslottext"

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/upperel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:padding="20dp">
+
+            <!--                <com.tech.denso.DropDown-->
+            <!--                    android:id="@+id/dropdown"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content" />-->
+
+            <TextView
+                android:id="@+id/personalinfotext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personal_information"
+                android:textColor="#312E4F"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/companynametextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/personalinfotext"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/company_name"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/companynamerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companynametextview">
+
+                <EditText
+                    android:id="@+id/companynameedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/companynameview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/companynameedittext"
+                    android:layout_alignStart="@+id/companynameedittext"
+                    android:layout_alignEnd="@+id/companynameedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/streettextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companynamerel"
+                android:layout_marginTop="10dp"
+                android:text="@string/street"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/streetrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/streettextview">
+
+                <EditText
+                    android:id="@+id/streetedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/streetview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/streetedittext"
+                    android:layout_alignStart="@+id/streetedittext"
+                    android:layout_alignEnd="@+id/streetedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/lasttexterror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/streetrel"
+                android:text="@string/there_should_be_no_space_in_last_name"
+                android:textColor="#8C8984"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/citytextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lasttexterror"
+                android:layout_marginTop="10dp"
+                android:text="@string/city_state_zip"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/cityrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/citytextview">
+
+                <EditText
+                    android:id="@+id/cityedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:paddingEnd="25dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/cityview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/cityedittext"
+                    android:layout_alignStart="@+id/cityedittext"
+                    android:layout_alignEnd="@+id/cityedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/phonetextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cityrel"
+                android:layout_marginTop="10dp"
+                android:text="@string/phone_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/phonerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phonetextview">
+
+                <EditText
+                    android:id="@+id/phoneedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:paddingEnd="25dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/phoneview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/phoneedittext"
+                    android:layout_alignStart="@+id/phoneedittext"
+                    android:layout_alignEnd="@+id/phoneedittext"
+                    android:background="@drawable/underline_textview" />
+
+                <ImageView
+                    android:id="@+id/phonegreencheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-23dp"
+                    android:layout_toEndOf="@+id/phoneedittext"
+                    android:src="@drawable/green_check_box"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/phoneredcheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-23dp"
+                    android:layout_toEndOf="@+id/phoneedittext"
+                    android:src="@drawable/red_corss_check_icon" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/middletextrel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/upperel"
+            android:layout_marginTop="10dp"
+            android:background="#F2F2F5"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/ortextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_horizontal"
+                android:letterSpacing="0.5"
+                android:minWidth="300dp"
+                android:text="@string/or"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottomrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/middletextrel"
+            android:layout_centerHorizontal="true"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/homeownernametextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/homeowner_name"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/homeownernamerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownernametextview">
+
+                <EditText
+                    android:id="@+id/homeownernameedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/homeownernameview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/homeownernameedittext"
+                    android:layout_alignStart="@+id/homeownernameedittext"
+                    android:layout_alignEnd="@+id/homeownernameedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/homestreettextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownernamerel"
+                android:layout_marginTop="10dp"
+                android:text="@string/street"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/homestreetrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homestreettextview">
+
+                <EditText
+                    android:id="@+id/homestreetedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/homestreetview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/homestreetedittext"
+                    android:layout_alignStart="@+id/homestreetedittext"
+                    android:layout_alignEnd="@+id/homestreetedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/homeownerlasttexterror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homestreetrel"
+                android:text="@string/there_should_be_no_space_in_last_name"
+                android:textColor="#8C8984"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/homeownercitytextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownerlasttexterror"
+                android:layout_marginTop="10dp"
+                android:text="@string/city_state_zip"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/homeownercityrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownercitytextview">
+
+                <EditText
+                    android:id="@+id/homeownercityedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:paddingEnd="25dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/homeownercityview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/homeownercityedittext"
+                    android:layout_alignStart="@+id/homeownercityedittext"
+                    android:layout_alignEnd="@+id/homeownercityedittext"
+                    android:background="@drawable/underline_textview" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/homeownerphonetextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownercityrel"
+                android:layout_marginTop="10dp"
+                android:text="@string/phone_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/homeownerphonerel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownerphonetextview">
+
+                <EditText
+                    android:id="@+id/homeownerphoneedittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:minWidth="300dp"
+                    android:paddingEnd="25dp"
+                    android:textColor="#333333"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/homeownerphoneview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/homeownerphoneedittext"
+                    android:layout_alignStart="@+id/homeownerphoneedittext"
+                    android:layout_alignEnd="@+id/homeownerphoneedittext"
+                    android:background="@drawable/underline_textview" />
+
+                <ImageView
+                    android:id="@+id/homeownerphonegreencheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-23dp"
+                    android:layout_toEndOf="@+id/homeownerphoneedittext"
+                    android:src="@drawable/green_check_box"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/homeownerphoneredcheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-23dp"
+                    android:layout_toEndOf="@+id/homeownerphoneedittext"
+                    android:src="@drawable/red_corss_check_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/servicesbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeownerphonerel"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/multi_selection_spinner_background"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/slectservicesterxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="280dp"
+                    android:padding="10dp"
+                    android:text="@string/select_services"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/slectservicesterxt"
+                    android:src="@drawable/down_arrow_icon" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nextbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/servicesbutton"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto"
+                android:minWidth="300dp"
+                android:text="@string/fragment_initial_warranty_next"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="#FF2548"
+                app:cornerRadius="5dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

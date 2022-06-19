@@ -2,6 +2,8 @@ package com.tech.denso.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -9,10 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -21,6 +25,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -104,6 +109,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     TextView nobranchtextview, nomaketextview, nomodeltextview, noyeartextview, nopreferredtextview, noservicestextview, notimetextview;
     //    public ListenFromActivity activityListener;
     TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selectservicetext, selecttimeslottext;
+    View firstnameview, lastnameview, emailview, phoneview;
 
     public void refreshList(String userList) {
         Toast.makeText(getContext(), "Come here", Toast.LENGTH_SHORT).show();
@@ -132,7 +138,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     }
 
     private String getBranch() {
-        com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum model = (com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum) selectbranchspinner.getSelectedItem();
+        com.tech.denso.Models.Locations.Datum model = (com.tech.denso.Models.Locations.Datum) selectbranchspinner.getSelectedItem();
         return model.getBranchName();
     }
 
@@ -996,13 +1002,18 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         phoneredcheck = view.findViewById(R.id.phoneredcheck);
         selectbranchspinner = view.findViewById(R.id.selectbranchspinner);
         selectmakespinner = view.findViewById(R.id.selectmakespinner);
-        selectbranchspinner = view.findViewById(R.id.selectbranchspinner);
         selectmodelspinner = view.findViewById(R.id.selectmodelspinner);
         selectyearspinner = view.findViewById(R.id.selectyearspinner);
         selectpreferredspinner = view.findViewById(R.id.selectpreferredspinner);
         selectservicesspinner = view.findViewById(R.id.selectservicesspinner);
-//        selecttimetextiew = view.findViewById(R.id.selecttimetextiew);
         selectdatetextview = view.findViewById(R.id.selectdatetextview);
+
+        firstnameview = view.findViewById(R.id.firstnameview);
+        lastnameview = view.findViewById(R.id.lastnameview);
+        emailview = view.findViewById(R.id.emailview);
+        phoneview = view.findViewById(R.id.phoneview);
+        selectdatetextview = view.findViewById(R.id.selectdatetextview);
+
         emailedittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1050,23 +1061,25 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         firstnameedittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isFirstNameHavingSpaceOrNot(firstnameedittext.getText().toString())) {
-                    firsttexterror.setVisibility(View.VISIBLE);
-                    ChangeEdittextColor(firstnameedittext, Color.parseColor("#FE0025"));
+                if (!s.toString().equals("")) {
+                    if (isFirstNameHavingSpaceOrNot(firstnameedittext.getText().toString())) {
+                        firsttexterror.setVisibility(View.VISIBLE);
+                        ChangeEdittextColor(firstnameview, Color.parseColor("#FE0025"));
+                    } else {
+                        firsttexterror.setVisibility(View.GONE);
+                        ChangeEdittextColor(firstnameview, Color.parseColor("#00C149"));
+                    }
                 } else {
-                    firsttexterror.setVisibility(View.GONE);
-                    ChangeEdittextColor(firstnameedittext, Color.parseColor("#00C149"));
+                    ChangeEdittextColor(firstnameview, Color.parseColor("#FE0025"));
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
         lastnamedittext.addTextChangedListener(new TextWatcher() {
@@ -1077,12 +1090,16 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isFirstNameHavingSpaceOrNot(lastnamedittext.getText().toString())) {
-                    lasttexterror.setVisibility(View.VISIBLE);
-                    ChangeEdittextColor(lastnamedittext, Color.parseColor("#FE0025"));
+                if (!s.toString().equals("")) {
+                    if (isFirstNameHavingSpaceOrNot(lastnamedittext.getText().toString())) {
+                        lasttexterror.setVisibility(View.VISIBLE);
+                        ChangeEdittextColor(lastnameview, Color.parseColor("#FE0025"));
+                    } else {
+                        lasttexterror.setVisibility(View.GONE);
+                        ChangeEdittextColor(lastnameview, Color.parseColor("#00C149"));
+                    }
                 } else {
-                    lasttexterror.setVisibility(View.GONE);
-                    ChangeEdittextColor(lastnamedittext, Color.parseColor("#00C149"));
+                    ChangeEdittextColor(lastnameview, Color.parseColor("#FE0025"));
                 }
             }
 
@@ -1091,31 +1108,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 
             }
         });
-//        selecttimetextiew.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Calendar mcurrentTime = Calendar.getInstance();
-//                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-//                int minute = mcurrentTime.get(Calendar.MINUTE);
-//                TimePickerDialog mTimePicker;
-//                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-//                        String finalhour = String.valueOf(selectedHour);
-//                        if (selectedHour < 10) {
-//                            finalhour = "0" + String.valueOf(selectedHour);
-//                        }
-//                        String finalhours = String.valueOf(selectedMinute);
-//                        if (selectedMinute < 10) {
-//                            finalhours = "0" + String.valueOf(selectedMinute);
-//                        }
-//                        selecttimetextiew.setText(finalhour + ":" + finalhours);
-//                    }
-//                }, hour, minute, true);
-//                mTimePicker.setTitle("Select Time");
-//                mTimePicker.show();
-//            }
-//        });
         selectdatetextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1145,17 +1137,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
             }
         });
         emailedittext.setText(new Const().getEmail());
-//        selecttimetextiew.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
         selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
-//        selecttimetextiew.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                setAllEdittextFocusToFalse();
-//
-//                selecttimetextiew.setFocusable(true);
-//                return false;
-//            }
-//        });
         selectdatetextview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1179,7 +1161,88 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         ShowPreferred();
         ShowRequiredServices();
         ShowTimeSlots();
+        setFocusChangeListener(emailedittext);
+        setFocusChangeListener(phoneedittext);
+        setFocusChangeListener(firstnameedittext);
+        setFocusChangeListener(lastnamedittext);
+        setFocusChangeListener(emailedittext, emailview);
+        setFocusChangeListener(phoneedittext, phoneview);
+        setFocusChangeListener(firstnameedittext, firstnameview);
+        setFocusChangeListener(lastnamedittext, lastnameview);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    View v = getActivity().getCurrentFocus();
+                    if (v instanceof EditText) {
+                        Rect outRect = new Rect();
+                        v.getGlobalVisibleRect(outRect);
+                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            v.clearFocus();
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    }
+                }
+                return true;
+            }
+        });
         return view;
+    }
+
+    public void setFocusChangeListener(EditText edittext, View view) {
+        edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    int colorFrom = Color.parseColor("#FAFAFA");
+                    int colorTo = getResources().getColor(android.R.color.holo_red_light);
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(250);
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            view.getBackground().setColorFilter((int) animator.getAnimatedValue(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
+
+                    });
+                    colorAnimation.start();
+                } else {
+                    int colorTo = Color.parseColor("#FAFAFA");
+                    int colorFrom = getResources().getColor(android.R.color.holo_red_light);
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(250);
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+//                            textView.setBackgroundColor((int) animator.getAnimatedValue());
+                            view.getBackground().setColorFilter((int) animator.getAnimatedValue(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
+
+                    });
+                    colorAnimation.start();
+                }
+            }
+        });
+    }
+
+    public void setFocusChangeListener(EditText edittext) {
+        edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    edittext.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_red_light),
+                            PorterDuff.Mode.SRC_ATOP);
+                } else {
+                    edittext.getBackground().setColorFilter(getResources().getColor(android.R.color.darker_gray),
+                            PorterDuff.Mode.SRC_ATOP);
+                }
+            }
+        });
     }
 
     private void setAllEdittextFocusToFalse() {
@@ -1205,7 +1268,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         selecttimeslotsspinner.setSelection(0);
     }
 
-    public void ChangeEdittextColor(EditText edittext, int color) {
+    public void ChangeEdittextColor(View edittext, int color) {
         edittext.getBackground().mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
@@ -1219,8 +1282,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     }
 
     boolean isFirstNameHavingSpaceOrNot(String firstname) {
-//        String firststr = "^\\\\s*$";
-//        return Pattern.compile(firststr).matcher(firstname).matches();
         return CharMatcher.whitespace().matchesAnyOf(firstname);
     }
 }

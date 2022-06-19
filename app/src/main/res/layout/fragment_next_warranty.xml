@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    tools:context=".Fragments.NextWarrantyFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/failedparttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/failed_part"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/salesorderrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/failedparttext"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/salesordertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/sales_order_or_invoice_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/salesorderedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/salesordertextview"
+                android:background="@null"
+                android:minWidth="300dp"
+                android:textColor="#000000"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/salesorderview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/salesorderedittext"
+                android:layout_alignStart="@+id/salesorderedittext"
+                android:layout_alignEnd="@+id/salesorderedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/firsttexterror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/salesorderrel"
+            android:layout_marginStart="5dp"
+            android:text="There should be no space in first name"
+            android:textColor="#8C8984"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/originalunitdaterel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firsttexterror"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/originalunittextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:hint="@string/original_unit_install_date"
+                android:minWidth="297dp"
+                android:paddingEnd="20dp" />
+
+            <TextView
+                android:id="@+id/originalunitselecttextview"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/originalunittextview"
+                android:gravity="center_vertical"
+                android:hint="@string/select_date"
+                android:minWidth="297dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/originalunitselecttextview"
+                android:layout_alignStart="@+id/originalunitselecttextview"
+                android:layout_alignEnd="@+id/originalunitselecttextview"
+                android:background="@drawable/underline_textview" />
+
+            <TextView
+                android:id="@+id/originalunitdateerror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/originalunitselecttextview"
+                android:text="@string/please_select_date"
+                android:textColor="#FF2548"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/failedpartdaterel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/originalunitdaterel"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/failedparttextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:hint="@string/failed_date"
+                android:minWidth="297dp"
+                android:paddingEnd="20dp" />
+
+            <TextView
+                android:id="@+id/failedpartselecttextview"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/failedparttextview"
+                android:gravity="center_vertical"
+                android:hint="@string/select_date"
+                android:minWidth="297dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/failedpartselecttextview"
+                android:layout_alignStart="@+id/failedpartselecttextview"
+                android:layout_alignEnd="@+id/failedpartselecttextview"
+                android:background="@drawable/underline_textview" />
+
+            <TextView
+                android:id="@+id/failedparterror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/failedpartselecttextview"
+                android:text="@string/please_select_date"
+                android:textColor="#FF2548"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/manufacturerrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/failedpartdaterel"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/manufacturertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/manufacturer"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/manufactureredittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/manufacturertextview"
+                android:background="@null"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/manufacturerview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/manufactureredittext"
+                android:layout_alignStart="@+id/manufactureredittext"
+                android:layout_alignEnd="@+id/manufactureredittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lasttexterror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/manufacturerrel"
+            android:layout_marginStart="5dp"
+            android:text="There should be no space in last name"
+            android:textColor="#8C8984"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/unitmodeltextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lasttexterror"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/unit_model_number"
+            android:textColor="#8C8984"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:id="@+id/emailrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unitmodeltextview">
+
+            <EditText
+                android:id="@+id/unitmodeledittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@drawable/underline_textview"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/unitmodelview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/unitmodeledittext"
+                android:layout_alignStart="@+id/unitmodeledittext"
+                android:layout_alignEnd="@+id/unitmodeledittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/unitserialtextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/emailrel"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/unit_serial_number"
+            android:textColor="#8C8984"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:id="@+id/unitserialrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unitserialtextview">
+
+            <EditText
+                android:id="@+id/unitserialedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@drawable/underline_textview"
+                android:inputType="phone"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/unitserialview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/unitserialedittext"
+                android:layout_alignStart="@+id/unitserialedittext"
+                android:layout_alignEnd="@+id/unitserialedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/specificfailurereasontext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unitserialrel"
+            android:layout_marginTop="20dp"
+            android:text="@string/specific_failure_reason"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/messagetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/specificfailurereasontext"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_message"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/message_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/messagetext"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/warranty_failure_edittext_background"
+            android:gravity="top|start"
+            android:hint=""
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:maxWidth="300dp"
+            android:maxLines="10"
+            android:minWidth="300sp"
+            android:minLines="6"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:textColor="#000"
+            android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message_edittext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/roboto"
+            android:minWidth="300dp"
+            android:text="@string/fragment_initial_warranty_next"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF2548"
+            app:cornerRadius="5dp" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Denso</string>
+    <string name="openingtime">Opening Saturday till Thursday </string>
+    <string name="to"> to </string>
+    <string name="firstnameerror">Firstname Field cannot be Empty!</string>
+    <string name="lastnameerror">Lastname Field cannot be Empty!</string>
+    <string name="emailerror">Email Field cannot be Empty!</string>
+    <string name="phonenumbererror">Phone Number Field cannot be Empty!</string>
+    <string name="BookingFragment_nobrancherror">There is no branch! you can not set any booking</string>
+    <string name="city_state_zip">City/State/Zip</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="or">--------OR--------</string>
+    <string name="there_should_be_no_space_in_last_name">There should be no space in last name</string>
+    <string name="there_should_be_no_space_in_first_name">There should be no space in last name</string>
+    <string name="street">Street</string>
+    <string name="company_name">Company Name</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="homeowner_name">Homeowner Name</string>
+    <string name="select_services">Select Services</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_initial_warranty_next">Next</string>
+    <string name="failed_part">Failed Part</string>
+    <string name="sales_order_or_invoice_number">Sales Order OR Invoice Number</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="unit_model_number">Unit Model Number</string>
+    <string name="unit_serial_number">Unit Serial Number</string>
+    <string name="enter_message">Enter Message</string>
+    <string name="specific_failure_reason">Specific Failure Reason</string>
+    <string name="homeowner_phone_number_not_Valid">HomeOwner\'s Phone Number is not Valid!</string>
+    <string name="company_name_empty">Company Name can\'t be Empty!</string>
+    <string name="street_cant_be_empty">Street can\'t be Empty!</string>
+    <string name="homeownername_cant_be_empty">Home Owner Name Can\'t be Empty!</string>
+    <string name="homeownercityname_cant_be_empty">Home Owner City Name can\'t be Empty!</string>
+    <string name="manufacturer_cant_be_empty">Manufacturer can\'t be empty!</string>
+    <string name="unit_model_cant_be_empty">Unit model can\'t be empty!</string>
+    <string name="unit_serial_cant_be_empty">Unit serial can\'t be empty!</string>
+    <string name="message_cant_be_empty">Message can\'t be empty!</string>
+</resources>

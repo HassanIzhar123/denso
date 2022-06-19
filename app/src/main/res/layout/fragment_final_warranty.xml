@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    tools:context=".Fragments.FinalWarrantyFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/replacementparttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3.5dp"
+            android:text="@string/replacement_part"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/newpartrrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/replacementparttext"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/newparttextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3.5dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/new_part_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/newpartedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/newparttextview"
+                android:background="@null"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/newpartview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/newpartedittext"
+                android:layout_alignStart="@+id/newpartedittext"
+                android:layout_alignEnd="@+id/newpartedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lasttexterror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpartrrel"
+            android:layout_marginStart="5dp"
+            android:text="There should be no space in last name"
+            android:textColor="#8C8984"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/newpartnumbertextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lasttexterror"
+            android:layout_marginStart="3.5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/new_part_name"
+            android:textColor="#8C8984"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:id="@+id/newserialnumberrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpartnumbertextview">
+
+            <EditText
+                android:id="@+id/newserialnumberedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:minWidth="300dp"
+                android:paddingEnd="25dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/newserialnumberview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/newserialnumberedittext"
+                android:layout_alignStart="@+id/newserialnumberedittext"
+                android:layout_alignEnd="@+id/newserialnumberedittext"
+                android:background="@drawable/underline_textview" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/newserialnumbertextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newserialnumberrel"
+            android:layout_marginStart="3.5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/new_serial_number"
+            android:textColor="#8C8984"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:id="@+id/newpartnamerel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newserialnumbertextview">
+
+            <EditText
+                android:id="@+id/newpartnameedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:minWidth="300dp"
+                android:paddingEnd="25dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/newpartnameview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/newpartnameedittext"
+                android:layout_alignStart="@+id/newpartnameedittext"
+                android:layout_alignEnd="@+id/newpartnameedittext"
+                android:background="@drawable/underline_textview" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/newpartinvoincetextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpartnamerel"
+            android:layout_marginStart="3.5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/new_part_invoice_number"
+            android:textColor="#8C8984"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:id="@+id/newpartinvoincerel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpartinvoincetextview">
+
+            <EditText
+                android:id="@+id/newpartinvoinceedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:inputType="phone"
+                android:minWidth="300dp"
+                android:paddingEnd="25dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/newpartinvoiceview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/newpartinvoinceedittext"
+                android:layout_alignStart="@+id/newpartinvoinceedittext"
+                android:layout_alignEnd="@+id/newpartinvoinceedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/additionalcommentstext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpartinvoincerel"
+            android:layout_marginTop="20dp"
+            android:text="@string/specific_failure_reason"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/messagetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/additionalcommentstext"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_message"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/message_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/messagetext"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/warranty_failure_edittext_background"
+            android:gravity="top|start"
+            android:hint=""
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:maxWidth="300dp"
+            android:maxLines="10"
+            android:minWidth="300sp"
+            android:minLines="6"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:textColor="#000"
+            android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/notetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message_edittext"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/final_warranty_note_background"
+            android:gravity="center"
+            android:maxWidth="300dp"
+            android:padding="10dp"
+            android:text="@string/bring_original_dj_auto_e_invoice_along_with_damaged_parts"
+            android:textColor="#8E6C30"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notetext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/roboto"
+            android:minWidth="300dp"
+            android:text="@string/submit_claim"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF2548"
+            app:cornerRadius="5dp" />
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

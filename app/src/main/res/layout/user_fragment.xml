@@ -168,7 +168,9 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                    <EditText
+                      <EditText
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:id="@+id/old_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -219,7 +221,9 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                    <EditText
+                      <EditText
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:id="@+id/new_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -270,7 +274,9 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                    <EditText
+                      <EditText
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:id="@+id/confirm_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"

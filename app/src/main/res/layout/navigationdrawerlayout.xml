@@ -35,7 +35,7 @@
 
     </RelativeLayout>
 
-<!--    <androidx.cardview.widget.CardView-->
+    <!--    <androidx.cardview.widget.CardView-->
     <!--        android:id="@+id/othercard"-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="match_parent"-->
@@ -76,6 +76,16 @@
             android:background="?android:attr/actionBarItemBackground"
             android:src="@drawable/ic_menu" />
 
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_toEndOf="@+id/navigationbtn"
+            android:background="?android:attr/actionBarItemBackground"
+            android:src="@drawable/ic_back_btn" />
+
         <TextView
             android:id="@+id/titletextview"
             android:layout_width="match_parent"
@@ -84,7 +94,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/navigationbtn"
+            android:layout_toEndOf="@+id/backbtn"
             android:fontFamily="@font/helvetica"
             android:text="MAKE A BOOKING"
             android:textAlignment="center"

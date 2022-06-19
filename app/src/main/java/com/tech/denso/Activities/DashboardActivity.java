@@ -27,7 +27,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.tech.denso.Adapter.NavigationRecyclerAdapter;
 import com.tech.denso.Fragments.BookingFragment;
 import com.tech.denso.Fragments.ContactFragment;
+import com.tech.denso.Fragments.FinalWarrantyFragment;
 import com.tech.denso.Fragments.MapsFragment;
+import com.tech.denso.Fragments.NextWarrantyFragment;
 import com.tech.denso.Fragments.SendData;
 import com.tech.denso.Fragments.ServicesFragment;
 import com.tech.denso.Fragments.ServicingFragment;
@@ -60,6 +62,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     SendData sendData;
     public ListenFromActivity activityListener;
     TextView nametext;
+    public static ImageButton backbtn;
 
     @Override
     protected void onResume() {
@@ -113,9 +116,21 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         logoutrel = findViewById(R.id.logoutrel);
         loginrel = findViewById(R.id.loginrel);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        backbtn = findViewById(R.id.backbtn);
         sendbtn = findViewById(R.id.sendbtn);
         navigation_menu.setAdapter(null);
-
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
+                    DashboardActivity.backbtn.setVisibility(View.GONE);
+                    WarrantyFragment.pager.setCurrentItem(0);
+                } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                    WarrantyFragment.pager.setCurrentItem(1);
+                }
+            }
+        });
         Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
         if (loggedbol) {
             myhistoryrel.setVisibility(View.VISIBLE);

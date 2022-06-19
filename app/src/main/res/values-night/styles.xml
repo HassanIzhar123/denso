@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorPrimaryDark">#FF2247</item>
         <item name="colorAccent">@color/white</item>
         <item name="android:statusBarColor">#FF2247</item>
     </style>
@@ -13,6 +13,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimaryDark">#ed1a3b</item>
     </style>
 
     <style name="noactionbar" parent="AppTheme.NoActionBar">
@@ -37,5 +38,8 @@
         <item name="android:elevation">5dp</item>
         <item name="android:drawableRight">@drawable/ic_down_arrow</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="WhiteCheck">
+        <item name="colorAccent">#fff</item>
     </style>
 </resources>
