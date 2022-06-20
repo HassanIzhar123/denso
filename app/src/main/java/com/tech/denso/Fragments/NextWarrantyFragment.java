@@ -2,25 +2,21 @@ package com.tech.denso.Fragments;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.content.Context;
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.tech.denso.Activities.DashboardActivity;
@@ -28,6 +24,10 @@ import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.InitialViewModel;
 import com.tech.denso.ViewModels.NextViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 
 public class NextWarrantyFragment extends Fragment {
@@ -39,7 +39,9 @@ public class NextWarrantyFragment extends Fragment {
     MaterialButton nextbtn;
     View unitserialview, unitmodelview, manufacturerview, salesorderview;
     InitialWarrantyModel item;
-    TextView originalunitselecttextview, failedpartselecttextview,failedparterror,originalunitdateerror;
+    TextView originalunitselecttextview, failedpartselecttextview, failedparterror, originalunitdateerror;
+    final Calendar originalUnitCalendar = Calendar.getInstance();
+    final Calendar failedPartCalendar = Calendar.getInstance();
 
     public NextWarrantyFragment() {
         // Required empty public constructor
@@ -92,7 +94,8 @@ public class NextWarrantyFragment extends Fragment {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckCondition()) {
+                Log.e("","");
+                if (item != null && CheckCondition()) {
                     String salesorder = salesorderedittext.getText().toString();
                     String manufacturer = manufactureredittext.getText().toString();
                     String unitmodel = unitmodeledittext.getText().toString();
@@ -114,7 +117,42 @@ public class NextWarrantyFragment extends Fragment {
                 }
             }
         });
+        originalunitselecttextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        originalUnitCalendar.set(Calendar.YEAR, year);
+                        originalUnitCalendar.set(Calendar.MONTH, month);
+                        originalUnitCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        setDateToTextView(originalUnitCalendar, originalunitselecttextview, originalunitdateerror);
+                    }
+                }, originalUnitCalendar.get(Calendar.YEAR), originalUnitCalendar.get(Calendar.MONTH), originalUnitCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        failedpartselecttextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        failedPartCalendar.set(Calendar.YEAR, year);
+                        failedPartCalendar.set(Calendar.MONTH, month);
+                        failedPartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        setDateToTextView(failedPartCalendar, failedpartselecttextview, failedparterror);
+                    }
+                }, failedPartCalendar.get(Calendar.YEAR), failedPartCalendar.get(Calendar.MONTH), failedPartCalendar.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
         return view;
+    }
+
+    private void setDateToTextView(Calendar cal, TextView textView, TextView errorTextView) {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.getDefault());
+        textView.setText(dateFormat.format(cal.getTime()));
     }
 
     private boolean CheckCondition() {
@@ -149,7 +187,7 @@ public class NextWarrantyFragment extends Fragment {
         if (!checkIfStringisEmpty(salesorder) && !checkIfStringisEmpty(manufacturer) && !checkIfStringisEmpty(unitmode)
                 && !checkIfStringisEmpty(unitserial) && !checkIfStringisEmpty(message)
                 && !checkIfStringisEmpty(originalunit) && !checkIfStringisEmpty(failedpart)
-        &&!(failedpart.equals(getString(R.string.select_date)))&&!(originalunit.equals(getString(R.string.select_date)))) {
+                && !(failedpart.equals(getString(R.string.select_date))) && !(originalunit.equals(getString(R.string.select_date)))) {
             return true;
         } else {
             return false;

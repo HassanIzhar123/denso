@@ -2,11 +2,10 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/main_Red_Color</item>
         <item name="colorPrimaryDark">#FF2247</item>
         <item name="colorAccent">@color/white</item>
-        <item name="android:statusBarColor">@color/teal_200</item>
-
+        <item name="android:statusBarColor">#FF2247</item>
     </style>
 
     <style name="AppFullScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -42,5 +41,8 @@
     </style>
     <style name="WhiteCheck">
         <item name="colorAccent">#fff</item>
+    </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main_Red_Color</item>
     </style>
 </resources>

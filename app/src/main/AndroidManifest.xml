@@ -31,6 +31,10 @@
             android:exported="false"
             android:theme="@style/AppFullScreenTheme" />
         <activity
+            android:name=".Activities.SucessfullClaimActivity"
+            android:exported="false"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity
             android:name=".Activities.ArabicLanguageErrorActivity"
             android:exported="false"
             android:theme="@style/AppFullScreenTheme" />

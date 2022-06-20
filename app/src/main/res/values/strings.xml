@@ -51,4 +51,6 @@
     <string name="unit_model_cant_be_empty">Unit model can\'t be empty!</string>
     <string name="unit_serial_cant_be_empty">Unit serial can\'t be empty!</string>
     <string name="message_cant_be_empty">Message can\'t be empty!</string>
+    <string name="your_claim_request_has_been_submitted_successfully_and_send_a_copy_at_your_registered_email">Your claim Request has been submitted successfully and send a copy at your registered email.</string>
+    <string name="additional_comments">Additional Comments</string>
 </resources>

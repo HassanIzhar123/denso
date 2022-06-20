@@ -224,23 +224,21 @@ public class InitialWarrantyFragment extends Fragment {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DashboardActivity.backbtn.setVisibility(View.VISIBLE);
-                WarrantyFragment.pager.setCurrentItem(1);
-//                if (CheckCondition()) {
-//                    InitialWarrantyModel initialmodel = new InitialWarrantyModel();
-//                    initialmodel.setCompanyName(companynameedittext.getText().toString());
-//                    initialmodel.setStreet(streetedittext.getText().toString());
-//                    initialmodel.setCity(cityedittext.getText().toString());
-//                    initialmodel.setPhoneNumber(phoneedittext.getText().toString());
-//                    initialmodel.setHomeOwnerName(homeownernameedittext.getText().toString());
-//                    initialmodel.setHomeOwnerStreet(homestreetedittext.getText().toString());
-//                    initialmodel.setHomeOwnerCity(homeownercityedittext.getText().toString());
-//                    initialmodel.setHomeOwnerPhoneNumber(homeownerphoneedittext.getText().toString());
-//                    InitialViewModel model = new ViewModelProvider(requireActivity()).get(InitialViewModel.class);
-//                    model.select(initialmodel);
-//                    DashboardActivity.backbtn.setVisibility(View.VISIBLE);
-//                    WarrantyFragment.pager.setCurrentItem(1);
-//                }
+                if (CheckCondition()) {
+                    InitialWarrantyModel initialmodel = new InitialWarrantyModel();
+                    initialmodel.setCompanyName(companynameedittext.getText().toString());
+                    initialmodel.setStreet(streetedittext.getText().toString());
+                    initialmodel.setCity(cityedittext.getText().toString());
+                    initialmodel.setPhoneNumber(phoneedittext.getText().toString());
+                    initialmodel.setHomeOwnerName(homeownernameedittext.getText().toString());
+                    initialmodel.setHomeOwnerStreet(homestreetedittext.getText().toString());
+                    initialmodel.setHomeOwnerCity(homeownercityedittext.getText().toString());
+                    initialmodel.setHomeOwnerPhoneNumber(homeownerphoneedittext.getText().toString());
+                    InitialViewModel model = new ViewModelProvider(requireActivity()).get(InitialViewModel.class);
+                    model.select(initialmodel);
+                    DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                    WarrantyFragment.pager.setCurrentItem(1);
+                }
             }
         });
         return view;

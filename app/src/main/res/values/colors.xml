@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="edittext_right">#00C148</color>
     <color name="services_row_text_color">#333333</color>
+    <color name="main_Red_Color">#ed1a3b</color>
 </resources>

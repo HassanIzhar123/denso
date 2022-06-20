@@ -2,28 +2,39 @@ package com.tech.denso.Fragments;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
+import com.tech.denso.Helper.Const;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
 import com.tech.denso.R;
-import com.tech.denso.ViewModels.InitialViewModel;
 import com.tech.denso.ViewModels.NextViewModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 public class FinalWarrantyFragment extends Fragment {
 
@@ -33,6 +44,7 @@ public class FinalWarrantyFragment extends Fragment {
     EditText newpartedittext, newserialnumberedittext, newpartnameedittext, newpartinvoinceedittext;
     View newpartview, newserialnumberview, newpartnameview, newpartinvoiceview;
     InitialWarrantyModel item;
+    MaterialButton submitbtn;
 
     public FinalWarrantyFragment() {
         // Required empty public constructor
@@ -68,6 +80,7 @@ public class FinalWarrantyFragment extends Fragment {
         newpartnameview = view.findViewById(R.id.newpartnameview);
         newpartinvoiceview = view.findViewById(R.id.newpartinvoiceview);
 
+        submitbtn = view.findViewById(R.id.submitbtn);
         setFocusChangeListener(newpartedittext, newpartview);
         setFocusChangeListener(newserialnumberedittext, newserialnumberview);
         setFocusChangeListener(newpartnameedittext, newpartnameview);
@@ -94,7 +107,111 @@ public class FinalWarrantyFragment extends Fragment {
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             this.item = item;
         });
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (item != null && CheckCondition()) {
+                    String newPart = newpartedittext.getText().toString();
+                    String newSerialNumber = newserialnumberedittext.getText().toString();
+                    String newPartName = newpartnameedittext.getText().toString();
+                    String newPartInvoice = newpartinvoinceedittext.getText().toString();
+                    item.setNewPart(newPart);
+                    item.setNewSerialNumber(newSerialNumber);
+                    item.setNewPartName(newPartName);
+                    item.setNewPart(newPartInvoice);
+                    try {
+                        SubmitClaimRequest(item);
+                    } catch (JSONException e) {
+                        Log.e("exceptionissubmittion", "" + Arrays.toString(e.getStackTrace()));
+                    }
+                }
+            }
+        });
         return view;
+    }
+
+    private void SubmitClaimRequest(InitialWarrantyModel item) throws JSONException {
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(getContext());
+        String url = new Const().getBaseUrl() + "/api/warrantyclaims/";
+        Log.e("yurlcehckvalue", "" + url);
+        JSONObject jsonBody = new JSONObject();
+        jsonBody.put("companyName", item.getCompanyName());
+        jsonBody.put("street", item.getStreet());
+        jsonBody.put("City/State/Zip", item.getCity());
+        jsonBody.put("phoneNumber", item.getPhoneNumber());
+        jsonBody.put("homeOwnerName", item.getHomeOwnerName());
+        jsonBody.put("homeOwnerStreet", item.getHomeOwnerStreet());
+        jsonBody.put("homeOwnerCity/State/Zip", item.getHomeOwnerCity());
+        jsonBody.put("homeOwnerPhoneNumber", item.getHomeOwnerPhoneNumber());
+        jsonBody.put("salesOrderOrInvoiceNumber", item.getSaleOrder());
+        jsonBody.put("originalUnitInstallDate", item.getOriginalUnitDate());
+        jsonBody.put("failedDate", item.getFailedUnitDate());
+        jsonBody.put("manufacturer", item.getManufacturer());
+        jsonBody.put("unitModelNumber", item.getUnitModelNumber());
+        jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
+        jsonBody.put("unitPartNumber", item.getUnitModelNumber());//
+        jsonBody.put("modelNumber", item.getUnitModelNumber());//
+        jsonBody.put("serialNumber", item.getNewSerialNumber());
+        jsonBody.put("failureReason", item.getMessage());
+        jsonBody.put("newPartNumber", item.getNewPart());
+        jsonBody.put("newPartName", item.getNewPartName());
+        jsonBody.put("newSerialNumber", item.getNewSerialNumber());
+        jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
+        jsonBody.put("message", item.getMessage());//
+        Log.e("finaljsonobkect", "" + jsonBody.toString());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("responsevaluechecl", "" + response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responsevaluechecl1", "" + Arrays.toString(error.getStackTrace()));
+            }
+        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                final Map<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Basic " + "c2FnYXJAa2FydHBheS5jb206cnMwM2UxQUp5RnQzNkQ5NDBxbjNmUDgzNVE3STAyNzI=");//put your token here
+//                return headers;
+//            }
+        };
+        requestQueue.add(jsonOblect);
+    }
+
+    private boolean CheckCondition() {
+        String newPart = newpartedittext.getText().toString();
+        String newSerialNumber = newserialnumberedittext.getText().toString();
+        String newPartName = newpartnameedittext.getText().toString();
+        String newPartInvoice = newpartinvoinceedittext.getText().toString();
+        if (checkIfStringisEmpty(newPart)) {
+            newpartedittext.setError(getString(R.string.salesorder_cant_be_empty));
+        }
+        if (checkIfStringisEmpty(newSerialNumber)) {
+            newserialnumberedittext.setError(getString(R.string.manufacturer_cant_be_empty));
+        }
+        if (checkIfStringisEmpty(newPartName)) {
+            newpartnameedittext.setError(getString(R.string.unit_model_cant_be_empty));
+        }
+        if (checkIfStringisEmpty(newPartInvoice)) {
+            newpartinvoinceedittext.setError(getString(R.string.unit_serial_cant_be_empty));
+        }
+        if (!checkIfStringisEmpty(newPart) && !checkIfStringisEmpty(newSerialNumber) && !checkIfStringisEmpty(newPartName)
+                && !checkIfStringisEmpty(newPartInvoice)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkIfStringisEmpty(String value) {
+        if (TextUtils.isEmpty(value)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setFocusChangeListener(EditText edittext, View view) {

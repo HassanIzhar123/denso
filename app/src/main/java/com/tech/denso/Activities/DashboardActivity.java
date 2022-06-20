@@ -1,5 +1,15 @@
 package com.tech.denso.Activities;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,17 +21,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tech.denso.Adapter.NavigationRecyclerAdapter;
@@ -192,6 +191,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                     bottombarrel.setVisibility(View.GONE);
                     sendbtn.setVisibility(View.GONE);
                 }
+                backbtn.setVisibility(View.GONE);
             }
         });
         logoutrel.setOnClickListener(new View.OnClickListener() {
@@ -280,9 +280,19 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                         i.putExtra("clickedonuser", true);
                         startActivityForResult(i, 1);
                     }
+                    backbtn.setVisibility(View.GONE);
+                } else if (position == 3) {
+                    viewpager.setCurrentItem(position);
+                    WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment||
+                            viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                        backbtn.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     viewpager.setCurrentItem(position);
+                    backbtn.setVisibility(View.GONE);
                 }
+
             }
         });
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

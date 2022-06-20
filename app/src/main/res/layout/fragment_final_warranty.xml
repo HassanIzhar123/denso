@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/newpartinvoincerel"
             android:layout_marginTop="20dp"
-            android:text="@string/specific_failure_reason"
+            android:text="@string/additional_comments"
             android:textColor="#000000"
             android:textSize="15sp" />
 

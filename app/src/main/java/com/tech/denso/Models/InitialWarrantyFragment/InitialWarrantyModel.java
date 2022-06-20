@@ -5,6 +5,42 @@ public class InitialWarrantyModel {
     String street;
     String city;
 
+    public String getNewPart() {
+        return newPart;
+    }
+
+    public void setNewPart(String newPart) {
+        this.newPart = newPart;
+    }
+
+    public String getNewSerialNumber() {
+        return newSerialNumber;
+    }
+
+    public void setNewSerialNumber(String newSerialNumber) {
+        this.newSerialNumber = newSerialNumber;
+    }
+
+    public String getNewPartName() {
+        return newPartName;
+    }
+
+    public void setNewPartName(String newPartName) {
+        this.newPartName = newPartName;
+    }
+
+    public String getNewPartInvoice() {
+        return newPartInvoice;
+    }
+
+    public void setNewPartInvoice(String newPartInvoice) {
+        this.newPartInvoice = newPartInvoice;
+    }
+
+    String newPart  ;
+    String newSerialNumber;
+    String newPartName ;
+    String newPartInvoice ;
     public String getSaleOrder() {
         return saleOrder;
     }
