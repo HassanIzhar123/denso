@@ -96,8 +96,8 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/originalunittextview"
                 android:gravity="center_vertical"
-                android:text="@string/select_date"
                 android:minWidth="297dp"
+                android:text="@string/select_date"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
                 android:textSize="15sp" />
@@ -145,8 +145,8 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/failedparttextview"
                 android:gravity="center_vertical"
-                android:text="@string/select_date"
                 android:minWidth="297dp"
+                android:text="@string/select_date"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
                 android:textSize="15sp" />
@@ -177,6 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/failedpartdaterel"
+            android:layout_marginStart="3dp"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true">
@@ -185,7 +186,6 @@
                 android:id="@+id/manufacturertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/manufacturer"
                 android:textColor="#8C8984"
@@ -224,27 +224,27 @@
             android:textSize="10sp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/unitmodeltextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lasttexterror"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/unit_model_number"
-            android:textColor="#8C8984"
-            android:textSize="13sp" />
-
         <RelativeLayout
             android:id="@+id/emailrel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/unitmodeltextview">
+            android:layout_below="@+id/lasttexterror"
+            android:layout_marginStart="3dp">
+
+            <TextView
+                android:id="@+id/unitmodeltextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/unit_model_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/unitmodeledittext"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:layout_below="@+id/unitmodeltextview"
                 android:background="@drawable/underline_textview"
                 android:minWidth="300dp"
                 android:textColor="#333333"
@@ -262,27 +262,28 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/unitserialtextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/emailrel"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/unit_serial_number"
-            android:textColor="#8C8984"
-            android:textSize="13sp" />
 
         <RelativeLayout
             android:id="@+id/unitserialrel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/unitserialtextview">
+            android:layout_marginStart="3dp"
+            android:layout_below="@+id/emailrel">
+
+            <TextView
+                android:id="@+id/unitserialtextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/unit_serial_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/unitserialedittext"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:layout_below="@+id/unitserialtextview"
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"

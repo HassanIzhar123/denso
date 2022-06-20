@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -62,6 +64,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     public ListenFromActivity activityListener;
     TextView nametext;
     public static ImageButton backbtn;
+    MyPagerAdapter adapterViewPager;
 
     @Override
     protected void onResume() {
@@ -158,40 +161,52 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         NavigationRecyclerAdapter adapter = new NavigationRecyclerAdapter(array, icons);
         navigation_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         navigation_menu.setAdapter(adapter);
-//        LoadFragment(DashboardActivity.this, new HomeFragment());
         LoadDashboardViewpager();
         adapter.setOnItemCLickListener(new NavigationRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, int position, String value) {
                 if (value.equals("Home")) {
-//                    LoadFragment(DashboardActivity.this, new HomeFragment());
                     findViewById(R.id.framelayout).setVisibility(View.GONE);
                     bottombarrel.setVisibility(View.VISIBLE);
                     mDrawerLayout.closeDrawer(nav_view);
-                    sendbtn.setVisibility(View.VISIBLE);
+                    if (adapterViewPager.getCurrentFragment() instanceof WarrantyFragment) {
+                        WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                        if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
+                            DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                        } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                            DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                        } else {
+                            DashboardActivity.backbtn.setVisibility(View.GONE);
+                        }
+                    }
                 } else if (value.equals("Services")) {
                     LoadFragment(DashboardActivity.this, new ServicesFragment());
                     findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
                     bottombarrel.setVisibility(View.GONE);
                     sendbtn.setVisibility(View.GONE);
+                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("Why Denso Services?")) {
                     LoadFragment(DashboardActivity.this, new WhyDensoFragment());
                     findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
                     bottombarrel.setVisibility(View.GONE);
                     sendbtn.setVisibility(View.GONE);
+                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("B2B Login")) {
                     open_Webpage("https://shop.dj-auto.com/");
+                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("E-Catalog")) {
                     open_Webpage("https://djauto-service.com/ecatalog/");
+                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("Our Gallery")) {
                     open_Webpage("https://djauto-service.com/gallery/");
+                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("Contact")) {
                     LoadFragment(DashboardActivity.this, new ContactFragment());
                     findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
                     bottombarrel.setVisibility(View.GONE);
                     sendbtn.setVisibility(View.GONE);
+                    backbtn.setVisibility(View.GONE);
                 }
-                backbtn.setVisibility(View.GONE);
             }
         });
         logoutrel.setOnClickListener(new View.OnClickListener() {
@@ -262,7 +277,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         fragments.add(ServicingFragment.newInstance(2, "Page # 3"));
         fragments.add(WarrantyFragment.newInstance(3, "Page # 4"));
         fragments.add(UserFragment.newInstance(4, "Page # 5"));
-        MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
         viewpager.setAdapter(adapterViewPager);
         viewpager.setOffscreenPageLimit(5);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -284,7 +299,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 } else if (position == 3) {
                     viewpager.setCurrentItem(position);
                     WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
-                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment||
+                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment ||
                             viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
                         backbtn.setVisibility(View.VISIBLE);
                     }
@@ -359,10 +374,23 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private ArrayList<Fragment> fragments;
+        private Fragment mCurrentFragment;
 
         public MyPagerAdapter(FragmentManager fragmentManager, ArrayList<Fragment> fragments) {
             super(fragmentManager);
             this.fragments = fragments;
+        }
+
+        public Fragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            if (getCurrentFragment() != object) {
+                mCurrentFragment = ((Fragment) object);
+            }
+            super.setPrimaryItem(container, position, object);
         }
 
         @Override

@@ -33,7 +33,6 @@
                 android:id="@+id/newparttextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3.5dp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:focusable="true"
@@ -75,27 +74,26 @@
             android:textSize="10sp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/newpartnumbertextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lasttexterror"
-            android:layout_marginStart="3.5dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/new_part_name"
-            android:textColor="#8C8984"
-            android:textSize="13sp" />
-
         <RelativeLayout
             android:id="@+id/newserialnumberrel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/newpartnumbertextview">
+            android:layout_below="@+id/lasttexterror">
+
+            <TextView
+                android:id="@+id/newpartnumbertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/new_part_name"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/newserialnumberedittext"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:layout_below="@+id/newpartnumbertextview"
                 android:background="@null"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
@@ -113,27 +111,26 @@
                 android:background="@drawable/underline_textview" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/newserialnumbertextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newserialnumberrel"
-            android:layout_marginStart="3.5dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/new_serial_number"
-            android:textColor="#8C8984"
-            android:textSize="13sp" />
-
         <RelativeLayout
             android:id="@+id/newpartnamerel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/newserialnumbertextview">
+            android:layout_below="@+id/newserialnumberrel">
+
+            <TextView
+                android:id="@+id/newserialnumbertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/new_serial_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/newpartnameedittext"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:layout_below="@+id/newserialnumbertextview"
                 android:background="@null"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
@@ -151,27 +148,26 @@
                 android:background="@drawable/underline_textview" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/newpartinvoincetextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newpartnamerel"
-            android:layout_marginStart="3.5dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/new_part_invoice_number"
-            android:textColor="#8C8984"
-            android:textSize="13sp" />
-
         <RelativeLayout
             android:id="@+id/newpartinvoincerel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/newpartinvoincetextview">
+            android:layout_below="@+id/newpartnamerel">
+
+            <TextView
+                android:id="@+id/newpartinvoincetextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/new_part_invoice_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/newpartinvoinceedittext"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:layout_below="@+id/newpartinvoincetextview"
                 android:background="@null"
                 android:inputType="phone"
                 android:minWidth="300dp"
