@@ -149,6 +149,13 @@
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/layout/spinner_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/layout/warranty_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/menu/menu_bottom.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/selected_warranty_failure_edittext_background.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/warranty_failure_edittext_background.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/activity_dashboard.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/booking_fragment.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_initial_warranty.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_next_warranty.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/layout_naviation_body.xml" value="0.24947916666666667" />
       </map>
     </option>
   </component>

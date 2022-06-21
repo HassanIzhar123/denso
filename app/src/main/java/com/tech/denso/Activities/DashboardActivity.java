@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -42,6 +43,7 @@ import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Interfaces.ListenFromActivity;
 import com.tech.denso.R;
+import com.tech.denso.ViewModels.BookingViewModel;
 
 import java.util.ArrayList;
 
@@ -121,6 +123,30 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         backbtn = findViewById(R.id.backbtn);
         sendbtn = findViewById(R.id.sendbtn);
         navigation_menu.setAdapter(null);
+        BookingViewModel model = new ViewModelProvider(this).get(BookingViewModel.class);
+        model.getSelected().observe(this, item -> {
+            if (item.getLogOutVisibility() == View.VISIBLE) {
+                logoutrel.setVisibility(View.VISIBLE);
+            } else if (item.getLogOutVisibility() == View.GONE) {
+                logoutrel.setVisibility(View.GONE);
+            } else {
+                logoutrel.setVisibility(View.GONE);
+            }
+            if (item.getHistoryRelVisibility() == View.VISIBLE) {
+                myhistoryrel.setVisibility(View.VISIBLE);
+            } else if (item.getHistoryRelVisibility() == View.GONE) {
+                myhistoryrel.setVisibility(View.GONE);
+            } else {
+                myhistoryrel.setVisibility(View.GONE);
+            }
+            if (item.getLoginVisibility() == View.VISIBLE) {
+                loginrel.setVisibility(View.VISIBLE);
+            } else if (item.getLoginVisibility() == View.GONE) {
+                loginrel.setVisibility(View.GONE);
+            } else {
+                loginrel.setVisibility(View.GONE);
+            }
+        });
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +159,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 }
             }
         });
+        //here
+        //here it is
         Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
         if (loggedbol) {
             myhistoryrel.setVisibility(View.VISIBLE);
