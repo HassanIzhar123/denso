@@ -2,6 +2,7 @@ package com.tech.denso.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,8 +17,14 @@ public class SuccessfulBookingActivity extends AppCompatActivity {
         findViewById(R.id.gobackbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(SuccessfulBookingActivity.this, DashboardActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 }

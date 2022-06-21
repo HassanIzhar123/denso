@@ -1,16 +1,43 @@
 package com.tech.denso.Models.InitialWarrantyFragment;
 
 public class InitialWarrantyModel {
+
+    public String getUnitPartNumber() {
+        return unitPartNumber;
+    }
+
+    public void setUnitPartNumber(String unitPartNumber) {
+        this.unitPartNumber = unitPartNumber;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    String unitPartNumber, modelNumber, serialNumber;
+
     String companyName;
     String street;
     String city;
 
-    public String getNewPart() {
-        return newPart;
+    public String getNewPartNumber() {
+        return newPartNumber;
     }
 
-    public void setNewPart(String newPart) {
-        this.newPart = newPart;
+    public void setNewPartNumber(String newPartNumber) {
+        this.newPartNumber = newPartNumber;
     }
 
     public String getNewSerialNumber() {
@@ -37,10 +64,21 @@ public class InitialWarrantyModel {
         this.newPartInvoice = newPartInvoice;
     }
 
-    String newPart  ;
+    String newPartNumber;
     String newSerialNumber;
-    String newPartName ;
-    String newPartInvoice ;
+    String newPartName;
+    String newPartInvoice;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    String comments;
+
     public String getSaleOrder() {
         return saleOrder;
     }
@@ -89,15 +127,16 @@ public class InitialWarrantyModel {
         this.unitSerialNumber = unitSerialNumber;
     }
 
-    public String getMessage() {
-        return message;
+    public String getFailureReasonMessage() {
+        return failureReasonMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setFailureReasonMessage(String failureReasonMessage) {
+        this.failureReasonMessage = failureReasonMessage;
     }
 
-    String saleOrder,originalUnitDate,failedUnitDate,manufacturer,unitModelNumber,unitSerialNumber,message;
+    String saleOrder, originalUnitDate, failedUnitDate, manufacturer, unitModelNumber, unitSerialNumber, failureReasonMessage;
+
     public String getCompanyName() {
         return companyName;
     }

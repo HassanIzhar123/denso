@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -41,8 +42,11 @@ import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Interfaces.ListenFromActivity;
+import com.tech.denso.Models.BookingsModel.BookingSendModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.BookingViewModel;
+import com.tech.denso.ViewModels.SignupToBookingModel;
+import com.tech.denso.ViewModels.SignupToBookingViewModel;
 
 import java.util.ArrayList;
 
@@ -213,11 +217,13 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                     sendbtn.setVisibility(View.GONE);
                     backbtn.setVisibility(View.GONE);
                 } else if (value.equals("Why Denso Services?")) {
-                    LoadFragment(DashboardActivity.this, new WhyDensoFragment());
-                    findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                    bottombarrel.setVisibility(View.GONE);
-                    sendbtn.setVisibility(View.GONE);
+                    open_Webpage("https://djauto-service.com/whydensoservices");
                     backbtn.setVisibility(View.GONE);
+//                    LoadFragment(DashboardActivity.this, new WhyDensoFragment());
+//                    findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                    bottombarrel.setVisibility(View.GONE);
+//                    sendbtn.setVisibility(View.GONE);
+//                    backbtn.setVisibility(View.GONE);
                 } else if (value.equals("B2B Login")) {
                     open_Webpage("https://shop.dj-auto.com/");
                     backbtn.setVisibility(View.GONE);

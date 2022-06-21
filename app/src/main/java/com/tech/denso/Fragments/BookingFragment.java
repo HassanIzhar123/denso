@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
@@ -82,6 +83,8 @@ import com.tech.denso.Models.LoginModel.LoginModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.BookingModel;
 import com.tech.denso.ViewModels.BookingViewModel;
+import com.tech.denso.ViewModels.SignupToBookingModel;
+import com.tech.denso.ViewModels.SignupToBookingViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,10 +116,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     //    public ListenFromActivity activityListener;
     TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selectservicetext, selecttimeslottext;
     View firstnameview, lastnameview, emailview, phoneview;
-
-    public void refreshList(String userList) {
-        Toast.makeText(getContext(), "Come here", Toast.LENGTH_SHORT).show();
-    }
 
     public static BookingFragment newInstance() {
         BookingFragment fragmentFirst = new BookingFragment();
@@ -240,7 +239,8 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 Intent i = new Intent(getContext(), LoginActivity.class);
                 i.putExtra("bookingfromfragment", true);
                 i.putExtra("bookingmodel", bookingmodel);
-                startActivityForResult(i, 2);
+                startActivity(i);
+//                startActivityForResult(i, 2);
             }
 //            SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
 //                    , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
@@ -255,9 +255,11 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onactivityreuslt", "here" + requestCode + " " + resultCode);
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 Boolean check = data.getBooleanExtra("comingbackbooking", false);
+                Log.e("onactivityreuslt1", "" + check);
                 if (check) {
                     BookingSendModel bookingmodel = (BookingSendModel) data.getSerializableExtra("bookingmodel");
                     SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
@@ -293,72 +295,39 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
             jsonBody.put("vehicleType", vehicleType);
             jsonBody.put("model", model);
             jsonBody.put("waitingStatus", "Waiting");
-//            String finaldate=localToGMT(date,"dd/MM/yyyy","yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//            String finaltime=localToGMT(time,"HH:mm","HH:mm:ss'Z'");
             final String requestBody = jsonBody.toString();
             Log.e("jsonbodychjeck", "" + requestBody);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    new TaskRunner().executeAsync(new Callable<Object>() {
-                        @Override
-                        public Object call() throws Exception {
-                            Gson gson = new Gson();
-                            LoginModel responsedata = gson.fromJson(response, LoginModel.class);
-                            if (responsedata.getMessage() != null) {
-                                final Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        dialog.cancel();
-                                    }
-                                }, 1000);
-                            }
-                            return null;
-                        }
-                    }, new TaskRunner.Callback<Object>() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onComplete(Object result) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                    startActivity(new Intent(getActivity(), SuccessfulBookingActivity.class));
-                                    setAllEdittextClear();
-                                    emailedittext.setText(new Const().getEmail());
-                                    selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
-                                    Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
-                                    if (loggedbol) {
-                                        BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
-                                        BookingModel bookingmodel = new BookingModel();
-                                        bookingmodel.setLogOutVisibility(View.VISIBLE);
-                                        bookingmodel.setHistoryRelVisibility(View.VISIBLE);
-                                        bookingmodel.setLoginVisibility(View.GONE);
-                                        model.select(bookingmodel);
-                                    } else {
-                                        BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
-                                        BookingModel bookingmodel = new BookingModel();
-                                        bookingmodel.setLogOutVisibility(View.GONE);
-                                        bookingmodel.setHistoryRelVisibility(View.GONE);
-                                        bookingmodel.setLoginVisibility(View.VISIBLE);
-                                        model.select(bookingmodel);
-                                    }
-                                }
+                    Gson gson = new Gson();
+                    LoginModel responsedata = gson.fromJson(response, LoginModel.class);
+                    Log.e("reponsedatacheck", "" + responsedata.getMessage());
+                    if (dialog != null) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                            startActivity(new Intent(getActivity(), SuccessfulBookingActivity.class));
+                            setAllEdittextClear();
+                            emailedittext.setText(new Const().getEmail());
+                            selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
+                            Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
+                            if (loggedbol) {
+                                BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+                                BookingModel bookingmodel = new BookingModel();
+                                bookingmodel.setLogOutVisibility(View.VISIBLE);
+                                bookingmodel.setHistoryRelVisibility(View.VISIBLE);
+                                bookingmodel.setLoginVisibility(View.GONE);
+                                model.select(bookingmodel);
+                            } else {
+                                BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+                                BookingModel bookingmodel = new BookingModel();
+                                bookingmodel.setLogOutVisibility(View.GONE);
+                                bookingmodel.setHistoryRelVisibility(View.GONE);
+                                bookingmodel.setLoginVisibility(View.VISIBLE);
+                                model.select(bookingmodel);
                             }
                         }
-
-                        @Override
-                        public void onError(Exception e) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                }
-                            }
-                        }
-                    });
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -393,38 +362,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public static String localToGMT(String datestr, String inputformat, String outputformat) {
-//        Date myDate = null;
-//        String dtStart = date;
-//        SimpleDateFormat format = new SimpleDateFormat(inputformat);
-//        try {
-//            myDate = format.parse(dtStart);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
-//        calendar.setTime(myDate);
-//        Date time = calendar.getTime();
-//        SimpleDateFormat outputFmt = new SimpleDateFormat(outputformat);
-//        String dateAsString = outputFmt.format(time);
-//        System.out.println(dateAsString);
-//        return dateAsString;
-        String expiryDateString = datestr;
-        final SimpleDateFormat formatter = new SimpleDateFormat(inputformat);
-        final SimpleDateFormat outformatter = new SimpleDateFormat(outputformat);
-        formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
-        outformatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = null;
-        try {
-            date = formatter.parse(expiryDateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return outformatter.format(date);
     }
 
     private void Showbranch() {
@@ -875,6 +812,19 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 //        title = getArguments().getString("someTitle");
     }
 
+    //    @Override
+//    public void onBookingSave(SignupToBookingModel item) {
+//        Log.e("viewmodelvalues", "" + item.isComingBackFlag());
+//        Boolean check = item.isComingBackFlag();
+//        if (check) {
+//            BookingSendModel bookingmodel = (BookingSendModel) item.getModel();
+//            Log.e("viewmodelvalues1", "" + bookingmodel.getLastName());
+//            SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
+//                    , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+//                    bookingmodel.getMake(), bookingmodel.getStatus(), bookingmodel.getModel(), bookingmodel.getService(), bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()), bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
+//        }
+//    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.booking_fragment, container, false);
@@ -917,7 +867,21 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         emailview = view.findViewById(R.id.emailview);
         phoneview = view.findViewById(R.id.phoneview);
         selectdatetextview = view.findViewById(R.id.selectdatetextview);
-
+//        SignupToBookingViewModel model = new ViewModelProvider(BookingFragment.this).get(SignupToBookingViewModel.class);
+//        model.getSelected().observe(getViewLifecycleOwner(), new Observer<SignupToBookingModel>() {
+//            @Override
+//            public void onChanged(SignupToBookingModel item) {
+//                Log.e("viewmodelvalues", "" + item.isComingBackFlag());
+//                Boolean check = item.isComingBackFlag();
+//                if (check) {
+//                    BookingSendModel bookingmodel = (BookingSendModel) item.getModel();
+//                    Log.e("viewmodelvalues1", "" + bookingmodel.getLastName());
+//                    SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
+//                            , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+//                            bookingmodel.getMake(), bookingmodel.getStatus(), bookingmodel.getModel(), bookingmodel.getService(), bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()), bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
+//                }
+//            }
+//        });
         emailedittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1188,4 +1152,5 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     boolean isFirstNameHavingSpaceOrNot(String firstname) {
         return CharMatcher.whitespace().matchesAnyOf(firstname);
     }
+
 }

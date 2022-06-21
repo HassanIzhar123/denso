@@ -2,6 +2,7 @@ package com.tech.denso.Fragments;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -26,8 +27,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
+import com.tech.denso.Activities.SucessfullClaimActivity;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
+import com.tech.denso.Models.Services.ServicesModel;
+import com.tech.denso.Models.WarrantyClaim.WarrantyClaim;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.NextViewModel;
 
@@ -41,7 +46,7 @@ public class FinalWarrantyFragment extends Fragment {
     private int page;
     private String title;
     View view;
-    EditText newpartedittext, newserialnumberedittext, newpartnameedittext, newpartinvoinceedittext;
+    EditText newpartedittext, newserialnumberedittext, newpartnameedittext, newpartinvoinceedittext, message_edittext;
     View newpartview, newserialnumberview, newpartnameview, newpartinvoiceview;
     InitialWarrantyModel item;
     MaterialButton submitbtn;
@@ -74,6 +79,7 @@ public class FinalWarrantyFragment extends Fragment {
         newserialnumberedittext = view.findViewById(R.id.newserialnumberedittext);
         newpartnameedittext = view.findViewById(R.id.newpartnameedittext);
         newpartinvoinceedittext = view.findViewById(R.id.newpartinvoinceedittext);
+        message_edittext = view.findViewById(R.id.message_edittext);
 
         newpartview = view.findViewById(R.id.newpartview);
         newserialnumberview = view.findViewById(R.id.newserialnumberview);
@@ -111,14 +117,16 @@ public class FinalWarrantyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (item != null && CheckCondition()) {
-                    String newPart = newpartedittext.getText().toString();
+                    String newPartnumber = newpartedittext.getText().toString();
                     String newSerialNumber = newserialnumberedittext.getText().toString();
                     String newPartName = newpartnameedittext.getText().toString();
                     String newPartInvoice = newpartinvoinceedittext.getText().toString();
-                    item.setNewPart(newPart);
+                    String comments = message_edittext.getText().toString();
+                    item.setNewPartNumber(newPartnumber);
                     item.setNewSerialNumber(newSerialNumber);
                     item.setNewPartName(newPartName);
-                    item.setNewPart(newPartInvoice);
+                    item.setNewPartInvoice(newPartInvoice);
+                    item.setComments(comments);
                     try {
                         SubmitClaimRequest(item);
                     } catch (JSONException e) {
@@ -137,11 +145,11 @@ public class FinalWarrantyFragment extends Fragment {
         JSONObject jsonBody = new JSONObject();
         jsonBody.put("companyName", item.getCompanyName());
         jsonBody.put("street", item.getStreet());
-        jsonBody.put("City/State/Zip", item.getCity());
+        jsonBody.put("cityStateZip", item.getCity());
         jsonBody.put("phoneNumber", item.getPhoneNumber());
         jsonBody.put("homeOwnerName", item.getHomeOwnerName());
         jsonBody.put("homeOwnerStreet", item.getHomeOwnerStreet());
-        jsonBody.put("homeOwnerCity/State/Zip", item.getHomeOwnerCity());
+        jsonBody.put("homeOwnerCityStateZip", item.getHomeOwnerCity());
         jsonBody.put("homeOwnerPhoneNumber", item.getHomeOwnerPhoneNumber());
         jsonBody.put("salesOrderOrInvoiceNumber", item.getSaleOrder());
         jsonBody.put("originalUnitInstallDate", item.getOriginalUnitDate());
@@ -149,21 +157,27 @@ public class FinalWarrantyFragment extends Fragment {
         jsonBody.put("manufacturer", item.getManufacturer());
         jsonBody.put("unitModelNumber", item.getUnitModelNumber());
         jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
-        jsonBody.put("unitPartNumber", item.getUnitModelNumber());//
-        jsonBody.put("modelNumber", item.getUnitModelNumber());//
-        jsonBody.put("serialNumber", item.getNewSerialNumber());
-        jsonBody.put("failureReason", item.getMessage());
-        jsonBody.put("newPartNumber", item.getNewPart());
+        jsonBody.put("unitPartNumber", item.getUnitPartNumber());//
+        jsonBody.put("modelNumber", item.getModelNumber());//
+        jsonBody.put("serialNumber", item.getSerialNumber());
+        jsonBody.put("failureReason", item.getFailureReasonMessage());
+        jsonBody.put("newPartNumber", item.getNewPartNumber());
         jsonBody.put("newPartName", item.getNewPartName());
         jsonBody.put("newSerialNumber", item.getNewSerialNumber());
         jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
-        jsonBody.put("message", item.getMessage());//
+        jsonBody.put("message", item.getComments());//
         Log.e("finaljsonobkect", "" + jsonBody.toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("responsevaluechecl", "" + response);
+                Gson gson = new Gson();
+                WarrantyClaim responsedata = gson.fromJson(response.toString(), WarrantyClaim.class);
+                if (responsedata.getMessage().equals("Warranty Claim has been Submitted Successfully!")) {
+                    Intent i = new Intent(getActivity(), SucessfullClaimActivity.class);
+                    startActivity(i);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -186,6 +200,7 @@ public class FinalWarrantyFragment extends Fragment {
         String newSerialNumber = newserialnumberedittext.getText().toString();
         String newPartName = newpartnameedittext.getText().toString();
         String newPartInvoice = newpartinvoinceedittext.getText().toString();
+        String comments = message_edittext.getText().toString();
         if (checkIfStringisEmpty(newPart)) {
             newpartedittext.setError(getString(R.string.salesorder_cant_be_empty));
         }
@@ -197,6 +212,9 @@ public class FinalWarrantyFragment extends Fragment {
         }
         if (checkIfStringisEmpty(newPartInvoice)) {
             newpartinvoinceedittext.setError(getString(R.string.unit_serial_cant_be_empty));
+        }
+        if (checkIfStringisEmpty(comments)) {
+            message_edittext.setError(getString(R.string.comments_cant_be_empty));
         }
         if (!checkIfStringisEmpty(newPart) && !checkIfStringisEmpty(newSerialNumber) && !checkIfStringisEmpty(newPartName)
                 && !checkIfStringisEmpty(newPartInvoice)) {

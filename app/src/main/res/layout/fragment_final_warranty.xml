@@ -48,6 +48,7 @@
                 android:layout_below="@+id/newparttextview"
                 android:background="@null"
                 android:minWidth="300dp"
+                android:inputType="phone"
                 android:textColor="#333333"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                 android:textSize="15sp" />
@@ -132,6 +133,7 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/newserialnumbertextview"
                 android:background="@null"
+                android:inputType="phone"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
                 android:textColor="#333333"

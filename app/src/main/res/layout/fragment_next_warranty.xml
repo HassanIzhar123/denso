@@ -46,6 +46,7 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/salesordertextview"
                 android:background="@null"
+                android:inputType="phone"
                 android:minWidth="300dp"
                 android:textColor="#000000"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
@@ -246,7 +247,7 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/unitmodeltextview"
                 android:background="@drawable/underline_textview"
-                android:minWidth="300dp"
+                android:minWidth="300dp" android:inputType="phone"
                 android:textColor="#333333"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                 android:textSize="15sp" />
@@ -267,8 +268,8 @@
             android:id="@+id/unitserialrel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_below="@+id/emailrel">
+            android:layout_below="@+id/emailrel"
+            android:layout_marginStart="3dp">
 
             <TextView
                 android:id="@+id/unitserialtextview"
@@ -302,11 +303,128 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/unitpartnumberrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unitserialrel"
+            android:layout_marginStart="3dp">
+
+            <TextView
+                android:id="@+id/unitpartnumbertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/unit_part_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/unitpartnumberedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/unitpartnumbertextview"
+                android:background="@drawable/underline_textview"
+                android:inputType="phone"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/unitpartnumberview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/unitpartnumberedittext"
+                android:layout_alignStart="@+id/unitpartnumberedittext"
+                android:layout_alignEnd="@+id/unitpartnumberedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/modelnumberrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unitpartnumberrel"
+            android:layout_marginStart="3dp">
+
+            <TextView
+                android:id="@+id/modelnumbertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/model_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/modelnumberedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/modelnumbertextview"
+                android:background="@drawable/underline_textview"
+                android:inputType="phone"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/modelnumberview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/modelnumberedittext"
+                android:layout_alignStart="@+id/modelnumberedittext"
+                android:layout_alignEnd="@+id/modelnumberedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/serialnumberrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/modelnumberrel"
+            android:layout_marginStart="3dp">
+
+            <TextView
+                android:id="@+id/serialnumbertextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/serial_number"
+                android:textColor="#8C8984"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/serialnumberedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_below="@+id/serialnumbertextview"
+                android:background="@drawable/underline_textview"
+                android:inputType="phone"
+                android:minWidth="300dp"
+                android:textColor="#333333"
+                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/serialnumberview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/serialnumberedittext"
+                android:layout_alignStart="@+id/serialnumberedittext"
+                android:layout_alignEnd="@+id/serialnumberedittext"
+                android:background="@drawable/underline_textview" />
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/specificfailurereasontext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/unitserialrel"
+            android:layout_below="@+id/serialnumberrel"
             android:layout_marginTop="20dp"
             android:text="@string/specific_failure_reason"
             android:textColor="#000000"

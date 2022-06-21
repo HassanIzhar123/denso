@@ -35,9 +35,9 @@ public class NextWarrantyFragment extends Fragment {
     private int page;
     private String title;
     View view;
-    EditText salesorderedittext, manufactureredittext, unitmodeledittext, unitserialedittext, message_edittext;
+    EditText salesorderedittext, manufactureredittext, unitmodeledittext, unitserialedittext, unitpartnumberedittext, modelnumberedittext, serialnumberedittext, message_edittext;
     MaterialButton nextbtn;
-    View unitserialview, unitmodelview, manufacturerview, salesorderview;
+    View unitserialview, unitmodelview, manufacturerview, salesorderview, serialnumberview ,unitpartnumberview, modelnumberview;
     InitialWarrantyModel item;
     TextView originalunitselecttextview, failedpartselecttextview, failedparterror, originalunitdateerror;
     final Calendar originalUnitCalendar = Calendar.getInstance();
@@ -74,11 +74,17 @@ public class NextWarrantyFragment extends Fragment {
         manufactureredittext = view.findViewById(R.id.manufactureredittext);
         unitmodeledittext = view.findViewById(R.id.unitmodeledittext);
         unitserialedittext = view.findViewById(R.id.unitserialedittext);
+        unitpartnumberedittext = view.findViewById(R.id.unitpartnumberedittext);
+        modelnumberedittext = view.findViewById(R.id.modelnumberedittext);
+        serialnumberedittext = view.findViewById(R.id.serialnumberedittext);
 
         unitserialview = view.findViewById(R.id.unitserialview);
         unitmodelview = view.findViewById(R.id.unitmodelview);
         manufacturerview = view.findViewById(R.id.manufacturerview);
         salesorderview = view.findViewById(R.id.salesorderview);
+        unitpartnumberview = view.findViewById(R.id.unitpartnumberview);
+        modelnumberview = view.findViewById(R.id.modelnumberview);
+        serialnumberview = view.findViewById(R.id.serialnumberview);
         nextbtn = view.findViewById(R.id.nextbtn);
         failedparterror = view.findViewById(R.id.failedparterror);
         originalunitdateerror = view.findViewById(R.id.originalunitdateerror);
@@ -86,6 +92,9 @@ public class NextWarrantyFragment extends Fragment {
         setFocusChangeListener(unitmodeledittext, unitmodelview);
         setFocusChangeListener(manufactureredittext, manufacturerview);
         setFocusChangeListener(salesorderedittext, salesorderview);
+        setFocusChangeListener(unitpartnumberedittext, unitpartnumberview);
+        setFocusChangeListener(modelnumberedittext, modelnumberview);
+        setFocusChangeListener(serialnumberedittext, serialnumberview);
         message_edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -110,14 +119,20 @@ public class NextWarrantyFragment extends Fragment {
                     String manufacturer = manufactureredittext.getText().toString();
                     String unitmodel = unitmodeledittext.getText().toString();
                     String unitserial = unitserialedittext.getText().toString();
-                    String message = message_edittext.getText().toString();
+                    String unitpartnumber = unitpartnumberedittext.getText().toString();
+                    String modelnumber = modelnumberedittext.getText().toString();
+                    String serialnumber = serialnumberedittext.getText().toString();
+                    String failurereasonmessage = message_edittext.getText().toString();
                     String originalunitdate = originalunitselecttextview.getText().toString();
                     String failedpartdate = failedpartselecttextview.getText().toString();
                     item.setSaleOrder(salesorder);
                     item.setManufacturer(manufacturer);
                     item.setUnitModelNumber(unitmodel);
                     item.setUnitSerialNumber(unitserial);
-                    item.setMessage(message);
+                    item.setUnitPartNumber(unitpartnumber);
+                    item.setModelNumber(modelnumber);
+                    item.setSerialNumber(serialnumber);
+                    item.setFailureReasonMessage(failurereasonmessage);
                     item.setOriginalUnitDate(originalunitdate);
                     item.setFailedUnitDate(failedpartdate);
                     NextViewModel model = new ViewModelProvider(requireActivity()).get(NextViewModel.class);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,8 +30,13 @@ import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
+import com.tech.denso.Models.LoginModel.LoginModel;
 import com.tech.denso.Models.SignUpModel.SignUpModel;
 import com.tech.denso.R;
+import com.tech.denso.ViewModels.BookingModel;
+import com.tech.denso.ViewModels.BookingViewModel;
+import com.tech.denso.ViewModels.SignupToBookingModel;
+import com.tech.denso.ViewModels.SignupToBookingViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -161,10 +167,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         @Override
                         protected void thenDoUiRelatedWork(SignAsyncUpModel signAsyncUpModel) {
-                            Log.e("thendouuithread", "" + signAsyncUpModel.isComplete);
                             if (signAsyncUpModel.isComplete()) {
                                 SignUpModel responsedata = signAsyncUpModel.getSignUpModel();
-                                Log.e("responsedatacheck", "" + responsedata.getMessage());
                                 if (responsedata.getMessage() != null) {
                                     if (responsedata.getMessage().equals("New customer created!") || responsedata.getMessage().equals("Verify your email please")) {
                                         new Const().setEmail(email);
@@ -174,18 +178,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", true);
                                         dialog.cancel();
                                         if (getIntent().getBooleanExtra("clickedonuser", false)) {
-                                            BookingSendModel model = (BookingSendModel) getIntent().getSerializableExtra("signupbookingmodel");
-                                            Log.e("Signupbooking", "isclciekd");
-                                            CallBackModel.getInstance().onSignUpClicked();
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Firstname", firstname);
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Lastname", lastname);
+                                            BookingSendModel bookingmodel = (BookingSendModel) getIntent().getSerializableExtra("signupbookingmodel");
+                                            SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
+                                                    , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+                                                    bookingmodel.getMake(), bookingmodel.getStatus(),
+                                                    bookingmodel.getModel(), bookingmodel.getService(),
+                                                    bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()),
+                                                    bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
+                                            finish();
                                         } else {
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
-                                            Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
-                                            if (!bol) {
-                                                startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
-                                            } else {
-                                                startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
-                                            }
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Firstname", firstname);
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Lastname", lastname);
+                                            startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
+//                                            Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
+//                                            if (!bol) {
+//                                                startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
+//                                            } else {
+//                                                startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
+//                                            }
                                         }
                                     } else if (responsedata.getMessage().equals("Customer already registered")) {
                                         Toast.makeText(getApplicationContext(), "" + responsedata.getMessage(), Toast.LENGTH_SHORT).show();
@@ -234,6 +250,96 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             e.printStackTrace();
         }
 
+    }
+
+    private void SendBooking(String firstname, String lastname, String email, String phonenumber, String vehicleType, String waitingStatus, String transmission,
+                             String serviceDetails, String model, Boolean isListed, String branchName, String bookingTime, String bookingDate) {
+        try {
+            Dialog dialog = new Dialog(SignUpActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.loading_dialog);
+            dialog.show();
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            String URL = new Const().getBaseUrl() + "/api/bookings";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("bookingDate", bookingDate);
+            jsonBody.put("bookingTime", bookingTime);
+            jsonBody.put("branchName", branchName);
+            jsonBody.put("email", email);
+            jsonBody.put("firstName", firstname);
+            jsonBody.put("isListed", String.valueOf(isListed));
+            jsonBody.put("lastName", lastname);
+            jsonBody.put("phoneNumber", phonenumber);
+            jsonBody.put("serviceDetails", serviceDetails);
+            jsonBody.put("transmission", transmission);
+            jsonBody.put("vehicleType", vehicleType);
+            jsonBody.put("model", model);
+            jsonBody.put("waitingStatus", "Waiting");
+            final String requestBody = jsonBody.toString();
+            Log.e("jsonbodychjeck", "" + requestBody);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Gson gson = new Gson();
+                    LoginModel responsedata = gson.fromJson(response, LoginModel.class);
+                    if (dialog != null) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                            startActivity(new Intent(SignUpActivity.this, SuccessfulBookingActivity.class));
+                            Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
+                            if (loggedbol) {
+                                BookingViewModel model = new ViewModelProvider(SignUpActivity.this).get(BookingViewModel.class);
+                                BookingModel bookingmodel = new BookingModel();
+                                bookingmodel.setLogOutVisibility(View.VISIBLE);
+                                bookingmodel.setHistoryRelVisibility(View.VISIBLE);
+                                bookingmodel.setLoginVisibility(View.GONE);
+                                model.select(bookingmodel);
+                            } else {
+                                BookingViewModel model = new ViewModelProvider(SignUpActivity.this).get(BookingViewModel.class);
+                                BookingModel bookingmodel = new BookingModel();
+                                bookingmodel.setLogOutVisibility(View.GONE);
+                                bookingmodel.setHistoryRelVisibility(View.GONE);
+                                bookingmodel.setLoginVisibility(View.VISIBLE);
+                                model.select(bookingmodel);
+                            }
+                        }
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEYERROR", error.toString());
+                    Toast.makeText(getApplicationContext(), "Error Occured!", Toast.LENGTH_SHORT).show();
+                    if (dialog != null) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+            };
+            requestQueue.add(stringRequest);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     boolean isEmailValid(CharSequence email) {
