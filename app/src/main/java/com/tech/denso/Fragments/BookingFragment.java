@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -79,6 +80,8 @@ import com.tech.denso.Models.Locations.Datum;
 import com.tech.denso.Models.Locations.LocationsModel;
 import com.tech.denso.Models.LoginModel.LoginModel;
 import com.tech.denso.R;
+import com.tech.denso.ViewModels.BookingModel;
+import com.tech.denso.ViewModels.BookingViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -213,10 +216,8 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 && !(timeslot.equals("HH:MM"))
                 && isEmailValid(emailedittext.getText().toString()) && isPhoneNumberValid(phoneedittext.getText().toString()) &&
                 !isFirstNameHavingSpaceOrNot(firstnameedittext.getText().toString()) && !isFirstNameHavingSpaceOrNot(lastnamedittext.getText().toString()))) {
-            com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum dat = (com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.Datum) selectbranchspinner.getSelectedItem();
             Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
             if (loggedbol) {
-                Toast.makeText(getContext(), "All Condition fullfilled", Toast.LENGTH_SHORT).show();
                 SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
                         , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
                         make, "Waiting", model, mserviceodel, year, false, branch, timeslot, selectdatetextview.getText().toString().trim());
@@ -329,119 +330,22 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                                     setAllEdittextClear();
                                     emailedittext.setText(new Const().getEmail());
                                     selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                }
-                            }
-                        }
-                    });
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("VOLLEYERROR", error.toString());
-                    Toast.makeText(getContext(), "Error Occured!", Toast.LENGTH_SHORT).show();
-                    if (dialog != null) {
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
-                    }
-                }
-            }) {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
-
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                        return null;
-                    }
-                }
-            };
-            requestQueue.add(stringRequest);
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void SendBooking(String firstname, String lastname, String email, String phonenumber, String car, String years, String transmission,
-                             String wairs, boolean islisted, String description, String branchname, String date, String time) {
-        try {
-            Dialog dialog = new Dialog(getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setCancelable(true);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.setContentView(R.layout.loading_dialog);
-            dialog.show();
-            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            String URL = new Const().getBaseUrl() + "/api/bookings";
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("firstName", firstname);
-            jsonBody.put("lastName", lastname);
-            jsonBody.put("email", email);
-            jsonBody.put("phoneNumber", phonenumber);
-            jsonBody.put("vehicleType", car);
-            jsonBody.put("model", years);
-            jsonBody.put("transmission", transmission);
-            jsonBody.put("waitingStatus", "Waiting");
-            jsonBody.put("isListed", String.valueOf(islisted));
-            jsonBody.put("serviceDetails", description);
-            jsonBody.put("branchName", branchname);
-//            String finaldate=localToGMT(date,"dd/MM/yyyy","yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//            String finaltime=localToGMT(time,"HH:mm","HH:mm:ss'Z'");
-            jsonBody.put("bookingDate", date);
-            jsonBody.put("bookingTime", time + ":00Z");
-
-            final String requestBody = jsonBody.toString();
-            Log.e("jsonbodychjeck", "" + requestBody);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    new TaskRunner().executeAsync(new Callable<Object>() {
-                        @Override
-                        public Object call() throws Exception {
-                            Gson gson = new Gson();
-                            LoginModel responsedata = gson.fromJson(response, LoginModel.class);
-                            if (responsedata.getMessage() != null) {
-                                final Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        dialog.cancel();
+                                    Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
+                                    if (loggedbol) {
+                                        BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+                                        BookingModel bookingmodel = new BookingModel();
+                                        bookingmodel.setLogOutVisibility(View.VISIBLE);
+                                        bookingmodel.setHistoryRelVisibility(View.VISIBLE);
+                                        bookingmodel.setLoginVisibility(View.GONE);
+                                        model.select(bookingmodel);
+                                    } else {
+                                        BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+                                        BookingModel bookingmodel = new BookingModel();
+                                        bookingmodel.setLogOutVisibility(View.GONE);
+                                        bookingmodel.setHistoryRelVisibility(View.GONE);
+                                        bookingmodel.setLoginVisibility(View.VISIBLE);
+                                        model.select(bookingmodel);
                                     }
-                                }, 1000);
-                            }
-                            return null;
-                        }
-                    }, new TaskRunner.Callback<Object>() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onComplete(Object result) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                    startActivity(new Intent(getActivity(), SuccessfulBookingActivity.class));
-                                    setAllEdittextClear();
-                                    emailedittext.setText(new Const().getEmail());
-//                                    selecttimetextiew.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
-                                    selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
                                 }
                             }
                         }

@@ -86,6 +86,16 @@ public class NextWarrantyFragment extends Fragment {
         setFocusChangeListener(unitmodeledittext, unitmodelview);
         setFocusChangeListener(manufactureredittext, manufacturerview);
         setFocusChangeListener(salesorderedittext, salesorderview);
+        message_edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    message_edittext.setBackgroundResource(R.drawable.selected_warranty_failure_edittext_background);
+                } else {
+                    message_edittext.setBackgroundResource(R.drawable.warranty_failure_edittext_background);
+                }
+            }
+        });
         InitialViewModel model = new ViewModelProvider(requireActivity()).get(InitialViewModel.class);
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             Log.e("minitialvaluecheck", "" + item.getCity());
@@ -94,7 +104,7 @@ public class NextWarrantyFragment extends Fragment {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("","");
+                Log.e("", "");
                 if (item != null && CheckCondition()) {
                     String salesorder = salesorderedittext.getText().toString();
                     String manufacturer = manufactureredittext.getText().toString();
