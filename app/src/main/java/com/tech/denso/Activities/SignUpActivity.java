@@ -1,12 +1,9 @@
 package com.tech.denso.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,8 +27,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
-import com.tech.denso.Helper.TaskRunner;
 import com.tech.denso.Interfaces.CallBackModel;
+import com.tech.denso.Models.BookingsModel.BookingSendModel;
 import com.tech.denso.Models.SignUpModel.SignUpModel;
 import com.tech.denso.R;
 
@@ -40,7 +39,9 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.concurrent.Callable;
+
+import needle.Needle;
+import needle.UiRelatedTask;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView signinbtn;
@@ -147,70 +148,55 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    new TaskRunner().executeAsync(new Callable<Object>() {
+                    Needle.onBackgroundThread().execute(new UiRelatedTask<SignAsyncUpModel>() {
                         @Override
-                        public Object call() throws Exception {
+                        protected SignAsyncUpModel doWork() {
+                            SignAsyncUpModel model = new SignAsyncUpModel();
                             Gson gson = new Gson();
                             SignUpModel responsedata = gson.fromJson(response, SignUpModel.class);
-                            if (responsedata.getMessage() != null) {
-                                if (responsedata.getMessage().equals("New customer created!")) {
-                                    new Const().setEmail(email);
-                                    new Const().setPassword(password);
-                                    new Const().setFirstname(firstname);
-                                    new Const().setLastname(lastname);
-                                    new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", true);
+                            model.setSignUpModel(responsedata);
+                            model.setComplete(true);
+                            return model;
+                        }
 
-                                    final Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            dialog.cancel();
-                                            if (getIntent().getBooleanExtra("clickedonuser", false)) {
-                                                CallBackModel.getInstance().onSignUpClicked();
+                        @Override
+                        protected void thenDoUiRelatedWork(SignAsyncUpModel signAsyncUpModel) {
+                            Log.e("thendouuithread", "" + signAsyncUpModel.isComplete);
+                            if (signAsyncUpModel.isComplete()) {
+                                SignUpModel responsedata = signAsyncUpModel.getSignUpModel();
+                                Log.e("responsedatacheck", "" + responsedata.getMessage());
+                                if (responsedata.getMessage() != null) {
+                                    if (responsedata.getMessage().equals("New customer created!") || responsedata.getMessage().equals("Verify your email please")) {
+                                        new Const().setEmail(email);
+                                        new Const().setPassword(password);
+                                        new Const().setFirstname(firstname);
+                                        new Const().setLastname(lastname);
+                                        new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", true);
+                                        dialog.cancel();
+                                        if (getIntent().getBooleanExtra("clickedonuser", false)) {
+                                            BookingSendModel model = (BookingSendModel) getIntent().getSerializableExtra("signupbookingmodel");
+                                            Log.e("Signupbooking", "isclciekd");
+                                            CallBackModel.getInstance().onSignUpClicked();
+                                        } else {
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
+                                            new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
+                                            Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
+                                            if (!bol) {
+                                                startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
                                             } else {
-                                                new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
-                                                new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
-                                                Boolean bol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("ShowIntro");
-                                                if (!bol) {
-                                                    startActivity(new Intent(SignUpActivity.this, IntroductionActivity.class));
-                                                } else {
-                                                    startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
-                                                }
+                                                startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
                                             }
                                         }
-                                    }, 3000);
-                                } else if (responsedata.getMessage().equals("Customer already registered")) {
-                                    Toast.makeText(getApplicationContext(), "" + responsedata.getMessage(), Toast.LENGTH_SHORT).show();
-                                    final Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            dialog.cancel();
-                                        }
-                                    }, 1000);
+                                    } else if (responsedata.getMessage().equals("Customer already registered")) {
+                                        Toast.makeText(getApplicationContext(), "" + responsedata.getMessage(), Toast.LENGTH_SHORT).show();
+                                        dialog.cancel();
+                                    }
                                 }
-                            }
-                            return null;
-                        }
-                    }, new TaskRunner.Callback<Object>() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onComplete(Object result) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            if (dialog != null) {
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
+                            } else {
+                                if (dialog != null) {
+                                    if (dialog.isShowing()) {
+                                        dialog.dismiss();
+                                    }
                                 }
                             }
                         }
@@ -244,8 +230,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             };
             requestQueue.add(stringRequest);
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

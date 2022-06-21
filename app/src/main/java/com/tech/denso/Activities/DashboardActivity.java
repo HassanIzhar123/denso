@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -159,15 +158,15 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 }
             }
         });
-        //here
-        //here it is
         Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
         if (loggedbol) {
             myhistoryrel.setVisibility(View.VISIBLE);
             logoutrel.setVisibility(View.VISIBLE);
+            loginrel.setVisibility(View.GONE);
         } else {
             myhistoryrel.setVisibility(View.GONE);
             logoutrel.setVisibility(View.GONE);
+            loginrel.setVisibility(View.VISIBLE);
         }
 
         ArrayList<String> array = new ArrayList<>();

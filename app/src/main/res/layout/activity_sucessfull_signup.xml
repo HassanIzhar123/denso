@@ -62,7 +62,7 @@
                 android:layout_below="@+id/congratztext"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:text="The Account activiationlink has been generated, please check you email!"
+                android:text="The Account activiation link has been generated, please check you email!"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
