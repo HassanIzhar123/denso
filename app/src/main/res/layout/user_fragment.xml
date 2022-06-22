@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -168,21 +168,22 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                      <EditText
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    <EditText
                         android:id="@+id/old_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_toStartOf="@+id/btnrel"
                         android:background="@null"
+                        android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
                         android:hint="Enter old password"
                         android:lines="1"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="#000" />
+                        android:textColor="#0F0A39"
+                        android:textColorHint="#CBC9D9"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
                     <RelativeLayout
                         android:id="@+id/btnrel"
@@ -221,21 +222,22 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                      <EditText
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    <EditText
                         android:id="@+id/new_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_toStartOf="@+id/newbtnrel"
                         android:background="@null"
+                        android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
                         android:hint="Enter new password"
                         android:lines="1"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="#000" />
+                        android:textColor="#0F0A39"
+                        android:textColorHint="#CBC9D9"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
                     <RelativeLayout
                         android:id="@+id/newbtnrel"
@@ -274,21 +276,22 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background">
 
-                      <EditText
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    <EditText
                         android:id="@+id/confirm_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_toStartOf="@+id/confirmbtnrel"
                         android:background="@null"
+                        android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
                         android:hint="Confirm New password"
                         android:lines="1"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="#000" />
+                        android:textColor="#0F0A39"
+                        android:textColorHint="#CBC9D9"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
                     <RelativeLayout
                         android:id="@+id/confirmbtnrel"

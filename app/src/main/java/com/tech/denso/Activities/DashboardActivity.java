@@ -1,12 +1,14 @@
 package com.tech.denso.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Interfaces.ListenFromActivity;
+import com.tech.denso.Models.BookingLoginModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.BookingViewModel;
 
@@ -47,6 +50,8 @@ import java.util.ArrayList;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
+import needle.Needle;
+import needle.UiRelatedTask;
 
 public class DashboardActivity extends AppCompatActivity implements CallBackModel.OnCustomStateListener {
     RecyclerView navigation_menu;
@@ -65,6 +70,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     TextView nametext;
     public static ImageButton backbtn;
     MyPagerAdapter adapterViewPager;
+    RelativeLayout loadingrel;
 
     @Override
     protected void onResume() {
@@ -107,6 +113,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         new Const().setFirstname(new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreference("Firstname"));
         new Const().setLastname(new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreference("Lastname"));
         nametext.setText("Welcome, " + new Const().getFirstname() + " " + new Const().getLastname());
+        loadingrel = findViewById(R.id.loadingrel);
         bottomBar = findViewById(R.id.bottombar);
         viewpager = findViewById(R.id.viewpager);
         bottombarrel = findViewById(R.id.bottombarrel);
@@ -167,73 +174,165 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
             logoutrel.setVisibility(View.GONE);
             loginrel.setVisibility(View.VISIBLE);
         }
-
-        ArrayList<String> array = new ArrayList<>();
-        array.add("Home");
-        array.add("Services");
-        array.add("Why Denso Services?");
-        array.add("B2B Login");
-        array.add("E-Catalog");
-        array.add("Our Gallery");
-        array.add("Contact");
-        ArrayList<Integer> icons = new ArrayList<>();
-        icons.add(R.drawable.home_icon);
-        icons.add(R.drawable.mensu_services_icon);
-        icons.add(R.drawable.why_denso_icon);
-        icons.add(R.drawable.b2b_icon);
-        icons.add(R.drawable.e_catalog_icon);
-        icons.add(R.drawable.gallery_icon);
-        icons.add(R.drawable.contact_us_icon);
-        NavigationRecyclerAdapter adapter = new NavigationRecyclerAdapter(array, icons);
-        navigation_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        navigation_menu.setAdapter(adapter);
-        LoadDashboardViewpager();
-        adapter.setOnItemCLickListener(new NavigationRecyclerAdapter.OnItemClickListener() {
+        loadingrel.setVisibility(View.VISIBLE);
+        Needle.onBackgroundThread().execute(new UiRelatedTask<DashboardActivityModel>() {
             @Override
-            public void onClick(View v, int position, String value) {
-                if (value.equals("Home")) {
-                    findViewById(R.id.framelayout).setVisibility(View.GONE);
-                    bottombarrel.setVisibility(View.VISIBLE);
-                    mDrawerLayout.closeDrawer(nav_view);
-                    if (adapterViewPager.getCurrentFragment() instanceof WarrantyFragment) {
-                        WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
-                        if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
-                            DashboardActivity.backbtn.setVisibility(View.VISIBLE);
-                        } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
-                            DashboardActivity.backbtn.setVisibility(View.VISIBLE);
-                        } else {
-                            DashboardActivity.backbtn.setVisibility(View.GONE);
+            protected DashboardActivityModel doWork() {
+                DashboardActivityModel model = new DashboardActivityModel();
+                ArrayList<String> array = new ArrayList<>();
+                array.add("Home");
+                array.add("Services");
+                array.add("Why Denso Services?");
+                array.add("B2B Login");
+                array.add("E-Catalog");
+                array.add("Our Gallery");
+                array.add("Contact");
+                ArrayList<Integer> icons = new ArrayList<>();
+                icons.add(R.drawable.home_icon);
+                icons.add(R.drawable.mensu_services_icon);
+                icons.add(R.drawable.why_denso_icon);
+                icons.add(R.drawable.b2b_icon);
+                icons.add(R.drawable.e_catalog_icon);
+                icons.add(R.drawable.gallery_icon);
+                icons.add(R.drawable.contact_us_icon);
+                NavigationRecyclerAdapter adapter = new NavigationRecyclerAdapter(array, icons);
+                model.setNavigationRecyclerAdapter(adapter);
+                ArrayList<Fragment> fragments = new ArrayList<>();
+                fragments.add(BookingFragment.newInstance());
+                fragments.add(MapsFragment.newInstance(1, "Page # 2"));
+                fragments.add(ServicingFragment.newInstance(2, "Page # 3"));
+                fragments.add(WarrantyFragment.newInstance(3, "Page # 4"));
+                fragments.add(UserFragment.newInstance(4, "Page # 5"));
+                adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
+                model.setAdapter(adapterViewPager);
+                model.setComplete(true);
+                return model;
+            }
+
+            @Override
+            protected void thenDoUiRelatedWork(DashboardActivityModel result) {
+                if (result != null && result.isComplete()) {
+                    NavigationRecyclerAdapter adapter = result.getNavigationRecyclerAdapter();
+                    navigation_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    navigation_menu.setAdapter(adapter);
+                    viewpager.setAdapter(result.getAdapter());
+                    viewpager.setOffscreenPageLimit(5);
+                    adapter.setOnItemCLickListener(new NavigationRecyclerAdapter.OnItemClickListener() {
+                        @Override
+                        public void onClick(View v, int position, String value) {
+                            if (value.equals("Home")) {
+                                findViewById(R.id.framelayout).setVisibility(View.GONE);
+                                bottombarrel.setVisibility(View.VISIBLE);
+                                mDrawerLayout.closeDrawer(nav_view);
+                                if (adapterViewPager.getCurrentFragment() instanceof WarrantyFragment) {
+                                    WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
+                                        DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                                    } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                                        DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                                    } else {
+                                        DashboardActivity.backbtn.setVisibility(View.GONE);
+                                    }
+                                }
+                            } else if (value.equals("Services")) {
+                                LoadFragment(DashboardActivity.this, new ServicesFragment());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
+                                backbtn.setVisibility(View.GONE);
+                            } else if (value.equals("Why Denso Services?")) {
+                                open_Webpage("https://djauto-service.com/whydensoservices");
+                                backbtn.setVisibility(View.GONE);
+                            } else if (value.equals("B2B Login")) {
+                                open_Webpage("https://shop.dj-auto.com/");
+                                backbtn.setVisibility(View.GONE);
+                            } else if (value.equals("E-Catalog")) {
+                                open_Webpage("https://djauto-service.com/ecatalog/");
+                                backbtn.setVisibility(View.GONE);
+                            } else if (value.equals("Our Gallery")) {
+                                open_Webpage("https://djauto-service.com/gallery/");
+                                backbtn.setVisibility(View.GONE);
+                            } else if (value.equals("Contact")) {
+                                LoadFragment(DashboardActivity.this, new ContactFragment());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
+                                backbtn.setVisibility(View.GONE);
+                            }
+                            View view = getCurrentFocus();
+                            if (view != null) {
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                            }
                         }
-                    }
-                } else if (value.equals("Services")) {
-                    LoadFragment(DashboardActivity.this, new ServicesFragment());
-                    findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                    bottombarrel.setVisibility(View.GONE);
-                    sendbtn.setVisibility(View.GONE);
-                    backbtn.setVisibility(View.GONE);
-                } else if (value.equals("Why Denso Services?")) {
-                    open_Webpage("https://djauto-service.com/whydensoservices");
-                    backbtn.setVisibility(View.GONE);
-//                    LoadFragment(DashboardActivity.this, new WhyDensoFragment());
-//                    findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-//                    bottombarrel.setVisibility(View.GONE);
-//                    sendbtn.setVisibility(View.GONE);
-//                    backbtn.setVisibility(View.GONE);
-                } else if (value.equals("B2B Login")) {
-                    open_Webpage("https://shop.dj-auto.com/");
-                    backbtn.setVisibility(View.GONE);
-                } else if (value.equals("E-Catalog")) {
-                    open_Webpage("https://djauto-service.com/ecatalog/");
-                    backbtn.setVisibility(View.GONE);
-                } else if (value.equals("Our Gallery")) {
-                    open_Webpage("https://djauto-service.com/gallery/");
-                    backbtn.setVisibility(View.GONE);
-                } else if (value.equals("Contact")) {
-                    LoadFragment(DashboardActivity.this, new ContactFragment());
-                    findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                    bottombarrel.setVisibility(View.GONE);
-                    sendbtn.setVisibility(View.GONE);
-                    backbtn.setVisibility(View.GONE);
+                    });
+                    bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelect(int position) {
+                            if (position == 4) {
+                                Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
+                                if (loggedbol) {
+                                    viewpager.setCurrentItem(position);
+                                    DashboardActivity.titletextview.setText("MY ACCOUNT");
+                                    sendbtn.setVisibility(View.GONE);
+                                } else {
+                                    viewpager.setCurrentItem(position);
+                                    Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
+                                    i.putExtra("clickedonuser", true);
+                                    startActivityForResult(i, 1);
+                                }
+                                backbtn.setVisibility(View.GONE);
+                            } else if (position == 3) {
+                                viewpager.setCurrentItem(position);
+                                WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                                if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment ||
+                                        viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                                    backbtn.setVisibility(View.VISIBLE);
+                                }
+                            } else {
+                                viewpager.setCurrentItem(position);
+                                backbtn.setVisibility(View.GONE);
+                            }
+                            View view = getCurrentFocus();
+                            if (view != null) {
+                                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                            }
+                        }
+                    });
+                    viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            if (position == 0) {
+                                DashboardActivity.titletextview.setText("MAKE A BOOKING");
+                                sendbtn.setVisibility(View.VISIBLE);
+                            } else if (position == 1) {
+                                DashboardActivity.titletextview.setText("MAP LOCATOR");
+                                sendbtn.setVisibility(View.GONE);
+                            } else if (position == 2) {
+                                DashboardActivity.titletextview.setText("SERVICING");
+                                sendbtn.setVisibility(View.GONE);
+                            } else if (position == 3) {
+                                DashboardActivity.titletextview.setText("WARRANTY CLAIM");
+                                sendbtn.setVisibility(View.GONE);
+                            } else if (position == 4) {
+                                DashboardActivity.titletextview.setText("MY ACCOUNT");
+                                sendbtn.setVisibility(View.GONE);
+                            }
+                            bottomBar.setActiveItem(position);
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
+                    loadingrel.setVisibility(View.GONE);
                 }
             }
         });
@@ -299,77 +398,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     }
 
     private void LoadDashboardViewpager() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(BookingFragment.newInstance());
-        fragments.add(MapsFragment.newInstance(1, "Page # 2"));
-        fragments.add(ServicingFragment.newInstance(2, "Page # 3"));
-        fragments.add(WarrantyFragment.newInstance(3, "Page # 4"));
-        fragments.add(UserFragment.newInstance(4, "Page # 5"));
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), fragments);
-        viewpager.setAdapter(adapterViewPager);
-        viewpager.setOffscreenPageLimit(5);
-        bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelect(int position) {
-                if (position == 4) {
-                    Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
-                    if (loggedbol) {
-                        viewpager.setCurrentItem(position);
-                        DashboardActivity.titletextview.setText("MY ACCOUNT");
-                        sendbtn.setVisibility(View.GONE);
-                    } else {
-                        viewpager.setCurrentItem(position);
-                        Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
-                        i.putExtra("clickedonuser", true);
-                        startActivityForResult(i, 1);
-                    }
-                    backbtn.setVisibility(View.GONE);
-                } else if (position == 3) {
-                    viewpager.setCurrentItem(position);
-                    WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
-                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment ||
-                            viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
-                        backbtn.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    viewpager.setCurrentItem(position);
-                    backbtn.setVisibility(View.GONE);
-                }
 
-            }
-        });
-        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    DashboardActivity.titletextview.setText("MAKE A BOOKING");
-                    sendbtn.setVisibility(View.VISIBLE);
-                } else if (position == 1) {
-                    DashboardActivity.titletextview.setText("MAP LOCATOR");
-                    sendbtn.setVisibility(View.GONE);
-                } else if (position == 2) {
-                    DashboardActivity.titletextview.setText("SERVICING");
-                    sendbtn.setVisibility(View.GONE);
-                } else if (position == 3) {
-                    DashboardActivity.titletextview.setText("WARRANTY CLAIM");
-                    sendbtn.setVisibility(View.GONE);
-                } else if (position == 4) {
-                    DashboardActivity.titletextview.setText("MY ACCOUNT");
-                    sendbtn.setVisibility(View.GONE);
-                }
-                bottomBar.setActiveItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -23,7 +23,8 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottombar" />
+            android:layout_above="@+id/bottombar"
+            android:animateLayoutChanges="true" />
 
         <me.ibrahimsn.lib.SmoothBottomBar
             android:id="@+id/bottombar"
@@ -35,37 +36,46 @@
 
     </RelativeLayout>
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/othercard"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_below="@+id/toolbar"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="30dp"-->
-    <!--        android:layout_marginEnd="30dp"-->
-    <!--        android:layout_marginBottom="-10dp"-->
-    <!--        android:visibility="gone"-->
-    <!--        app:cardCornerRadius="15dp"-->
-    <!--        app:cardElevation="10dp">-->
+    <RelativeLayout
+        android:id="@+id/loadingrel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
 
-    <!--        <FrameLayout-->
-    <!--            android:id="@+id/framelayout"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_marginBottom="10dp"></FrameLayout>-->
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#FF2247"
+            android:indeterminateTintMode="src_atop" />
 
-    <!--    </androidx.cardview.widget.CardView>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/progress"
+            android:fontFamily="@font/helvetica"
+            android:text="Loading!"
+            android:textColor="#3f3f3f"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbar"
+        android:animateLayoutChanges="true" />
 
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E91A3A"
+        android:background="#ed1a3b"
         android:padding="10dp">
 
         <ImageButton
@@ -81,10 +91,10 @@
             android:layout_width="30dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:visibility="gone"
             android:layout_toEndOf="@+id/navigationbtn"
             android:background="?android:attr/actionBarItemBackground"
-            android:src="@drawable/ic_back_btn" />
+            android:src="@drawable/ic_back_btn"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/titletextview"
@@ -95,11 +105,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/backbtn"
-            android:fontFamily="@font/helvetica"
-            android:text="MAKE A BOOKING"
+            android:fontFamily="@font/poppins_semibold"
+            android:text=""
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/sendbtn"
@@ -107,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
             android:background="?selectableItemBackgroundBorderless"
+            android:elevation="10dp"
             android:src="@drawable/send_btn" />
 
     </RelativeLayout>

@@ -19,20 +19,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/helvetica"
+        android:layout_marginTop="5dp"
         android:text=""
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        />
 
     <TextView
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="2px"
         android:layout_below="@+id/nametext"
         android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
+        android:background="#3A3E48"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/navigation_menu"
@@ -76,10 +78,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="30dp"
                 android:layout_toEndOf="@+id/usericon"
-                android:fontFamily="@font/helvetica"
+                android:fontFamily="@font/roboto"
                 android:text="My History"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -87,11 +89,11 @@
         <TextView
             android:id="@+id/middleline"
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
+            android:layout_height="2px"
             android:layout_below="@+id/myhistoryrel"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="#FFFFFF" />
+            android:background="#3A3E48" />
 
         <RelativeLayout
             android:id="@+id/loginrel"
@@ -115,10 +117,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="30dp"
                 android:layout_toEndOf="@+id/loginicon"
-                android:fontFamily="@font/helvetica"
+                android:fontFamily="@font/roboto"
                 android:text="Login"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -145,10 +147,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="30dp"
                 android:layout_toEndOf="@+id/logouticon"
-                android:fontFamily="@font/helvetica"
+                android:fontFamily="@font/roboto"
                 android:text="LogOut"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

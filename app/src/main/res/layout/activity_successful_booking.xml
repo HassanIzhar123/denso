@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,9 +40,10 @@
                 android:layout_below="@+id/successimg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter"
                 android:text="Success"
                 android:textColor="#2C3D49"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -52,9 +53,10 @@
                 android:layout_below="@+id/suceestext"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter"
                 android:text="Congratulation"
-                android:textColor="#F40011"
-                android:textSize="17sp" />
+                android:textColor="#E53E2A"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/suceesdesctext"
@@ -65,9 +67,11 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
+                android:fontFamily="@font/inter"
                 android:text="Your Booking Request has been submitted successfully!"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textColor="#828282"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -91,9 +95,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/inter"
             android:minWidth="300dp"
             android:text="GO BACK"
             android:textAlignment="center" />
 
     </RelativeLayout>
+
 </RelativeLayout>

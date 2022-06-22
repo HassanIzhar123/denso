@@ -45,41 +45,40 @@ public class WhyDensoServicesAdapter extends RecyclerView.Adapter<WhyDensoServic
         holder.headertext.setText(servicename.get(position));
         if (position == 0) {
             holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.headertext.setTextColor(Color.parseColor("#262A33"));
-            holder.descriptiontext.setTextColor(Color.parseColor("#262A33"));
+            holder.headertext.setTextColor(Color.parseColor("#0F0A39"));
+            holder.descriptiontext.setTextColor(Color.parseColor("#0F0A39"));
             holder.descriptionheadertext.setTextColor(Color.parseColor("#262A33"));
             holder.serviceimg.setImageResource(R.drawable.group_9614);
             holder.whitebtn.setVisibility(View.GONE);
             holder.redbtn.setVisibility(View.VISIBLE);
         } else if (position == 1) {
-            holder.card.setCardBackgroundColor(Color.parseColor("#F40011"));
+            holder.card.setCardBackgroundColor(Color.parseColor("#ED1A3B"));
             holder.headertext.setTextColor(Color.parseColor("#FFFFFF"));
             holder.descriptiontext.setTextColor(Color.parseColor("#FFFFFF"));
             holder.descriptionheadertext.setTextColor(Color.parseColor("#FFFFFF"));
             holder.serviceimg.setImageResource(R.drawable.service_icon);
-
             holder.whitebtn.setVisibility(View.VISIBLE);
             holder.redbtn.setVisibility(View.GONE);
         } else if (position == 2) {
             holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.headertext.setTextColor(Color.parseColor("#262A33"));
-            holder.descriptiontext.setTextColor(Color.parseColor("#262A33"));
+            holder.headertext.setTextColor(Color.parseColor("#0F0A39"));
+            holder.descriptiontext.setTextColor(Color.parseColor("#0F0A39"));
             holder.descriptionheadertext.setTextColor(Color.parseColor("#262A33"));
             holder.serviceimg.setImageResource(R.drawable.group_9608);
             holder.whitebtn.setVisibility(View.GONE);
             holder.redbtn.setVisibility(View.VISIBLE);
         } else if (position == 3) {
             holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.headertext.setTextColor(Color.parseColor("#262A33"));
-            holder.descriptiontext.setTextColor(Color.parseColor("#262A33"));
+            holder.headertext.setTextColor(Color.parseColor("#0F0A39"));
+            holder.descriptiontext.setTextColor(Color.parseColor("#0F0A39"));
             holder.descriptionheadertext.setTextColor(Color.parseColor("#262A33"));
             holder.serviceimg.setImageResource(R.drawable.electrical0services_icon);
             holder.whitebtn.setVisibility(View.GONE);
             holder.redbtn.setVisibility(View.VISIBLE);
         } else {
             holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.headertext.setTextColor(Color.parseColor("#262A33"));
-            holder.descriptiontext.setTextColor(Color.parseColor("#262A33"));
+            holder.headertext.setTextColor(Color.parseColor("#0F0A39"));
+            holder.descriptiontext.setTextColor(Color.parseColor("#0F0A39"));
             holder.descriptionheadertext.setTextColor(Color.parseColor("#262A33"));
             holder.whitebtn.setVisibility(View.GONE);
             holder.redbtn.setVisibility(View.VISIBLE);

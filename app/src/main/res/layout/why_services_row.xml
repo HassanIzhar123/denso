@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     android:id="@+id/card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -24,12 +24,12 @@
                 android:id="@+id/headertext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
                 android:layout_toEndOf="@+id/serviceimg"
                 android:text="Services"
                 android:textColor="#262A33"
-                android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="5dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -47,9 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/headerrel"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Description"
             android:textColor="#262A33"
-            android:textSize="17sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
@@ -59,8 +60,9 @@
             android:layout_below="@+id/descriptionheadertext"
             android:layout_marginTop="20dp"
             android:text="-"
+            android:fontFamily="@font/poppins"
             android:textColor="#262A33"
-            android:textSize="17sp" />
+            android:textSize="12sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

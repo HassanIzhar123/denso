@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:overScrollMode="never">
@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/personal_information"
                 android:textColor="#312E4F"
-                android:textSize="15sp" />
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/companynametextview"
@@ -40,8 +41,9 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="@string/company_name"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:fontFamily="@font/poppins"
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/companynamerel"
@@ -54,10 +56,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/companynameview"
@@ -76,9 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/companynamerel"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/street"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/streetrel"
@@ -91,10 +96,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/streetview"
@@ -123,9 +130,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lasttexterror"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/city_state_zip"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/cityrel"
@@ -138,11 +146,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
                     android:paddingEnd="25dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/cityview"
@@ -161,9 +171,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cityrel"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/phone_number"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/phonerel"
@@ -176,12 +187,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:inputType="phone"
                     android:minWidth="300dp"
                     android:paddingEnd="25dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/phoneview"
@@ -230,12 +243,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/poppins_semibold"
                 android:gravity="center_horizontal"
-                android:letterSpacing="0.5"
                 android:minWidth="300dp"
                 android:text="@string/or"
-                android:textSize="17sp" />
+                android:textColor="#747474"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -255,9 +268,10 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:fontFamily="@font/poppins"
                 android:text="@string/homeowner_name"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/homeownernamerel"
@@ -270,10 +284,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/homeownernameview"
@@ -292,9 +308,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/homeownernamerel"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/street"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/homestreetrel"
@@ -307,10 +324,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/homestreetview"
@@ -339,9 +358,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/homeownerlasttexterror"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/city_state_zip"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/homeownercityrel"
@@ -354,11 +374,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:minWidth="300dp"
                     android:paddingEnd="25dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/homeownercityview"
@@ -377,9 +399,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/homeownercityrel"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/phone_number"
-                android:textColor="#8C8984"
-                android:textSize="13sp" />
+                android:textColor="#797979"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:id="@+id/homeownerphonerel"
@@ -392,12 +415,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
                     android:inputType="phone"
                     android:minWidth="300dp"
                     android:paddingEnd="25dp"
-                    android:textColor="#333333"
+                    android:textColor="#303030"
+                    android:textColorHint="#797979"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <View
                     android:id="@+id/homeownerphoneview"

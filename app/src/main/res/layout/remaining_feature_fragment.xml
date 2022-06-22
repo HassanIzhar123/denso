@@ -41,7 +41,8 @@
                     android:layout_centerVertical="true"
                     android:text="Wide Range"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/widerangeicon"
@@ -71,7 +72,8 @@
                     android:layout_centerVertical="true"
                     android:text="Affordable Services"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/affordeableserviceicon"
@@ -101,7 +103,8 @@
                     android:layout_centerVertical="true"
                     android:text="All Makes And Models"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/makesicon"
@@ -131,7 +134,8 @@
                     android:layout_centerVertical="true"
                     android:text="Experienced Technicians"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/experiencedicon"
@@ -161,7 +165,8 @@
                     android:layout_centerVertical="true"
                     android:text="Diagnostic Equipment"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/equipmenticon"

@@ -32,11 +32,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="THE SYSTEM UPHOLDS THE FOLLOWING VALUES AS A GUIDELINES TO ITS OPERATION:"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                 />
 
             <RelativeLayout
                 android:id="@+id/firstrel"
@@ -70,7 +71,8 @@
                         android:layout_toEndOf="@+id/brandicon"
                         android:text="Branch Value Denso"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -107,7 +109,8 @@
                         android:layout_toEndOf="@+id/speedicon"
                         android:text="Speed"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -145,7 +148,8 @@
                         android:layout_toEndOf="@+id/carownericon"
                         android:text="Car Owner Centered"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -179,7 +183,8 @@
                         android:layout_toEndOf="@+id/easeicon"
                         android:text="Ease Of Use"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -217,7 +222,8 @@
                         android:layout_toEndOf="@+id/trusticon"
                         android:text="Trust"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -251,7 +257,8 @@
                         android:layout_toEndOf="@+id/fasticon"
                         android:text="Fast Delivery"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp" />
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 

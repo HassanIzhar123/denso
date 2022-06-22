@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -42,7 +42,7 @@
                     android:background="@null"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:elevation="10dp"
-                    android:hint="Bearch Branch "
+                    android:hint="Search Branch "
                     android:padding="10dp"
                     android:textColor="#000"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
@@ -71,6 +71,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center_vertical"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp"
+                    android:textColor="#797979"
                     android:paddingStart="10dp"
                     android:text="No Branch Found!" />
 
@@ -101,7 +104,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="30dp"
-                android:background="#919191" />
+                android:background="#D3DFEF" />
 
         </RelativeLayout>
 

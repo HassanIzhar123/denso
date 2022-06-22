@@ -9,7 +9,7 @@
     <string name="BookingFragment_nobrancherror">There is no branch! you can not set any booking</string>
     <string name="city_state_zip">City/State/Zip</string>
     <string name="phone_number">Phone Number</string>
-    <string name="or">--------OR--------</string>
+    <string name="or">————————— OR —————————</string>
     <string name="there_should_be_no_space_in_last_name">There should be no space in last name</string>
     <string name="there_should_be_no_space_in_first_name">There should be no space in last name</string>
     <string name="street">Street</string>

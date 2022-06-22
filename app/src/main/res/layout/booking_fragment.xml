@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
@@ -38,11 +38,11 @@
                 <TextView
                     android:id="@+id/personalinfotext"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Personal Information"
-                    android:textStyle="bold"
                     android:textColor="#312E4F"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/firstnametextview"
@@ -50,10 +50,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/personalinfotext"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins"
                     android:text="First name"
-                    android:textStyle="bold"
-                    android:textColor="#8C8984"
-                    android:textSize="13sp" />
+                    android:textColor="#797979"
+                    android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/firstnamerel"
@@ -66,10 +66,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins"
                         android:hint="First Name"
                         android:minWidth="300dp"
-                        android:textColor="#333333"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textColor="#303030"
+                        android:textColorHint="#797979"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <View
                         android:id="@+id/firstnameview"
@@ -99,10 +102,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/firsttexterror"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Last name"
-                    android:textStyle="bold"
-                    android:textColor="#8C8984"
-                    android:textSize="13sp" />
+                    android:textColor="#797979"
+                    android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/lastnamerel"
@@ -115,10 +118,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins"
                         android:hint="Last Name"
                         android:minWidth="300dp"
-                        android:textColor="#333333"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textColorHint="#797979"
+                        android:textColor="#303030"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <View
                         android:id="@+id/lastnameview"
@@ -148,9 +154,9 @@
                     android:layout_below="@+id/lasttexterror"
                     android:layout_marginTop="10dp"
                     android:text="Email"
-                    android:textStyle="bold"
-                    android:textColor="#8C8984"
-                    android:textSize="13sp" />
+                    android:textColor="#797979"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/emailrel"
@@ -163,11 +169,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins"
                         android:hint="Email"
                         android:minWidth="300dp"
+                        android:textColorHint="#797979"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textColor="#303030"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <View
                         android:id="@+id/emailview"
@@ -206,9 +215,9 @@
                     android:layout_below="@+id/emailrel"
                     android:layout_marginTop="10dp"
                     android:text="Phone number"
-                    android:textStyle="bold"
-                    android:textColor="#8C8984"
-                    android:textSize="13sp" />
+                    android:textColor="#797979"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp"/>
 
                 <RelativeLayout
                     android:id="@+id/phonerel"
@@ -221,12 +230,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins"
                         android:hint="Phone Number"
                         android:inputType="phone"
+                        android:textColorHint="#797979"
                         android:minWidth="300dp"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textColor="#303030"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <View
                         android:id="@+id/phoneview"
@@ -274,9 +286,9 @@
                     android:layout_below="@+id/plustext"
                     android:layout_marginTop="20dp"
                     android:text="Vehicle Information"
-                    android:textColor="#333333"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="#312E4F"
+                    android:textSize="12sp"
+                    />
 
                 <RelativeLayout
                     android:id="@+id/allmakesrel"
@@ -297,7 +309,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectmakeview"
@@ -329,7 +341,7 @@
                         android:padding="15dp"
                         android:text="No Makes Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -362,7 +374,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectmodelview"
@@ -394,7 +406,7 @@
                         android:padding="15dp"
                         android:text="No Models Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -426,7 +438,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectyearview"
@@ -458,7 +470,7 @@
                         android:padding="15dp"
                         android:text="No Years Model Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -491,7 +503,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectbranchview"
@@ -523,7 +535,7 @@
                         android:padding="15dp"
                         android:text="No Branch Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -556,7 +568,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectpreferredview"
@@ -588,7 +600,7 @@
                         android:padding="15dp"
                         android:text="No Preferred Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -621,7 +633,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selectservicesview"
@@ -653,7 +665,7 @@
                         android:padding="15dp"
                         android:text="No Branch Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView
@@ -678,11 +690,13 @@
                         android:id="@+id/selectdatetextview"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
                         android:gravity="center_vertical"
                         android:hint="Date"
                         android:minWidth="300dp"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#797979"
+                        android:textSize="16sp" />
 
                     <View
                         android:id="@+id/selectdateview"
@@ -726,7 +740,7 @@
                         android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
-                        android:textColor="#333333" />
+                        android:textColor="#303030" />
 
                     <View
                         android:id="@+id/selecttimeslotview"
@@ -758,7 +772,7 @@
                         android:padding="15dp"
                         android:text="No TimeSlots Found!"
                         android:textColor="#8C8984"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:visibility="gone" />
 
                     <ImageView

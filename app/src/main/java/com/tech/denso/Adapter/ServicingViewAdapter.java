@@ -48,23 +48,23 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
         holder.headertext.setText(servicename);
         if (position == 0) {
             holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FE0025"));
+            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
             holder.serviceimg.setImageResource(R.drawable.group_9614);
         } else if (position == 1) {
-            holder.btnrel.setBackgroundResource(R.drawable.red_round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
+            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
             holder.serviceimg.setImageResource(R.drawable.group_9605);
         } else if (position == 2) {
-            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FE0025"));
+            holder.btnrel.setBackgroundResource(R.drawable.red_round_button_background);
+            holder.bookbtn.setTextColor(Color.parseColor("#FFFFFF"));
             holder.serviceimg.setImageResource(R.drawable.group_9608);
         } else if (position == 3) {
             holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FE0025"));
+            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
             holder.serviceimg.setImageResource(R.drawable.electrical0services_icon);
         } else {
             holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FE0025"));
+            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
         }
 
 //        StringBuilder builder = new StringBuilder();

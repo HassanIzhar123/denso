@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +30,8 @@
             android:text="LogIn Account"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="17sp"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_semibold"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -72,9 +73,11 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:hint="Enter Email"
                     android:padding="10dp"
-                    android:textColor="#000"
+                    android:textColor="#0F0A39"
+                    android:textColorHint="#CBC9D9"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
                 <RelativeLayout
@@ -88,21 +91,23 @@
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp">
 
-                      <EditText
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    <EditText
                         android:id="@+id/password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_toStartOf="@+id/btnrel"
                         android:background="@null"
+                        android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:hint="Enter Password"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="50dp"
                         android:paddingBottom="10dp"
-                        android:textColor="#000" />
+                        android:textColor="#0F0A39"
+                        android:textColorHint="#CBC9D9"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
 
                     <RelativeLayout
                         android:id="@+id/btnrel"
@@ -123,10 +128,10 @@
                             android:id="@+id/hidebtn"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:visibility="gone"
                             android:layout_marginEnd="10dp"
                             android:background="?selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_hide" />
+                            android:src="@drawable/ic_hide"
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
@@ -141,8 +146,10 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:background="?selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/roboto"
                     android:text="Forgot Your Password?"
-                    android:textColor="#938D9B" />
+                    android:textColor="#7B7890"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:id="@+id/signinbtnrel"
@@ -159,8 +166,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackgroundBorderless"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Sign In"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -179,10 +188,11 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto"
                         android:text="Do you want to book services personalized recommendations check out more quickly your booking history register."
                         android:textAlignment="center"
-                        android:textColor="#938D9B"
-                        android:textSize="17sp" />
+                        android:textColor="#7B7890"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/signupbtn"
@@ -193,8 +203,10 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="30dp"
                         android:background="?selectableItemBackgroundBorderless"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="Sign Up"
-                        android:textColor="#FF2548" />
+                        android:textColor="#ED1A3B"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
