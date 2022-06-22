@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:overScrollMode="never">
@@ -177,8 +176,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@null"
-                    android:minWidth="300dp"
                     android:inputType="phone"
+                    android:minWidth="300dp"
                     android:paddingEnd="25dp"
                     android:textColor="#333333"
                     android:textCursorDrawable="@drawable/edittext_cursor_drawable"
@@ -438,7 +437,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/multi_selection_spinner_background"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/slectservicesterxt"

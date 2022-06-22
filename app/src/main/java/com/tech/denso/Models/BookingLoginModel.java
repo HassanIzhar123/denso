@@ -1,4 +1,4 @@
-package com.tech.denso.Activities;
+package com.tech.denso.Models;
 
 import com.tech.denso.Models.LoginModel.LoginModel;
 

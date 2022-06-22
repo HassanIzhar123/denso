@@ -9,12 +9,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,14 +23,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
+import com.tech.denso.Activities.LoginActivity;
 import com.tech.denso.Activities.SucessfullClaimActivity;
 import com.tech.denso.Helper.Const;
+import com.tech.denso.Helper.SharedPreference;
+import com.tech.denso.Models.BookingsModel.BookingSendModel;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
-import com.tech.denso.Models.Services.ServicesModel;
 import com.tech.denso.Models.WarrantyClaim.WarrantyClaim;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.NextViewModel;
@@ -91,24 +90,6 @@ public class FinalWarrantyFragment extends Fragment {
         setFocusChangeListener(newserialnumberedittext, newserialnumberview);
         setFocusChangeListener(newpartnameedittext, newpartnameview);
         setFocusChangeListener(newpartinvoinceedittext, newpartinvoiceview);
-//        view.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    View v = getActivity().getCurrentFocus();
-//                    if (v instanceof EditText) {
-//                        Rect outRect = new Rect();
-//                        v.getGlobalVisibleRect(outRect);
-//                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-//                            v.clearFocus();
-//                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//                        }
-//                    }
-//                }
-//                return true;
-//            }
-//        });
         NextViewModel model = new ViewModelProvider(requireActivity()).get(NextViewModel.class);
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             this.item = item;
@@ -128,9 +109,19 @@ public class FinalWarrantyFragment extends Fragment {
                     item.setNewPartInvoice(newPartInvoice);
                     item.setComments(comments);
                     try {
-                        SubmitClaimRequest(item);
+                        boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
+                        if (loggedbol) {
+                            SubmitClaimRequest(item);
+                        } else {
+                            Toast.makeText(getContext(), "Please SignUp Or Login First!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getContext(), LoginActivity.class);
+                            i.putExtra("warrantyfromfragment", true);
+                            i.putExtra("warrantymodel", item);
+                            startActivity(i);
+                        }
+
                     } catch (JSONException e) {
-                        Log.e("exceptionissubmittion", "" + Arrays.toString(e.getStackTrace()));
+                        Log.e("exceptionissubmittion1", "" + Arrays.toString(e.getStackTrace()));
                     }
                 }
             }
@@ -139,9 +130,8 @@ public class FinalWarrantyFragment extends Fragment {
     }
 
     private void SubmitClaimRequest(InitialWarrantyModel item) throws JSONException {
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(getContext());
         String url = new Const().getBaseUrl() + "/api/warrantyclaims/";
-        Log.e("yurlcehckvalue", "" + url);
+        Log.e("yurlcehckvalue1", "" + url);
         JSONObject jsonBody = new JSONObject();
         jsonBody.put("companyName", item.getCompanyName());
         jsonBody.put("street", item.getStreet());
@@ -271,4 +261,5 @@ public class FinalWarrantyFragment extends Fragment {
             }
         });
     }
+
 }

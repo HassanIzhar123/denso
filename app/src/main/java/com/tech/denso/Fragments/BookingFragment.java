@@ -6,7 +6,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,9 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -27,18 +24,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
@@ -50,13 +44,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.common.base.CharMatcher;
 import com.google.gson.Gson;
 import com.tech.denso.Activities.DashboardActivity;
-import com.tech.denso.Activities.IntroductionActivity;
 import com.tech.denso.Activities.LoginActivity;
 import com.tech.denso.Activities.SuccessfulBookingActivity;
 import com.tech.denso.Adapter.BookingBranchSpinnerAdapter;
@@ -65,32 +55,26 @@ import com.tech.denso.Adapter.BookingModelSpinnerAdapter;
 import com.tech.denso.Adapter.BookingPreferredAndRequiredAdapter;
 import com.tech.denso.Adapter.BookingTimeSpinnerAdapter;
 import com.tech.denso.Adapter.BookingYearSpinnerAdapter;
-import com.tech.denso.Adapter.CustomAdapter;
 import com.tech.denso.Helper.App;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Helper.TaskRunner;
 import com.tech.denso.Interfaces.ListenFromActivity;
-import com.tech.denso.Models.BookingsModel.BookingBranchSpinnerModel.BookingBranchSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingMakeSpinnerModel.BookingMakeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingModelsSpinnerModel.BookingModelsSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
 import com.tech.denso.Models.BookingsModel.BookingTimeSpinnerModel.BookingTimeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingYearSpinnerModel.BookingYearSpinnerModel;
-import com.tech.denso.Models.Locations.Datum;
 import com.tech.denso.Models.Locations.LocationsModel;
 import com.tech.denso.Models.LoginModel.LoginModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.BookingModel;
 import com.tech.denso.ViewModels.BookingViewModel;
-import com.tech.denso.ViewModels.SignupToBookingModel;
-import com.tech.denso.ViewModels.SignupToBookingViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,7 +84,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
@@ -115,7 +98,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     TextView nobranchtextview, nomaketextview, nomodeltextview, noyeartextview, nopreferredtextview, noservicestextview, notimetextview;
     //    public ListenFromActivity activityListener;
     TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selectservicetext, selecttimeslottext;
-    View firstnameview, lastnameview, emailview, phoneview;
+    View firstnameview, lastnameview, emailview, phoneview,selectmakeview;
 
     public static BookingFragment newInstance() {
         BookingFragment fragmentFirst = new BookingFragment();
@@ -866,6 +849,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         lastnameview = view.findViewById(R.id.lastnameview);
         emailview = view.findViewById(R.id.emailview);
         phoneview = view.findViewById(R.id.phoneview);
+        selectmakeview = view.findViewById(R.id.selectmakeview);
         selectdatetextview = view.findViewById(R.id.selectdatetextview);
 //        SignupToBookingViewModel model = new ViewModelProvider(BookingFragment.this).get(SignupToBookingViewModel.class);
 //        model.getSelected().observe(getViewLifecycleOwner(), new Observer<SignupToBookingModel>() {
@@ -1058,7 +1042,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         return view;
     }
 
-    public void setFocusChangeListener(EditText edittext, View view) {
+    public void setFocusChangeListener(View edittext, View view) {
         edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

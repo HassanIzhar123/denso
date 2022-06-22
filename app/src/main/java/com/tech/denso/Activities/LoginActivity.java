@@ -1,14 +1,9 @@
 package com.tech.denso.Activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -19,38 +14,36 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.Dash;
 import com.google.gson.Gson;
-import com.tech.denso.Fragments.BookingFragment;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
-import com.tech.denso.Helper.TaskRunner;
+import com.tech.denso.Models.BookingLoginModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
+import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
 import com.tech.denso.Models.LoginModel.LoginModel;
-import com.tech.denso.Models.SignUpModel.SignUpModel;
+import com.tech.denso.Models.WarrantyClaim.WarrantyClaim;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.BookingModel;
 import com.tech.denso.ViewModels.BookingViewModel;
-import com.tech.denso.ViewModels.SignupToBookingModel;
-import com.tech.denso.ViewModels.SignupToBookingViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.Callable;
+import java.util.Arrays;
 
 import needle.Needle;
 import needle.UiRelatedTask;
@@ -108,6 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.e("onsignupclciked", "checked here");
                     i.putExtra("clickedonuser", getIntent().getBooleanExtra("bookingfromfragment", false));
                     i.putExtra("signupbookingmodel", getIntent().getSerializableExtra("bookingmodel"));
+                    i.putExtra("warrantyclickedonuser", getIntent().getBooleanExtra("warrantyfromfragment", false));
+                    i.putExtra("signupwarrantymodel", getIntent().getSerializableExtra("warrantymodel"));
                     startActivity(i);
                     finish();
                 }
@@ -182,15 +177,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
                                 dialog.cancel();
                                 Boolean bookingfromfragment = getIntent().getBooleanExtra("bookingfromfragment", false);
+                                Boolean warrantyfromfragment = getIntent().getBooleanExtra("warrantyfromfragment", false);
                                 if (bookingfromfragment) {
-//                                    Intent intent = new Intent();
-//                                    intent.putExtra("comingbackbooking", true);
-//                                    intent.putExtra("bookingmodel", getIntent().getSerializableExtra("bookingmodel"));
-//                                    setResult(RESULT_OK, intent);
-//                                    finish();
-//                                    SignupToBookingModel signupmodel = new SignupToBookingModel();
-//                                    signupmodel.setComingBackFlag(true);
-//                                    signupmodel.setModel();
                                     BookingSendModel bookingmodel = (BookingSendModel) getIntent().getSerializableExtra("bookingmodel");
                                     SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
                                             , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
@@ -199,6 +187,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()),
                                             bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
                                     finish();
+                                } else if (warrantyfromfragment) {
+                                    InitialWarrantyModel warrantymodel = (InitialWarrantyModel) getIntent().getSerializableExtra("warrantymodel");
+                                    try {
+                                        SubmitClaimRequest(warrantymodel);
+                                        finish();
+                                    } catch (Exception e) {
+                                        Log.e("","");
+                                    }
+
                                 } else {
                                     startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                 }
@@ -243,6 +240,62 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void SubmitClaimRequest(InitialWarrantyModel item) throws JSONException {
+        String url = new Const().getBaseUrl() + "/api/warrantyclaims/";
+        Log.e("yurlcehckvalue1", "" + url);
+        JSONObject jsonBody = new JSONObject();
+        jsonBody.put("companyName", item.getCompanyName());
+        jsonBody.put("street", item.getStreet());
+        jsonBody.put("cityStateZip", item.getCity());
+        jsonBody.put("phoneNumber", item.getPhoneNumber());
+        jsonBody.put("homeOwnerName", item.getHomeOwnerName());
+        jsonBody.put("homeOwnerStreet", item.getHomeOwnerStreet());
+        jsonBody.put("homeOwnerCityStateZip", item.getHomeOwnerCity());
+        jsonBody.put("homeOwnerPhoneNumber", item.getHomeOwnerPhoneNumber());
+        jsonBody.put("salesOrderOrInvoiceNumber", item.getSaleOrder());
+        jsonBody.put("originalUnitInstallDate", item.getOriginalUnitDate());
+        jsonBody.put("failedDate", item.getFailedUnitDate());
+        jsonBody.put("manufacturer", item.getManufacturer());
+        jsonBody.put("unitModelNumber", item.getUnitModelNumber());
+        jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
+        jsonBody.put("unitPartNumber", item.getUnitPartNumber());//
+        jsonBody.put("modelNumber", item.getModelNumber());//
+        jsonBody.put("serialNumber", item.getSerialNumber());
+        jsonBody.put("failureReason", item.getFailureReasonMessage());
+        jsonBody.put("newPartNumber", item.getNewPartNumber());
+        jsonBody.put("newPartName", item.getNewPartName());
+        jsonBody.put("newSerialNumber", item.getNewSerialNumber());
+        jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
+        jsonBody.put("message", item.getComments());//
+        Log.e("finaljsonobkect", "" + jsonBody.toString());
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("responsevaluechecl", "" + response);
+                Gson gson = new Gson();
+                WarrantyClaim responsedata = gson.fromJson(response.toString(), WarrantyClaim.class);
+                if (responsedata.getMessage().equals("Warranty Claim has been Submitted Successfully!")) {
+                    Intent i = new Intent(LoginActivity.this, SucessfullClaimActivity.class);
+                    startActivity(i);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responsevaluechecl1", "" + Arrays.toString(error.getStackTrace()));
+            }
+        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                final Map<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Basic " + "c2FnYXJAa2FydHBheS5jb206cnMwM2UxQUp5RnQzNkQ5NDBxbjNmUDgzNVE3STAyNzI=");//put your token here
+//                return headers;
+//            }
+        };
+        requestQueue.add(jsonOblect);
     }
 
     private void SendBooking(String firstname, String lastname, String email, String phonenumber, String vehicleType, String waitingStatus, String transmission,

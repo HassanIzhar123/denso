@@ -40,6 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Personal Information"
+                    android:textStyle="bold"
                     android:textColor="#312E4F"
                     android:textSize="15sp" />
 
@@ -50,6 +51,7 @@
                     android:layout_below="@+id/personalinfotext"
                     android:layout_marginTop="20dp"
                     android:text="First name"
+                    android:textStyle="bold"
                     android:textColor="#8C8984"
                     android:textSize="13sp" />
 
@@ -72,7 +74,7 @@
                     <View
                         android:id="@+id/firstnameview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/firstnameedittext"
                         android:layout_alignStart="@+id/firstnameedittext"
                         android:layout_alignEnd="@+id/firstnameedittext"
@@ -98,6 +100,7 @@
                     android:layout_below="@+id/firsttexterror"
                     android:layout_marginTop="10dp"
                     android:text="Last name"
+                    android:textStyle="bold"
                     android:textColor="#8C8984"
                     android:textSize="13sp" />
 
@@ -120,7 +123,7 @@
                     <View
                         android:id="@+id/lastnameview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/lastnameedittext"
                         android:layout_alignStart="@+id/lastnameedittext"
                         android:layout_alignEnd="@+id/lastnameedittext"
@@ -145,6 +148,7 @@
                     android:layout_below="@+id/lasttexterror"
                     android:layout_marginTop="10dp"
                     android:text="Email"
+                    android:textStyle="bold"
                     android:textColor="#8C8984"
                     android:textSize="13sp" />
 
@@ -168,7 +172,7 @@
                     <View
                         android:id="@+id/emailview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/emailedittext"
                         android:layout_alignStart="@+id/emailedittext"
                         android:layout_alignEnd="@+id/emailedittext"
@@ -202,6 +206,7 @@
                     android:layout_below="@+id/emailrel"
                     android:layout_marginTop="10dp"
                     android:text="Phone number"
+                    android:textStyle="bold"
                     android:textColor="#8C8984"
                     android:textSize="13sp" />
 
@@ -226,7 +231,7 @@
                     <View
                         android:id="@+id/phoneview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/phoneedittext"
                         android:layout_alignStart="@+id/phoneedittext"
                         android:layout_alignEnd="@+id/phoneedittext"
@@ -269,8 +274,9 @@
                     android:layout_below="@+id/plustext"
                     android:layout_marginTop="20dp"
                     android:text="Vehicle Information"
-                    android:textColor="#312E4F"
-                    android:textSize="15sp" />
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:id="@+id/allmakesrel"
@@ -288,7 +294,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="All Makes"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -296,7 +302,7 @@
                     <View
                         android:id="@+id/selectmakeview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectmakespinner"
                         android:layout_alignStart="@+id/selectmakespinner"
                         android:layout_alignEnd="@+id/selectmakespinner"
@@ -353,7 +359,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="All Models"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -417,7 +423,7 @@
                         android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -425,7 +431,7 @@
                     <View
                         android:id="@+id/selectyearview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectyearspinner"
                         android:layout_alignStart="@+id/selectyearspinner"
                         android:layout_alignEnd="@+id/selectyearspinner"
@@ -482,7 +488,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -490,7 +496,7 @@
                     <View
                         android:id="@+id/selectbranchview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectbranchspinner"
                         android:layout_alignStart="@+id/selectbranchspinner"
                         android:layout_alignEnd="@+id/selectbranchspinner"
@@ -547,7 +553,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -555,7 +561,7 @@
                     <View
                         android:id="@+id/selectpreferredview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectpreferredspinner"
                         android:layout_alignStart="@+id/selectpreferredspinner"
                         android:layout_alignEnd="@+id/selectpreferredspinner"
@@ -612,7 +618,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -620,7 +626,7 @@
                     <View
                         android:id="@+id/selectservicesview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectservicesspinner"
                         android:layout_alignStart="@+id/selectservicesspinner"
                         android:layout_alignEnd="@+id/selectservicesspinner"
@@ -675,12 +681,13 @@
                         android:gravity="center_vertical"
                         android:hint="Date"
                         android:minWidth="300dp"
-                        android:paddingEnd="25dp" />
+                        android:paddingEnd="25dp"
+                        android:textColor="#333333" />
 
                     <View
                         android:id="@+id/selectdateview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selectdatetextview"
                         android:layout_alignStart="@+id/selectdatetextview"
                         android:layout_alignEnd="@+id/selectdatetextview"
@@ -716,7 +723,7 @@
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="324dp"
+                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#333333" />
@@ -724,7 +731,7 @@
                     <View
                         android:id="@+id/selecttimeslotview"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="2dp"
                         android:layout_below="@+id/selecttimeslotsspinner"
                         android:layout_alignStart="@+id/selecttimeslotsspinner"
                         android:layout_alignEnd="@+id/selecttimeslotsspinner"

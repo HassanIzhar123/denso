@@ -1,4 +1,4 @@
-package com.tech.denso.Fragments;
+package com.tech.denso.Interfaces;
 
 public interface SendData {
     public void send(String firstname, String lastname, String email);

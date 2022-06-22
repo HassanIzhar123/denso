@@ -1,6 +1,8 @@
 package com.tech.denso.Models.InitialWarrantyFragment;
 
-public class InitialWarrantyModel {
+import java.io.Serializable;
+
+public class InitialWarrantyModel implements Serializable {
 
     public String getUnitPartNumber() {
         return unitPartNumber;

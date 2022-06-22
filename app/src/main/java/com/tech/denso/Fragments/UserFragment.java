@@ -53,6 +53,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import needle.Needle;
+import needle.UiRelatedTask;
+
 public class UserFragment extends Fragment implements View.OnClickListener {
     private String title;
     private int page;
@@ -143,13 +146,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 resetrel.setVisibility(View.GONE);
                 nodatarel.setVisibility(View.GONE);
                 if (position == 0) {
-                    Log.e("buttongroupvalue", "true");
                     resetrel.setVisibility(View.GONE);
                     historyrecyclerview.setVisibility(View.VISIBLE);
                     nodatarel.setVisibility(View.GONE);
                     LoadData();
                 } else if (position == 1) {
-                    Log.e("buttongroupvalue1", "true");
                     historyrecyclerview.setAdapter(null);
                     historyrecyclerview.setVisibility(View.GONE);
                     resetrel.setVisibility(View.VISIBLE);
@@ -276,45 +277,129 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
     private void LoadData() {
         Log.e("buttongroupvalue", "inside loaddata");
-        new TaskRunner().executeAsync(new Callable<Object>() {
+        String url = new Const().getBaseUrl() + "/api/bookings/";
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public Object call() throws Exception {
-                if (buttongroup.getPosition() == 0) {
-                    GetBookingData();
-                } else {
-                    nodatarel.setVisibility(View.GONE);
-                    loadingrel.setVisibility(View.GONE);
-                }
-                return null;
-            }
-        }, new TaskRunner.Callback<Object>() {
-            @Override
-            public void onStart() {
-                loadingrel.setVisibility(View.VISIBLE);
-                historyrecyclerview.setVisibility(View.GONE);
-                nodatarel.setVisibility(View.GONE);
-            }
+            public void onResponse(String response) {
+                Needle.onBackgroundThread().execute(new UiRelatedTask<HistoryAsyncModel>() {
+                    @Override
+                    protected HistoryAsyncModel doWork() {
+                        HistoryAsyncModel model = new HistoryAsyncModel();
+                        if (buttongroup.getPosition() == 0) {
+                            Gson gson = new Gson();
+                            BookingsModel responsedata = gson.fromJson(response, BookingsModel.class);
+                            if (responsedata.getData().size() > 0) {
+                                List<Datum> datums = new ArrayList<>();
+                                List<Datum> data = responsedata.getData();
+                                for (int i = 0; i < data.size(); i++) {
+                                    if (data.get(i).getEmail().equals(new Const().getEmail())) {
+                                        datums.add(data.get(i));
+                                    }
+                                }
+                                Log.e("datumarraycheck", "" + datums.size());
+                                if (datums.size() > 0) {
+                                    BookingHistoryViewAdapter adapter = new BookingHistoryViewAdapter(getContext(), datums);
+                                    model.setComplete(true);
+                                    model.setAdapter(adapter);
+                                } else {
+                                    model.setComplete(false);
+                                    model.setNoData(true);
+                                }
+                            } else {
+                                model.setComplete(false);
+                                model.setNoData(true);
+                            }
+                        } else {
+                            model.setComplete(false);
+                            model.setResetPassword(true);
+                        }
+                        return model;
+                    }
 
-            @Override
-            public void onComplete(Object result) {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        loadingrel.setVisibility(View.GONE);
-//                        historyrecyclerview.setVisibility(View.VISIBLE);
-//                        nodatarel.setVisibility(View.GONE);
-//                    }
-//                }, 3000);
-            }
+                    @Override
+                    protected void thenDoUiRelatedWork(HistoryAsyncModel result) {
+                        if (result.isComplete) {
+                            historyrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+                            historyrecyclerview.setAdapter(result.getAdapter());
+                            loadingrel.setVisibility(View.GONE);
+                            historyrecyclerview.setVisibility(View.VISIBLE);
+                            nodatarel.setVisibility(View.GONE);
+                        } else if (!result.isComplete()) {
+                            if (result.isNoData()) {
+                                loadingrel.setVisibility(View.GONE);
+                                historyrecyclerview.setVisibility(View.GONE);
+                                nodatarel.setVisibility(View.VISIBLE);
+                            }else if(result.isResetPassword()){
+                                nodatarel.setVisibility(View.GONE);
+                                loadingrel.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                });
 
+            }
+        }, new Response.ErrorListener() {
             @Override
-            public void onError(Exception e) {
-                Log.e("Eceptionindialog", "" + e.toString());
+            public void onErrorResponse(VolleyError error) {
                 loadingrel.setVisibility(View.GONE);
                 historyrecyclerview.setVisibility(View.GONE);
                 nodatarel.setVisibility(View.VISIBLE);
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                Const constant = new Const();
+                String creds = String.format("%s:%s", constant.getEmail(), constant.getPassword());
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+        };
+        req.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(req, url);
+//        new TaskRunner().executeAsync(new Callable<Object>() {
+//            @Override
+//            public Object call() throws Exception {
+//                if (buttongroup.getPosition() == 0) {
+//                    GetBookingData();
+//                } else {
+//                    nodatarel.setVisibility(View.GONE);
+//                    loadingrel.setVisibility(View.GONE);
+//                }
+//                return null;
+//            }
+//        }, new TaskRunner.Callback<Object>() {
+//            @Override
+//            public void onStart() {
+//                loadingrel.setVisibility(View.VISIBLE);
+//                historyrecyclerview.setVisibility(View.GONE);
+//                nodatarel.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onComplete(Object result) {
+////                new Handler().postDelayed(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        loadingrel.setVisibility(View.GONE);
+////                        historyrecyclerview.setVisibility(View.VISIBLE);
+////                        nodatarel.setVisibility(View.GONE);
+////                    }
+////                }, 3000);
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                Log.e("Eceptionindialog", "" + e.toString());
+//                loadingrel.setVisibility(View.GONE);
+//                historyrecyclerview.setVisibility(View.GONE);
+//                nodatarel.setVisibility(View.VISIBLE);
+//            }
+//        });
     }
 
     private void GetBookingData() {

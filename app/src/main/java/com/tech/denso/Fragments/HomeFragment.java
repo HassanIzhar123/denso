@@ -1,6 +1,5 @@
 package com.tech.denso.Fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.tech.denso.Activities.DashboardActivity;
+import com.tech.denso.Interfaces.SendData;
 import com.tech.denso.R;
 
 import java.util.ArrayList;
 
-import me.ibrahimsn.lib.OnItemReselectedListener;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
