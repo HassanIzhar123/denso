@@ -175,7 +175,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Lastname", (responsedata.getCustomer().getLastName()));
                                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
                                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
-                                dialog.cancel();
                                 Boolean bookingfromfragment = getIntent().getBooleanExtra("bookingfromfragment", false);
                                 Boolean warrantyfromfragment = getIntent().getBooleanExtra("warrantyfromfragment", false);
                                 if (bookingfromfragment) {
@@ -199,6 +198,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 } else {
                                     startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                 }
+                                dialog.cancel();
                             } else if (responsedata.getMessage().equals("Customer is not registered..")) {
                                 Toast.makeText(getApplicationContext(), "" + responsedata.getMessage(), Toast.LENGTH_SHORT).show();
                                 dialog.cancel();

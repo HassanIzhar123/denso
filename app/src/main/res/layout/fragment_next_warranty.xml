@@ -38,7 +38,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="@string/sales_order_or_invoice_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -48,7 +48,7 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/salesordertextview"
                 android:background="@null"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="phone"
                 android:minWidth="300dp"
                 android:textColor="#303030"
@@ -94,7 +94,7 @@
                 android:hint="@string/original_unit_install_date"
                 android:minWidth="297dp"
                 android:paddingEnd="20dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_below="@+id/originalunittextview"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center_vertical"
                 android:minWidth="297dp"
                 android:text="@string/select_date"
@@ -147,7 +147,7 @@
                 android:hint="@string/failed_date"
                 android:minWidth="297dp"
                 android:paddingEnd="20dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -159,7 +159,7 @@
                 android:gravity="center_vertical"
                 android:minWidth="297dp"
                 android:text="@string/select_date"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp" />
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/manufacturer"
                 android:textColor="#797979"
                 android:textSize="12sp" />
@@ -211,7 +211,7 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/manufacturertextview"
                 android:background="@null"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:minWidth="300dp"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/unit_model_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -265,7 +265,7 @@
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp"
@@ -297,7 +297,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/unit_serial_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -309,7 +309,7 @@
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp"
@@ -340,7 +340,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/unit_part_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -352,7 +352,7 @@
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp"
@@ -383,7 +383,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/model_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -395,7 +395,7 @@
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp"
@@ -426,7 +426,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/serial_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -438,7 +438,7 @@
                 android:background="@drawable/underline_textview"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp"
@@ -474,7 +474,7 @@
             android:layout_below="@+id/specificfailurereasontext"
             android:layout_marginTop="10dp"
             android:text="@string/enter_message"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#797979"
             android:textSize="12sp"/>
 
@@ -496,7 +496,7 @@
             android:padding="10dp"
             android:scrollbars="vertical"
             android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#303030"
             android:textColorHint="#303030"
             android:textSize="16sp"/>

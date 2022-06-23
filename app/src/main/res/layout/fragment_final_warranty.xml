@@ -39,7 +39,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="@string/new_part_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/new_part_name"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp"/>
 
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/new_serial_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -169,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/new_part_invoice_number"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -216,7 +216,7 @@
             android:layout_below="@+id/additionalcommentstext"
             android:layout_marginTop="10dp"
             android:text="@string/enter_message"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#797979"
             android:textSize="12sp" />
 
@@ -250,7 +250,7 @@
             android:layout_below="@+id/message_edittext"
             android:layout_marginTop="20dp"
             android:background="@drawable/final_warranty_note_background"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxWidth="300dp"
             android:padding="10dp"

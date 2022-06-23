@@ -1131,8 +1131,21 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     boolean isPhoneNumberValid(String number) {
         String phonestr = "^((?:[+?0?0?966]+)(?:\\s?\\d{2})(?:\\s?\\d{7}))$";
         return Pattern.compile(phonestr).matcher(number).matches();
-    }
 
+    }
+//    public boolean isPhoneNumberValid(String phoneNumber, String countryCode) {
+//        // NOTE: This should probably be a member variable.
+//        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+//
+//        try {
+//            PhoneNumber numberProto = phoneUtil.parse(phoneNumber, countryCode);
+//            return phoneUtil.isValidNumber(numberProto);
+//        } catch (NumberParseException e) {
+//            System.err.println("NumberParseException was thrown: " + e.toString());
+//        }
+//
+//        return false;
+//    }
     boolean isFirstNameHavingSpaceOrNot(String firstname) {
         return CharMatcher.whitespace().matchesAnyOf(firstname);
     }

@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/personalinfotext"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="First name"
                     android:textColor="#797979"
                     android:textSize="12sp" />
@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_regular"
                         android:hint="First Name"
                         android:minWidth="300dp"
                         android:textColor="#303030"
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/firsttexterror"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Last name"
                     android:textColor="#797979"
                     android:textSize="12sp" />
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_regular"
                         android:hint="Last Name"
                         android:minWidth="300dp"
                         android:textColorHint="#797979"
@@ -155,7 +155,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Email"
                     android:textColor="#797979"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp" />
 
                 <RelativeLayout
@@ -169,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_regular"
                         android:hint="Email"
                         android:minWidth="300dp"
                         android:textColorHint="#797979"
@@ -216,7 +216,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Phone number"
                     android:textColor="#797979"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"/>
 
                 <RelativeLayout
@@ -230,7 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         android:background="@null"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_regular"
                         android:hint="Phone Number"
                         android:inputType="phone"
                         android:textColorHint="#797979"
@@ -690,7 +690,7 @@
                         android:id="@+id/selectdatetextview"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_regular"
                         android:gravity="center_vertical"
                         android:hint="Date"
                         android:minWidth="300dp"

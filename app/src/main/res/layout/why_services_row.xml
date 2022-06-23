@@ -60,7 +60,7 @@
             android:layout_below="@+id/descriptionheadertext"
             android:layout_marginTop="20dp"
             android:text="-"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#262A33"
             android:textSize="12sp" />
 

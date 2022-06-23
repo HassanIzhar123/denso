@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/ordercharactertext"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Value"
                 android:textColor="#232731"
                 android:textSize="14sp" />
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/datecharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp"
                 />
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/timecharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp" />
 
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/bookservicecharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp"/>
 
@@ -211,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/makecharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp"/>
 
@@ -252,7 +252,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/yearcharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp" />
 
@@ -293,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/tranmissioncharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp" />
 
@@ -334,7 +334,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/branchcharactertext"
                 android:text="Value"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="#232731"
                 android:textSize="14sp" />
 
