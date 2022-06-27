@@ -148,14 +148,15 @@ public class FinalWarrantyFragment extends Fragment {
         jsonBody.put("unitModelNumber", item.getUnitModelNumber());
         jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
         jsonBody.put("unitPartNumber", item.getUnitPartNumber());//
-        jsonBody.put("modelNumber", item.getModelNumber());//
-        jsonBody.put("serialNumber", item.getSerialNumber());
+        jsonBody.put("vehicleName", item.getVehicleName());//
+        jsonBody.put("vehicleModel", item.getVehicleModel());
         jsonBody.put("failureReason", item.getFailureReasonMessage());
         jsonBody.put("newPartNumber", item.getNewPartNumber());
         jsonBody.put("newPartName", item.getNewPartName());
         jsonBody.put("newSerialNumber", item.getNewSerialNumber());
         jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
         jsonBody.put("message", item.getComments());//
+        jsonBody.put("email", item.getComments());//
         Log.e("finaljsonobkect", "" + jsonBody.toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {

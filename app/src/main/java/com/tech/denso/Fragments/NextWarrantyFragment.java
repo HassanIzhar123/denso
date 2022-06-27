@@ -7,27 +7,56 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 import com.tech.denso.Activities.DashboardActivity;
+import com.tech.denso.Adapter.BookingBranchSpinnerAdapter;
+import com.tech.denso.Adapter.WarrantyModelSpinnerAdapter;
+import com.tech.denso.Adapter.WarrantyNameSpinnerAdapter;
+import com.tech.denso.Helper.App;
+import com.tech.denso.Helper.Const;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
+import com.tech.denso.Models.Vehicles.VehicleModel.Datum;
+import com.tech.denso.Models.Vehicles.VehicleName.Vehicles;
+import com.tech.denso.Models.Vehicles.VehiclesModel;
 import com.tech.denso.R;
 import com.tech.denso.ViewModels.InitialViewModel;
 import com.tech.denso.ViewModels.NextViewModel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import needle.Needle;
+import needle.UiRelatedTask;
 
 
 public class NextWarrantyFragment extends Fragment {
@@ -35,13 +64,17 @@ public class NextWarrantyFragment extends Fragment {
     private int page;
     private String title;
     View view;
-    EditText salesorderedittext, manufactureredittext, unitmodeledittext, unitserialedittext, unitpartnumberedittext, modelnumberedittext, serialnumberedittext, message_edittext;
+    EditText salesorderedittext, manufactureredittext, unitmodeledittext, unitserialedittext, unitpartnumberedittext, message_edittext;
     MaterialButton nextbtn;
-    View unitserialview, unitmodelview, manufacturerview, salesorderview, serialnumberview ,unitpartnumberview, modelnumberview;
+    View unitserialview, unitmodelview, manufacturerview, salesorderview, unitpartnumberview;
     InitialWarrantyModel item;
     TextView originalunitselecttextview, failedpartselecttextview, failedparterror, originalunitdateerror;
     final Calendar originalUnitCalendar = Calendar.getInstance();
     final Calendar failedPartCalendar = Calendar.getInstance();
+    Spinner selectnamespinner, selectmodelspinner;
+    TextView selectvehiclenametext, selectvehiclemodeltext;
+    TextView nonametextview, nomodeltextview;
+    ImageView namedropdownicon, modeldropdownicon;
 
     public NextWarrantyFragment() {
         // Required empty public constructor
@@ -75,26 +108,34 @@ public class NextWarrantyFragment extends Fragment {
         unitmodeledittext = view.findViewById(R.id.unitmodeledittext);
         unitserialedittext = view.findViewById(R.id.unitserialedittext);
         unitpartnumberedittext = view.findViewById(R.id.unitpartnumberedittext);
-        modelnumberedittext = view.findViewById(R.id.modelnumberedittext);
-        serialnumberedittext = view.findViewById(R.id.serialnumberedittext);
+
+        selectnamespinner = view.findViewById(R.id.selectnamespinner);
+        selectmodelspinner = view.findViewById(R.id.selectmodelspinner);
+
+        selectvehiclenametext = view.findViewById(R.id.selectvehiclenametext);
+        selectvehiclemodeltext = view.findViewById(R.id.selectvehiclemodeltext);
+        nonametextview = view.findViewById(R.id.nonametextview);
+        nomodeltextview = view.findViewById(R.id.nomodeltextview);
+        namedropdownicon = view.findViewById(R.id.namedropdownicon);
+        modeldropdownicon = view.findViewById(R.id.modeldropdownicon);
 
         unitserialview = view.findViewById(R.id.unitserialview);
         unitmodelview = view.findViewById(R.id.unitmodelview);
         manufacturerview = view.findViewById(R.id.manufacturerview);
         salesorderview = view.findViewById(R.id.salesorderview);
         unitpartnumberview = view.findViewById(R.id.unitpartnumberview);
-        modelnumberview = view.findViewById(R.id.modelnumberview);
-        serialnumberview = view.findViewById(R.id.serialnumberview);
         nextbtn = view.findViewById(R.id.nextbtn);
         failedparterror = view.findViewById(R.id.failedparterror);
         originalunitdateerror = view.findViewById(R.id.originalunitdateerror);
+
+        ShowVehicleName();
+        ShowVehicleModel();
+
         setFocusChangeListener(unitserialedittext, unitserialview);
         setFocusChangeListener(unitmodeledittext, unitmodelview);
         setFocusChangeListener(manufactureredittext, manufacturerview);
         setFocusChangeListener(salesorderedittext, salesorderview);
         setFocusChangeListener(unitpartnumberedittext, unitpartnumberview);
-        setFocusChangeListener(modelnumberedittext, modelnumberview);
-        setFocusChangeListener(serialnumberedittext, serialnumberview);
         message_edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -113,25 +154,27 @@ public class NextWarrantyFragment extends Fragment {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("", "");
+                if (getActivity() != null) {
+                    new Helper().HideKeyboard(getActivity());
+                }
                 if (item != null && CheckCondition()) {
                     String salesorder = salesorderedittext.getText().toString();
                     String manufacturer = manufactureredittext.getText().toString();
                     String unitmodel = unitmodeledittext.getText().toString();
                     String unitserial = unitserialedittext.getText().toString();
                     String unitpartnumber = unitpartnumberedittext.getText().toString();
-                    String modelnumber = modelnumberedittext.getText().toString();
-                    String serialnumber = serialnumberedittext.getText().toString();
                     String failurereasonmessage = message_edittext.getText().toString();
                     String originalunitdate = originalunitselecttextview.getText().toString();
                     String failedpartdate = failedpartselecttextview.getText().toString();
+                    String vehiclename = getCurrentVehicleName();
+                    String vehiclemodel = getCurrentVehicleModel();
                     item.setSaleOrder(salesorder);
                     item.setManufacturer(manufacturer);
                     item.setUnitModelNumber(unitmodel);
                     item.setUnitSerialNumber(unitserial);
                     item.setUnitPartNumber(unitpartnumber);
-                    item.setModelNumber(modelnumber);
-                    item.setSerialNumber(serialnumber);
+                    item.setVehicleName(vehiclename);
+                    item.setVehicleModel(vehiclemodel);
                     item.setFailureReasonMessage(failurereasonmessage);
                     item.setOriginalUnitDate(originalunitdate);
                     item.setFailedUnitDate(failedpartdate);
@@ -174,10 +217,185 @@ public class NextWarrantyFragment extends Fragment {
         return view;
     }
 
+    private void ShowVehicleName() {
+        ArrayList<com.tech.denso.Models.Vehicles.VehicleName.Datum> list = new ArrayList();
+        com.tech.denso.Models.Vehicles.VehicleName.Datum datum = new com.tech.denso.Models.Vehicles.VehicleName.Datum();
+        datum.setVehicleType("Select Vehicle Name");
+        list.add(datum);
+        final WarrantyNameSpinnerAdapter[] customAdapter = {new WarrantyNameSpinnerAdapter(getContext(), list)};
+        selectnamespinner.setAdapter(customAdapter[0]);
+        selectnamespinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
+        selectnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectvehiclenametext.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        String url = new Const().getBaseUrl() + "/api/vehicles/";
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Needle.onBackgroundThread().execute(new UiRelatedTask<VehiclesModel>() {
+                    @Override
+                    protected VehiclesModel doWork() {
+                        Gson gson = new Gson();
+                        Vehicles responsedata = gson.fromJson(response, Vehicles.class);
+                        VehiclesModel model = new VehiclesModel();
+                        list.addAll(responsedata.getData());
+                        model.setList(list);
+                        model.setComplete(true);
+                        return model;
+                    }
+
+                    @Override
+                    protected void thenDoUiRelatedWork(VehiclesModel result) {
+                        if (result.isComplete()) {
+                            if (result.getList().size() > 1) {
+                                nonametextview.setVisibility(View.GONE);
+                                namedropdownicon.setVisibility(View.VISIBLE);
+                                selectnamespinner.setVisibility(View.VISIBLE);
+                                customAdapter[0].notifyDataSetChanged();
+                            } else {
+                                nonametextview.setVisibility(View.VISIBLE);
+                                namedropdownicon.setVisibility(View.GONE);
+                                selectnamespinner.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responsecheckvalue1", "" + Arrays.toString(error.getStackTrace()));
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                Const constant = new Const();
+                Log.e("Emailpasswordcheck", "" + constant.getEmail() + " " + constant.getPassword());
+                String creds = String.format("%s:%s", constant.getEmail(), constant.getPassword());
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+        };
+        req.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(req, url);
+    }
+
+    private void ShowVehicleModel() {
+        List<Datum> list = new ArrayList();
+        com.tech.denso.Models.Vehicles.VehicleModel.Datum datum = new com.tech.denso.Models.Vehicles.VehicleModel.Datum();
+        datum.setModelYear("Select Vehicle Model");
+        list.add(datum);
+        final WarrantyModelSpinnerAdapter[] customAdapter = {new WarrantyModelSpinnerAdapter(getContext(), list)};
+        selectmodelspinner.setAdapter(customAdapter[0]);
+        selectmodelspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
+        selectmodelspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectvehiclemodeltext.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        String url = new Const().getBaseUrl() + "/api/models/";
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Needle.onBackgroundThread().execute(new UiRelatedTask<VehiclesModelModel>() {
+                    @Override
+                    protected VehiclesModelModel doWork() {
+                        Gson gson = new Gson();
+                        com.tech.denso.Models.Vehicles.VehicleModel.VehiclesModel responsedata = gson.fromJson(response, com.tech.denso.Models.Vehicles.VehicleModel.VehiclesModel.class);
+                        VehiclesModelModel model = new VehiclesModelModel();
+                        list.addAll(responsedata.getData());
+                        model.setList(list);
+                        model.setComplete(true);
+                        return model;
+                    }
+
+                    @Override
+                    protected void thenDoUiRelatedWork(VehiclesModelModel result) {
+                        if (result.isComplete()) {
+                            if (result.getList().size() > 1) {
+                                nomodeltextview.setVisibility(View.GONE);
+                                modeldropdownicon.setVisibility(View.VISIBLE);
+                                selectmodelspinner.setVisibility(View.VISIBLE);
+                                customAdapter[0].notifyDataSetChanged();
+                            } else {
+                                nomodeltextview.setVisibility(View.VISIBLE);
+                                modeldropdownicon.setVisibility(View.GONE);
+                                selectmodelspinner.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responsecheckvalue1", "" + Arrays.toString(error.getStackTrace()));
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                Const constant = new Const();
+                Log.e("Emailpasswordcheck", "" + constant.getEmail() + " " + constant.getPassword());
+                String creds = String.format("%s:%s", constant.getEmail(), constant.getPassword());
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+        };
+        req.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(req, url);
+    }
+
     private void setDateToTextView(Calendar cal, TextView textView, TextView errorTextView) {
         String myFormat = "MM/dd/yy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.getDefault());
         textView.setText(dateFormat.format(cal.getTime()));
+        errorTextView.setVisibility(View.GONE);
+    }
+
+    public String getCurrentVehicleName() {
+        com.tech.denso.Models.Vehicles.VehicleName.Datum model = (com.tech.denso.Models.Vehicles.VehicleName.Datum) selectnamespinner.getSelectedItem();
+        return model.getVehicleType();
+    }
+
+    public String getCurrentVehicleModel() {
+        com.tech.denso.Models.Vehicles.VehicleModel.Datum model = (com.tech.denso.Models.Vehicles.VehicleModel.Datum) selectmodelspinner.getSelectedItem();
+        return model.getModelYear();
     }
 
     private boolean CheckCondition() {
@@ -188,6 +406,18 @@ public class NextWarrantyFragment extends Fragment {
         String message = message_edittext.getText().toString();
         String originalunit = originalunitselecttextview.getText().toString();
         String failedpart = failedpartselecttextview.getText().toString();
+        String unitpartnumber = unitpartnumberedittext.getText().toString();
+        String vehiclename = getCurrentVehicleName();
+        String vehiclemodel = getCurrentVehicleModel();
+        if (checkIfStringisEmpty(salesorder)) {
+            salesorderedittext.setError(getString(R.string.salesorder_cant_be_empty));
+        }
+        if (vehiclename.equals("Select Vehicle Name")) {
+            selectvehiclenametext.setVisibility(View.VISIBLE);
+        }
+        if (vehiclemodel.equals("Select Vehicle Model")) {
+            selectvehiclemodeltext.setVisibility(View.VISIBLE);
+        }
         if (checkIfStringisEmpty(salesorder)) {
             salesorderedittext.setError(getString(R.string.salesorder_cant_be_empty));
         }
@@ -200,6 +430,9 @@ public class NextWarrantyFragment extends Fragment {
         if (checkIfStringisEmpty(unitserial)) {
             unitserialedittext.setError(getString(R.string.unit_serial_cant_be_empty));
         }
+        if (checkIfStringisEmpty(unitpartnumber)) {
+            unitpartnumberedittext.setError(getString(R.string.unit_part_number_cant_be_empty));
+        }
         if (checkIfStringisEmpty(message)) {
             message_edittext.setError(getString(R.string.message_cant_be_empty));
         }
@@ -211,7 +444,11 @@ public class NextWarrantyFragment extends Fragment {
         }
         if (!checkIfStringisEmpty(salesorder) && !checkIfStringisEmpty(manufacturer) && !checkIfStringisEmpty(unitmode)
                 && !checkIfStringisEmpty(unitserial) && !checkIfStringisEmpty(message)
-                && !checkIfStringisEmpty(originalunit) && !checkIfStringisEmpty(failedpart)
+                && !checkIfStringisEmpty(originalunit)
+                && !checkIfStringisEmpty(unitpartnumber)
+                && (!vehiclename.equals("Select Vehicle Name"))
+                && (!vehiclemodel.equals("Select Vehicle Model"))
+                && !checkIfStringisEmpty(failedpart)
                 && !(failedpart.equals(getString(R.string.select_date))) && !(originalunit.equals(getString(R.string.select_date)))) {
             return true;
         } else {

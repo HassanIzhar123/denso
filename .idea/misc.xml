@@ -128,6 +128,37 @@
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/layout/user_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/layout/warranty_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HassanIzhar/Desktop/denso/app/src/main/res/menu/menu_bottom.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/home_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/ic_baseline_push_pin_24.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/ic_dim__unselect_warranty_icon.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/ic_locator_icon_white.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/ic_map.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/ic_map_small.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/icon_awesome_tools.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/icon_awesome_user_alt.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/icon_material_home.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/multi_selection_spinner_background.xml" value="0.265625" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/drawable/top_br_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/activity_dashboard.xml" value="0.24564102564102563" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/activity_successful_booking.xml" value="0.24564102564102563" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/activity_sucessfull_signup.xml" value="0.264" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/booking_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/custom_spinner_items.xml" value="0.24564102564102563" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_b2blogin.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_contacts.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_ecatalog.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_gallery.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_home.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_initial_warranty.xml" value="0.264" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_next_warranty.xml" value="0.264" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/fragment_whydenso.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/layout_naviation_body.xml" value="0.24564102564102563" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/navigationdrawerlayout.xml" value="0.176" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/recyclerrow.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/services_dialog.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/services_row.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/layout/servicing_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/hassa/Desktop/denso/app/src/main/res/menu/menu_bottom.xml" value="0.24947916666666667" />
       </map>
     </option>
   </component>

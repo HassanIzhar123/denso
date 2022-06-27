@@ -66,15 +66,9 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
             holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
             holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
         }
-
-//        StringBuilder builder = new StringBuilder();
-//        String[] splits = mData.get(position).getServiceCategory().toString().split("//");
-//        for (int i = 0; i < splits.length; i++) {
-//            final SpannableStringBuilder sb = new SpannableStringBuilder("//");
-//            sb.setSpan(new ForegroundColorSpan(Color.parseColor("#ED1A3B")), 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//            builder.append(sb);
-////            .append(splits[i]).append("\n")
-//        }
+//        String htmlText = mData.get(position).getServiceCategory()
+//                .replace("//","<font color='#c5c5c5'>"+"//" +"</font>");
+//        holder.descriptiontext.setText(Html.fromHtml(htmlText));
         holder.descriptiontext.setText(mData.get(position).getServiceCategory());
     }
 
@@ -109,7 +103,7 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
         return mData.get(id);
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

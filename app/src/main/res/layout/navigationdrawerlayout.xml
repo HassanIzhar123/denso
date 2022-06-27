@@ -6,12 +6,6 @@
     android:animateLayoutChanges="true"
     android:background="#FFFFFF">
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/upperbackground"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@drawable/top_br_bg" />-->
-
     <RelativeLayout
         android:id="@+id/bottombarrel"
         android:layout_width="match_parent"
@@ -26,7 +20,7 @@
             android:layout_above="@+id/bottombar"
             android:animateLayoutChanges="true" />
 
-        <me.ibrahimsn.lib.SmoothBottomBar
+        <com.tech.denso.CustomViews.SmoothBottomBar
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
             android:layout_height="70dp"

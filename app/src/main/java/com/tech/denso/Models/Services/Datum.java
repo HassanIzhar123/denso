@@ -6,6 +6,13 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Datum {
+    public Datum(String id, String createDate, String serviceName, String serviceCategory, int v) {
+        this.id = id;
+        this.createDate = createDate;
+        this.serviceName = serviceName;
+        this.serviceCategory = serviceCategory;
+        this.v = v;
+    }
 
     @SerializedName("_id")
     @Expose

@@ -1,5 +1,7 @@
 package com.tech.denso.Activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -26,13 +29,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.tech.denso.Adapter.NavigationRecyclerAdapter;
+import com.tech.denso.Fragments.B2BLoginFragment;
 import com.tech.denso.Fragments.BookingFragment;
 import com.tech.denso.Fragments.ContactFragment;
+import com.tech.denso.Fragments.ECatalogFragment;
 import com.tech.denso.Fragments.FinalWarrantyFragment;
+import com.tech.denso.Fragments.GalleryFragment;
+import com.tech.denso.Fragments.HomeFragment;
 import com.tech.denso.Fragments.MapsFragment;
 import com.tech.denso.Fragments.NextWarrantyFragment;
+import com.tech.denso.Fragments.WhyDensoServices;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Interfaces.SendData;
 import com.tech.denso.Fragments.ServicesFragment;
 import com.tech.denso.Fragments.ServicingFragment;
@@ -61,7 +71,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     public static TextView titletextview;
     RelativeLayout bottombarrel;
     //    CardView othercard;
-    SmoothBottomBar bottomBar;
+    com.tech.denso.CustomViews.SmoothBottomBar bottomBar;
+    //    BottomNavigationView bottomBar;
     ViewPager viewpager;
     RelativeLayout logoutrel, myhistoryrel, loginrel;
     public static ImageButton sendbtn;
@@ -216,7 +227,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                     navigation_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     navigation_menu.setAdapter(adapter);
                     viewpager.setAdapter(result.getAdapter());
-                    viewpager.setOffscreenPageLimit(5);
+                    viewpager.setOffscreenPageLimit(result.adapter.getCount());
                     adapter.setOnItemCLickListener(new NavigationRecyclerAdapter.OnItemClickListener() {
                         @Override
                         public void onClick(View v, int position, String value) {
@@ -235,35 +246,60 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                                     }
                                 }
                             } else if (value.equals("Services")) {
+//                                new Helper().ShowAnimationWithVisibility( findViewById(R.id.framelayout));
+                                DashboardActivity.titletextview.setText("SERVICES");
                                 LoadFragment(DashboardActivity.this, new ServicesFragment());
                                 findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
                                 bottombarrel.setVisibility(View.GONE);
                                 sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Why Denso Services?")) {
-                                open_Webpage("https://djauto-service.com/whydensoservices");
+                                DashboardActivity.titletextview.setText("WHY DENSO SERVICES");
+//                                open_Webpage("https://djauto-service.com/whydensoservices");
+//                                backbtn.setVisibility(View.GONE);
+                                LoadFragment(DashboardActivity.this, new WhyDensoServices());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("B2B Login")) {
-                                open_Webpage("https://shop.dj-auto.com/");
+                                DashboardActivity.titletextview.setText("B2B LOGIN");
+//                                open_Webpage("https://shop.dj-auto.com/");
+//                                backbtn.setVisibility(View.GONE);
+                                LoadFragment(DashboardActivity.this, new B2BLoginFragment());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("E-Catalog")) {
-                                open_Webpage("https://djauto-service.com/ecatalog/");
+                                DashboardActivity.titletextview.setText("E-CATALOG");
+//                                open_Webpage("https://djauto-service.com/ecatalog/");
+//                                backbtn.setVisibility(View.GONE);
+                                LoadFragment(DashboardActivity.this, new ECatalogFragment());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Our Gallery")) {
-                                open_Webpage("https://djauto-service.com/gallery/");
+                                DashboardActivity.titletextview.setText("OUR GALLERY");
+//                                open_Webpage("https://djauto-service.com/gallery/");
+//                                backbtn.setVisibility(View.GONE);
+                                LoadFragment(DashboardActivity.this, new GalleryFragment());
+                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+                                bottombarrel.setVisibility(View.GONE);
+                                sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Contact")) {
+                                DashboardActivity.titletextview.setText("CONTACT");
+//                                open_Webpage("https://djauto-service.com/contact");
+//                                backbtn.setVisibility(View.GONE);
                                 LoadFragment(DashboardActivity.this, new ContactFragment());
                                 findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
                                 bottombarrel.setVisibility(View.GONE);
                                 sendbtn.setVisibility(View.GONE);
                                 backbtn.setVisibility(View.GONE);
                             }
-                            View view = getCurrentFocus();
-                            if (view != null) {
-                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                            }
+                            new Helper().HideKeyboard(DashboardActivity.this);
                         }
                     });
                     bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -293,11 +329,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                                 viewpager.setCurrentItem(position);
                                 backbtn.setVisibility(View.GONE);
                             }
-                            View view = getCurrentFocus();
-                            if (view != null) {
-                                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                            }
+                            new Helper().HideKeyboard(DashboardActivity.this);
                         }
                     });
                     viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -325,6 +357,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                                 sendbtn.setVisibility(View.GONE);
                             }
                             bottomBar.setActiveItem(position);
+//                            bottomBar.setSelectedItemId(new Helper().getBottomBarPosition(position));
+                            new Helper().HideKeyboard(DashboardActivity.this);
                         }
 
                         @Override
@@ -340,6 +374,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
             @Override
             public void onClick(View v) {
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", false);
+                new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("ShowIntro", false);
                 new SharedPreference(getApplicationContext(), getApplicationContext().toString()).removeAllValues();
                 Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
                 i.putExtra("clickedlogout", true);
@@ -361,6 +396,7 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                 } else {
                     mDrawerLayout.openDrawer(GravityCompat.START);
                 }
+                new Helper().HideKeyboard(DashboardActivity.this);
             }
         });
         sendbtn.setOnClickListener(new View.OnClickListener() {
@@ -368,19 +404,33 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
             public void onClick(View v) {
                 if (null != activityListener) {
                     activityListener.doSomethingInFragment();
+                    new Helper().HideKeyboard(DashboardActivity.this);
                 }
             }
         });
         myhistoryrel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(DashboardActivity.this, MyAccountActivity.class));
-
                 Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
                 if (loggedbol) {
                     mDrawerLayout.closeDrawer(nav_view);
                     viewpager.setCurrentItem(4);
                     bottomBar.setActiveItem(4);
+                    if (!(adapterViewPager.getCurrentFragment() instanceof HomeFragment)) {
+                        findViewById(R.id.framelayout).setVisibility(View.GONE);
+                        bottombarrel.setVisibility(View.VISIBLE);
+                        mDrawerLayout.closeDrawer(nav_view);
+                        if (adapterViewPager.getCurrentFragment() instanceof WarrantyFragment) {
+                            WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                            if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
+                                DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                            } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                                DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                            } else {
+                                DashboardActivity.backbtn.setVisibility(View.GONE);
+                            }
+                        }
+                    }
                     DashboardActivity.titletextview.setText("MY ACCOUNT");
                     sendbtn.setVisibility(View.GONE);
                 } else {
@@ -392,14 +442,57 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
         });
     }
 
+    public void OpenPage(int position) {
+        if (position == 2) {
+            if (!(adapterViewPager.getCurrentFragment() instanceof HomeFragment)) {
+//                findViewById(R.id.framelayout).animate().translationY(findViewById(R.id.framelayout).getHeight()).alpha(0.0f).setDuration(1200).setListener(new Animator.AnimatorListener() {
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        findViewById(R.id.framelayout).setVisibility(View.GONE);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
+                if (adapterViewPager.getCurrentFragment() instanceof WarrantyFragment) {
+                    WarrantyFragment.MyPagerAdapter viewpageradapter = WarrantyFragment.adapter;
+                    if (viewpageradapter.getCurrentFragment() instanceof NextWarrantyFragment) {
+                        DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                    } else if (viewpageradapter.getCurrentFragment() instanceof FinalWarrantyFragment) {
+                        DashboardActivity.backbtn.setVisibility(View.VISIBLE);
+                    } else {
+                        DashboardActivity.backbtn.setVisibility(View.GONE);
+                    }
+                }
+            }
+            findViewById(R.id.framelayout).setVisibility(View.GONE);
+            bottombarrel.setVisibility(View.VISIBLE);
+            mDrawerLayout.closeDrawer(nav_view);
+            mDrawerLayout.closeDrawer(nav_view);
+            viewpager.setCurrentItem(position);
+            bottomBar.setActiveItem(position);
+            DashboardActivity.titletextview.setText("MY ACCOUNT");
+            sendbtn.setVisibility(View.GONE);
+        } else {
+            viewpager.setCurrentItem(position);
+        }
+    }
+
     private void open_Webpage(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
-    }
-
-    private void LoadDashboardViewpager() {
-
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -416,18 +509,12 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     }
 
     public void LoadFragment(Activity activity, Fragment frag) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FragmentManager ft = ((FragmentActivity) activity).getSupportFragmentManager();
-                FragmentTransaction transaction = ft.beginTransaction();
-//                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-                transaction.replace(R.id.framelayout, frag); // replace a Fragment with Frame Layout
-                transaction.addToBackStack(null);
-                transaction.commit();
-                mDrawerLayout.closeDrawer(nav_view);
-            }
-        }, 0);
+        FragmentManager ft = ((FragmentActivity) activity).getSupportFragmentManager();
+        FragmentTransaction transaction = ft.beginTransaction();
+        transaction.replace(R.id.framelayout, frag);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        mDrawerLayout.closeDrawer(nav_view);
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {

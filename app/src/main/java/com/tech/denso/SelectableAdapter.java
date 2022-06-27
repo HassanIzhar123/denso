@@ -17,19 +17,21 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tech.denso.Models.BookingsModel.BookingServicesSpinner.Datum;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.ViewHolder> implements DialogInterface.OnDismissListener {
 
-    private List<Item> mValues;
-    private List<Item> filteredvalues;
+    private List<Datum> mValues;
+    private List<Datum> filteredvalues;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-    ArrayList<Item> temparr = new ArrayList<>();
+    ArrayList<Datum> temparr = new ArrayList<>();
     Context context;
 
-    public SelectableAdapter(Context context, List<Item> items,
+    public SelectableAdapter(Context context, List<Datum> items,
                              Dialog dialog, ItemClickListener listener) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
@@ -49,14 +51,14 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name = mValues.get(position).getName();
+        String name = mValues.get(position).getServiceCategory();
         holder.textView.setText(name);
         setChecked(holder.rel, holder.checkbox, holder.textView, mValues.get(position), mValues.get(position).isSelected());
     }
 
-    public List<Item> getSelectedItems() {
-        List<Item> selectedItems = new ArrayList<>();
-        for (Item item : temparr) {
+    public List<Datum> getSelectedItems() {
+        List<Datum> selectedItems = new ArrayList<>();
+        for (Datum item : temparr) {
             if (item.isSelected()) {
                 selectedItems.add(item);
             }
@@ -73,7 +75,7 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
         return mValues.size();
     }
 
-    public void setBackToOriginalArray(List<Item> templist) {
+    public void setBackToOriginalArray(List<Datum> templist) {
         mValues.clear();
         mValues.addAll(templist);
 //        List<Item> selectedarr = getSelectedItems();
@@ -87,11 +89,15 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
         notifyDataSetChanged();
     }
 
+    public void setSelected(int position) {
+
+    }
+
     public void filter(String text) {
         filteredvalues.clear();
         for (int i = 0; i < mValues.size(); i++) {
-            if (mValues.get(i).getName().toLowerCase().contains(text.toLowerCase())
-                    && mValues.get(i).getName().trim().toLowerCase().startsWith(text.toLowerCase().trim())
+            if (mValues.get(i).getServiceCategory().toLowerCase().contains(text.toLowerCase())
+                    && mValues.get(i).getServiceCategory().trim().toLowerCase().startsWith(text.toLowerCase().trim())
             ) {
                 filteredvalues.add(mValues.get(i));
             }
@@ -101,7 +107,7 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
         notifyDataSetChanged();
     }
 
-    public ArrayList<Item> getTemparr() {
+    public ArrayList<Datum> getTemparr() {
         return temparr;
     }
 
@@ -110,18 +116,18 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
         mClickListener.onDismissDialog(getSelectedItems());
     }
 
-    public List<Item> getmValues() {
+    public List<Datum> getmValues() {
         return mValues;
     }
 
     public void setAllChecked(boolean value) {
-        for (Item item : mValues) {
+        for (Datum item : mValues) {
             item.setSelected(value);
         }
         notifyDataSetChanged();
     }
 
-    public void setChecked(RelativeLayout rel, CheckBox checkbox, TextView textView, Item mItem, boolean value) {
+    public void setChecked(RelativeLayout rel, CheckBox checkbox, TextView textView, Datum mItem, boolean value) {
         if (value) {
             rel.setBackgroundColor(Color.parseColor("#E91A3A"));
             textView.setTextColor(Color.parseColor("#FFFFFF"));
@@ -192,8 +198,8 @@ public class SelectableAdapter extends RecyclerView.Adapter<SelectableAdapter.Vi
     }
 
     public interface ItemClickListener {
-        void onItemSelected(Item item, int position);
+        void onItemSelected(Datum item, int position);
 
-        void onDismissDialog(List<Item> items);
+        void onDismissDialog(List<Datum> items);
     }
 }

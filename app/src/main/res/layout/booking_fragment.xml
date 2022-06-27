@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
@@ -14,13 +15,15 @@
         android:background="@drawable/top_br_bg" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/mainrel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
-
         android:layout_marginEnd="30dp"
+        android:visibility="gone"
         android:layout_marginBottom="-10dp"
+        android:animateLayoutChanges="true"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp">
 
@@ -121,8 +124,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:hint="Last Name"
                         android:minWidth="300dp"
-                        android:textColorHint="#797979"
                         android:textColor="#303030"
+                        android:textColorHint="#797979"
                         android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:textSize="16sp" />
 
@@ -153,9 +156,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lasttexterror"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Email"
                     android:textColor="#797979"
-                    android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp" />
 
                 <RelativeLayout
@@ -172,9 +175,9 @@
                         android:fontFamily="@font/poppins_regular"
                         android:hint="Email"
                         android:minWidth="300dp"
-                        android:textColorHint="#797979"
                         android:paddingEnd="25dp"
                         android:textColor="#303030"
+                        android:textColorHint="#797979"
                         android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:textSize="16sp" />
 
@@ -214,10 +217,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/emailrel"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Phone number"
                     android:textColor="#797979"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/phonerel"
@@ -225,18 +228,29 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/phonenumbertextview">
 
+                    <TextView
+                        android:id="@+id/numbercodetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7.5dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/suadiarabiacode"
+                        android:textColor="#303030"
+                        android:textSize="16sp" />
+
                     <EditText
                         android:id="@+id/phoneedittext"
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/numbercodetext"
                         android:background="@null"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="Phone Number"
                         android:inputType="phone"
-                        android:textColorHint="#797979"
-                        android:minWidth="300dp"
+                        android:minWidth="255dp"
                         android:paddingEnd="25dp"
                         android:textColor="#303030"
+                        android:textColorHint="#797979"
                         android:textCursorDrawable="@drawable/edittext_cursor_drawable"
                         android:textSize="16sp" />
 
@@ -287,8 +301,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Vehicle Information"
                     android:textColor="#312E4F"
-                    android:textSize="12sp"
-                    />
+                    android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/allmakesrel"
@@ -614,76 +627,133 @@
 
                 </RelativeLayout>
 
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/selectservicesrel"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/selectpreferredrel">-->
+
+                <!--                    <Spinner-->
+                <!--                        android:id="@+id/selectservicesspinner"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="50dp"-->
+                <!--                        android:layout_marginStart="-16dp"-->
+                <!--                        android:layout_marginTop="3dp"-->
+                <!--                        android:layout_marginEnd="3dp"-->
+                <!--                        android:layout_marginBottom="3dp"-->
+                <!--                        android:background="@drawable/spinner_background"-->
+                <!--                        android:hint="Branch"-->
+                <!--                        android:minWidth="300dp"-->
+                <!--                        android:overlapAnchor="false"-->
+                <!--                        android:paddingEnd="25dp"-->
+                <!--                        android:textColor="#303030" />-->
+
+                <!--                    <View-->
+                <!--                        android:id="@+id/selectservicesview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="2dp"-->
+                <!--                        android:layout_below="@+id/selectservicesspinner"-->
+                <!--                        android:layout_alignStart="@+id/selectservicesspinner"-->
+                <!--                        android:layout_alignEnd="@+id/selectservicesspinner"-->
+                <!--                        android:background="@drawable/underline_textview" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/selectservicetext"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_below="@+id/selectservicesspinner"-->
+                <!--                        android:layout_marginTop="2dp"-->
+                <!--                        android:text="Please Select Service!"-->
+                <!--                        android:textColor="#B71C1C"-->
+                <!--                        android:textSize="10sp"-->
+                <!--                        android:visibility="gone" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/noservicestextview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginStart="3dp"-->
+                <!--                        android:background="@drawable/spinner_background"-->
+                <!--                        android:padding="15dp"-->
+                <!--                        android:text="No Branch Found!"-->
+                <!--                        android:textColor="#8C8984"-->
+                <!--                        android:textSize="10sp"-->
+                <!--                        android:visibility="gone" />-->
+
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="30dp"-->
+                <!--                        android:layout_height="30dp"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginStart="-35dp"-->
+                <!--                        android:layout_toEndOf="@+id/selectservicesspinner"-->
+                <!--                        android:scaleType="centerInside"-->
+                <!--                        android:src="@drawable/union" />-->
+
+                <!--                </RelativeLayout>-->
                 <RelativeLayout
-                    android:id="@+id/selectservicesrel"
+                    android:id="@+id/servicesbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/selectpreferredrel">
-
-                    <Spinner
-                        android:id="@+id/selectservicesspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="-16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:background="@drawable/spinner_background"
-                        android:hint="Branch"
-                        android:minWidth="300dp"
-                        android:overlapAnchor="false"
-                        android:paddingEnd="25dp"
-                        android:textColor="#303030" />
-
-                    <View
-                        android:id="@+id/selectservicesview"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/selectservicesspinner"
-                        android:layout_alignStart="@+id/selectservicesspinner"
-                        android:layout_alignEnd="@+id/selectservicesspinner"
-                        android:background="@drawable/underline_textview" />
+                    android:layout_below="@+id/selectpreferredrel"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/multi_selection_spinner_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
-                        android:id="@+id/selectservicetext"
+                        android:id="@+id/slectservicesterxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/selectservicesspinner"
-                        android:layout_marginTop="2dp"
-                        android:text="Please Select Service!"
-                        android:textColor="#B71C1C"
-                        android:textSize="10sp"
-                        android:visibility="gone" />
+                        android:fontFamily="@font/poppins_regular"
+                        android:minWidth="262dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/select_services"
+                        android:textColor="#303030"
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/noservicestextview"
-                        android:layout_width="match_parent"
+                        android:id="@+id/noservicestext"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="3dp"
-                        android:background="@drawable/spinner_background"
-                        android:padding="15dp"
-                        android:text="No Branch Found!"
-                        android:textColor="#8C8984"
-                        android:textSize="10sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:minWidth="262dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/no_services_found"
+                        android:textColor="#303030"
+                        android:textSize="15sp"
                         android:visibility="gone" />
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectservicesspinner"
-                        android:scaleType="centerInside"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toEndOf="@+id/slectservicesterxt"
                         android:src="@drawable/union" />
 
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/pleaseselectservicetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/servicesbutton"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/please_select_services"
+                    android:textColor="#B71C1C"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/selectdaterel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/selectservicesrel"
+                    android:layout_below="@+id/pleaseselectservicetext"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -802,5 +872,35 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.cardview.widget.CardView>
+<!--main layout will be visible later because of data loading unitl this laoding is shown-->
+    <RelativeLayout
+        android:id="@+id/loadingimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#FF2247"
+            android:indeterminateTintMode="src_atop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/progress"
+            android:fontFamily="@font/helvetica"
+            android:text="Loading!"
+            android:textColor="#3f3f3f"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

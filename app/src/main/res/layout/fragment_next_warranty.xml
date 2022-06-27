@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:overScrollMode="never"
     tools:context=".Fragments.NextWarrantyFragment">
 
@@ -17,8 +18,8 @@
             android:id="@+id/failedparttext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/failed_part"
             android:fontFamily="@font/poppins_medium"
+            android:text="@string/failed_part"
             android:textColor="#0F0A39"
             android:textSize="14sp" />
 
@@ -37,10 +38,10 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:text="@string/sales_order_or_invoice_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/sales_order_or_invoice_number"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/salesorderedittext"
@@ -51,6 +52,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="phone"
                 android:minWidth="300dp"
+                android:nextFocusDown="@+id/originalunitselecttextview"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
@@ -90,13 +92,13 @@
                 android:id="@+id/originalunittextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center_vertical"
                 android:hint="@string/original_unit_install_date"
                 android:minWidth="297dp"
                 android:paddingEnd="20dp"
-                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/originalunitselecttextview"
@@ -143,23 +145,23 @@
                 android:id="@+id/failedparttextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center_vertical"
                 android:hint="@string/failed_date"
                 android:minWidth="297dp"
                 android:paddingEnd="20dp"
-                android:fontFamily="@font/poppins_regular"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/failedpartselecttextview"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_below="@+id/failedparttextview"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center_vertical"
                 android:minWidth="297dp"
                 android:text="@string/select_date"
-                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textSize="16sp" />
@@ -213,6 +215,7 @@
                 android:background="@null"
                 android:fontFamily="@font/poppins_regular"
                 android:minWidth="300dp"
+                android:nextFocusDown="@+id/unitmodeledittext"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
@@ -252,8 +255,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/unit_model_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/unit_model_number"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -263,14 +266,13 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/unitmodeltextview"
                 android:background="@drawable/underline_textview"
-                android:inputType="phone"
-                android:minWidth="300dp"
                 android:fontFamily="@font/poppins_regular"
+                android:minWidth="300dp"
+                android:nextFocusDown="@+id/unitserialedittext"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
-                android:textSize="16sp"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/unitmodelview"
@@ -282,7 +284,6 @@
                 android:background="@drawable/underline_textview" />
 
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/unitserialrel"
@@ -296,10 +297,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/unit_serial_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/unit_serial_number"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/unitserialedittext"
@@ -307,14 +308,14 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/unitserialtextview"
                 android:background="@drawable/underline_textview"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins_regular"
+                android:nextFocusDown="@+id/unitpartnumberedittext"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
-                android:textSize="16sp"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/unitserialview"
@@ -339,10 +340,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/unit_part_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/unit_part_number"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/unitpartnumberedittext"
@@ -350,14 +351,13 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/unitpartnumbertextview"
                 android:background="@drawable/underline_textview"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="phone"
                 android:minWidth="300dp"
-                android:fontFamily="@font/poppins_regular"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
-                android:textSize="16sp"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/unitpartnumberview"
@@ -370,100 +370,179 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/modelnumberrel"
+        <TextView
+            android:id="@+id/nametextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/unitpartnumberrel"
-            android:layout_marginStart="3dp">
-
-            <TextView
-                android:id="@+id/modelnumbertextview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/model_number"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="#797979"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/modelnumberedittext"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_below="@+id/modelnumbertextview"
-                android:background="@drawable/underline_textview"
-                android:inputType="phone"
-                android:minWidth="300dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="#303030"
-                android:textColorHint="#303030"
-                android:textSize="16sp"
-                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                 />
-
-            <View
-                android:id="@+id/modelnumberview"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/modelnumberedittext"
-                android:layout_alignStart="@+id/modelnumberedittext"
-                android:layout_alignEnd="@+id/modelnumberedittext"
-                android:background="@drawable/underline_textview" />
-
-        </RelativeLayout>
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Select Vehicle Name"
+            android:textColor="#797979"
+            android:textSize="12sp" />
 
         <RelativeLayout
-            android:id="@+id/serialnumberrel"
+            android:id="@+id/vehiclenamerel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/modelnumberrel"
-            android:layout_marginStart="3dp">
+            android:layout_below="@+id/nametextview"
+            android:minHeight="50dp">
 
-            <TextView
-                android:id="@+id/serialnumbertextview"
+            <Spinner
+                android:id="@+id/selectnamespinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/serial_number"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="#797979"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/serialnumberedittext"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_below="@+id/serialnumbertextview"
-                android:background="@drawable/underline_textview"
-                android:inputType="phone"
-                android:minWidth="300dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="#303030"
-                android:textColorHint="#303030"
-                android:textSize="16sp"
-                android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                />
+                android:layout_height="55dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/spinner_background"
+                android:hint="Select Vehicle Name"
+                android:minWidth="320dp"
+                android:overlapAnchor="false"
+                android:paddingEnd="25dp"
+                android:textColor="#303030" />
 
             <View
-                android:id="@+id/serialnumberview"
+                android:id="@+id/selectnameview"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/serialnumberedittext"
-                android:layout_alignStart="@+id/serialnumberedittext"
-                android:layout_alignEnd="@+id/serialnumberedittext"
+                android:layout_below="@+id/selectnamespinner"
+                android:layout_alignStart="@+id/selectnamespinner"
+                android:layout_alignEnd="@+id/selectnamespinner"
                 android:background="@drawable/underline_textview" />
 
+            <TextView
+                android:id="@+id/nonametextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:background="@drawable/spinner_background"
+                android:gravity="center_vertical"
+                android:minWidth="300dp"
+                android:text="No Vehicle Name Found!"
+                android:textColor="#8C8984"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/namedropdownicon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-35dp"
+                android:layout_toEndOf="@+id/selectnamespinner"
+                android:scaleType="centerInside"
+                android:src="@drawable/union" />
+
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/selectvehiclenametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vehiclenamerel"
+            android:layout_marginTop="2dp"
+            android:text="@string/please_select_vehicle_name"
+            android:textColor="#B71C1C"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/modeltextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectvehiclenametext"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/select_vehicle_model"
+            android:textColor="#797979"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:id="@+id/vehiclemodelrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/modeltextview">
+
+            <Spinner
+                android:id="@+id/selectmodelspinner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/spinner_background"
+                android:hint="Select Vehicle Model"
+                android:minWidth="320dp"
+                android:overlapAnchor="false"
+                android:paddingEnd="25dp"
+                android:textColor="#303030" />
+
+            <View
+                android:id="@+id/selectmodelview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/selectmodelspinner"
+                android:layout_alignStart="@+id/selectmodelspinner"
+                android:layout_alignEnd="@+id/selectmodelspinner"
+                android:background="@drawable/underline_textview" />
+
+            <TextView
+                android:id="@+id/nomodeltextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:background="@drawable/spinner_background"
+                android:padding="15dp"
+                android:text="@string/no_vehicle_models_found"
+                android:textColor="#8C8984"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/modeldropdownicon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-35dp"
+                android:layout_toEndOf="@+id/selectmodelspinner"
+                android:scaleType="centerInside"
+                android:src="@drawable/union" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/selectvehiclemodeltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vehiclemodelrel"
+            android:layout_marginTop="2dp"
+            android:text="@string/please_select_vehicle_model"
+            android:textColor="#B71C1C"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/selectmodeltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vehiclemodelrel"
+            android:layout_marginTop="2dp"
+            android:text="@string/please_select_vehicle_name"
+            android:textColor="#B71C1C"
+            android:textSize="10sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/specificfailurereasontext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/serialnumberrel"
+            android:layout_below="@+id/selectmodeltext"
             android:layout_marginTop="20dp"
-            android:text="@string/specific_failure_reason"
             android:fontFamily="@font/poppins_medium"
+            android:text="@string/specific_failure_reason"
             android:textColor="#0F0A39"
             android:textSize="14sp" />
 
@@ -473,10 +552,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/specificfailurereasontext"
             android:layout_marginTop="10dp"
-            android:text="@string/enter_message"
             android:fontFamily="@font/poppins_regular"
+            android:text="@string/enter_message"
             android:textColor="#797979"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/message_edittext"
@@ -485,6 +564,7 @@
             android:layout_below="@+id/messagetext"
             android:layout_marginTop="10dp"
             android:background="@drawable/warranty_failure_edittext_background"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="top|start"
             android:hint=""
             android:inputType="textMultiLine"
@@ -495,11 +575,10 @@
             android:minLines="6"
             android:padding="10dp"
             android:scrollbars="vertical"
-            android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-            android:fontFamily="@font/poppins_regular"
             android:textColor="#303030"
             android:textColorHint="#303030"
-            android:textSize="16sp"/>
+            android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+            android:textSize="16sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextbtn"

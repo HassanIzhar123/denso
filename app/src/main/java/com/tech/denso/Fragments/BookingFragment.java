@@ -2,7 +2,11 @@ package com.tech.denso.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -13,8 +17,12 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,18 +30,30 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -44,8 +64,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.common.base.CharMatcher;
 import com.google.gson.Gson;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.tech.denso.Activities.DashboardActivity;
 import com.tech.denso.Activities.LoginActivity;
 import com.tech.denso.Activities.SuccessfulBookingActivity;
@@ -57,17 +81,25 @@ import com.tech.denso.Adapter.BookingTimeSpinnerAdapter;
 import com.tech.denso.Adapter.BookingYearSpinnerAdapter;
 import com.tech.denso.Helper.App;
 import com.tech.denso.Helper.Const;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Helper.TaskRunner;
 import com.tech.denso.Interfaces.ListenFromActivity;
+import com.tech.denso.Item;
+import com.tech.denso.Models.BookingLoginModel;
 import com.tech.denso.Models.BookingsModel.BookingMakeSpinnerModel.BookingMakeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingModelsSpinnerModel.BookingModelsSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
+import com.tech.denso.Models.BookingsModel.BookingServicesSpinner.Datum;
+import com.tech.denso.Models.BookingsModel.BookingServicesSpinner.ServicesAsyncModel;
+import com.tech.denso.Models.BookingsModel.BookingServicesSpinner.ServicesModel;
 import com.tech.denso.Models.BookingsModel.BookingTimeSpinnerModel.BookingTimeSpinnerModel;
 import com.tech.denso.Models.BookingsModel.BookingYearSpinnerModel.BookingYearSpinnerModel;
+import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
 import com.tech.denso.Models.Locations.LocationsModel;
 import com.tech.denso.Models.LoginModel.LoginModel;
 import com.tech.denso.R;
+import com.tech.denso.SelectableAdapter;
 import com.tech.denso.ViewModels.BookingModel;
 import com.tech.denso.ViewModels.BookingViewModel;
 
@@ -79,6 +111,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -87,18 +121,29 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
+import needle.Needle;
+import needle.UiRelatedTask;
+import pl.droidsonroids.gif.AnimationListener;
+import pl.droidsonroids.gif.GifImageView;
+
 public class BookingFragment extends Fragment implements ListenFromActivity {
     private String title;
     private int page;
     EditText firstnameedittext, lastnamedittext, emailedittext, phoneedittext;
     TextView selectdatetextview;
-    Spinner selectbranchspinner, selectmakespinner, selectmodelspinner, selectyearspinner, selectpreferredspinner, selectservicesspinner, selecttimeslotsspinner;
+    Spinner selectbranchspinner, selectmakespinner, selectmodelspinner, selectyearspinner, selectpreferredspinner, selecttimeslotsspinner;
     ImageView emailgreencheck, emailredcheck, phoneredcheck, phonegreencheck;
     TextView firsttexterror, lasttexterror;
     TextView nobranchtextview, nomaketextview, nomodeltextview, noyeartextview, nopreferredtextview, noservicestextview, notimetextview;
     //    public ListenFromActivity activityListener;
-    TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selectservicetext, selecttimeslottext;
-    View firstnameview, lastnameview, emailview, phoneview,selectmakeview;
+    TextView selectmaketext, selectmodeltext, selectyeartext, selectbranchtext, selectpreferredtext, selecttimeslottext;
+    View firstnameview, lastnameview, emailview, phoneview, selectmakeview;
+    RelativeLayout sp_services;
+    SelectableAdapter adapter;
+    TextView sp_services_text, pleaseselectservicetext;
+    Dialog dialog;
+    RelativeLayout loadingimg;
+    CardView mainrel;
 
     public static BookingFragment newInstance() {
         BookingFragment fragmentFirst = new BookingFragment();
@@ -133,8 +178,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     }
 
     private String getService() {
-        String model = (String) selectservicesspinner.getSelectedItem();
-        return model;
+        return sp_services_text.getText().toString();
     }
 
     private String getTimeSlot() {
@@ -177,8 +221,8 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         if (preferred.equals("Select Preferred")) {
             selectpreferredtext.setVisibility(View.VISIBLE);
         }
-        if (mserviceodel.equals("Select Required Service")) {
-            selectservicetext.setVisibility(View.VISIBLE);
+        if (mserviceodel.equals("Select Services")) {
+            pleaseselectservicetext.setVisibility(View.VISIBLE);
         }
         if (timeslot.equals("HH:MM")) {
             selecttimeslottext.setVisibility(View.VISIBLE);
@@ -196,12 +240,12 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 && !((preferred.equals("Select Preferred"))
                 && !(mserviceodel.equals("Select Required Service"))
                 && !(timeslot.equals("HH:MM"))
-                && isEmailValid(emailedittext.getText().toString()) && isPhoneNumberValid(phoneedittext.getText().toString()) &&
+                && isEmailValid(emailedittext.getText().toString()) && isPhoneNumberValid(getString(R.string.suadiarabiacode) + phoneedittext.getText().toString()) &&
                 !isFirstNameHavingSpaceOrNot(firstnameedittext.getText().toString()) && !isFirstNameHavingSpaceOrNot(lastnamedittext.getText().toString()))) {
             Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
             if (loggedbol) {
                 SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
-                        , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
+                        , emailedittext.getText().toString().trim(), getString(R.string.suadiarabiacode) + phoneedittext.getText().toString().trim(),
                         make, "Waiting", model, mserviceodel, year, false, branch, timeslot, selectdatetextview.getText().toString().trim());
             } else {
                 Toast.makeText(getContext(), "Please SignUp Or Login First!", Toast.LENGTH_SHORT).show();
@@ -209,7 +253,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 bookingmodel.setFirstName(firstnameedittext.getText().toString().trim());
                 bookingmodel.setLastName(lastnamedittext.getText().toString().trim());
                 bookingmodel.setEmail(emailedittext.getText().toString().trim());
-                bookingmodel.setPhoneNumber(phoneedittext.getText().toString().trim());
+                bookingmodel.setPhoneNumber(getString(R.string.suadiarabiacode) + phoneedittext.getText().toString().trim());
                 bookingmodel.setMake(make);
                 bookingmodel.setStatus("Waiting");
                 bookingmodel.setModel(model);
@@ -223,15 +267,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 i.putExtra("bookingfromfragment", true);
                 i.putExtra("bookingmodel", bookingmodel);
                 startActivity(i);
-//                startActivityForResult(i, 2);
             }
-//            SendBooking(firstnameedittext.getText().toString().trim(), lastnamedittext.getText().toString().trim()
-//                    , emailedittext.getText().toString().trim(), phoneedittext.getText().toString().trim(),
-//                    caredittext.getText().toString().trim(), yearsedittext.getText().toString().trim()
-//                    , transmissionsedittext.getText().toString().trim(), wairsedittext.getText().toString().trim(),
-//                    listedcheckbox.isChecked(), descriptionedittext.getText().toString().trim(),
-//                    dat.getAddress().trim()
-//                    , selectdatetextview.getText().toString().trim(), selecttimetextiew.getText().toString().trim());
         }
     }
 
@@ -289,10 +325,11 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                     if (dialog != null) {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
+
                             startActivity(new Intent(getActivity(), SuccessfulBookingActivity.class));
                             setAllEdittextClear();
                             emailedittext.setText(new Const().getEmail());
-                            selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
+                            selectdatetextview.setText(new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date()));
                             Boolean loggedbol = new SharedPreference(getContext(), getContext().toString()).getPreferenceBoolean("LoggedIn");
                             if (loggedbol) {
                                 BookingViewModel model = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
@@ -354,6 +391,13 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add(datum);
         final BookingBranchSpinnerAdapter[] customAdapter = {new BookingBranchSpinnerAdapter(getContext(), list)};
         selectbranchspinner.setAdapter(customAdapter[0]);
+        selectbranchspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selectbranchspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -375,9 +419,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                         Gson gson = new Gson();
                         LocationsModel responsedata = gson.fromJson(response, LocationsModel.class);
                         list.addAll(responsedata.getData());
-//                        Gson gson = new Gson();
-//                        BookingBranchSpinnerModel responsedata = gson.fromJson(response, BookingBranchSpinnerModel.class);
-//                        list.addAll(responsedata.getData());
                         return list;
                     }
                 }, new TaskRunner.Callback<List<com.tech.denso.Models.Locations.Datum>>() {
@@ -434,6 +475,13 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add(datum);
         final BookingMakeSpinnerAdapter[] customAdapter = {new BookingMakeSpinnerAdapter(getContext(), list)};
         selectmakespinner.setAdapter(customAdapter[0]);
+        selectmakespinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selectmakespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -511,6 +559,13 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add(datum);
         final BookingModelSpinnerAdapter[] customAdapter = {new BookingModelSpinnerAdapter(getContext(), list)};
         selectmodelspinner.setAdapter(customAdapter[0]);
+        selectmodelspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selectmodelspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -588,10 +643,18 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add(datum);
         final BookingYearSpinnerAdapter[] customAdapter = {new BookingYearSpinnerAdapter(getContext(), list)};
         selectyearspinner.setAdapter(customAdapter[0]);
+        selectyearspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selectyearspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectyeartext.setVisibility(View.GONE);
+                new Helper().HideKeyboard(getActivity());
             }
 
             @Override
@@ -665,6 +728,13 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add(datum);
         final BookingTimeSpinnerAdapter[] customAdapter = {new BookingTimeSpinnerAdapter(getContext(), list)};
         selecttimeslotsspinner.setAdapter(customAdapter[0]);
+        selecttimeslotsspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selecttimeslotsspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -743,30 +813,17 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         list.add("Waiting");
         final BookingPreferredAndRequiredAdapter[] customAdapter = {new BookingPreferredAndRequiredAdapter(getContext(), list)};
         selectpreferredspinner.setAdapter(customAdapter[0]);
+        selectpreferredspinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new Helper().HideKeyboard(getActivity());
+                return false;
+            }
+        });
         selectpreferredspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectpreferredtext.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void ShowRequiredServices() {
-        ArrayList<String> list = new ArrayList();
-        list.add("Select Required Service");
-        list.add("A/C Inspection");
-        list.add("A/C Repair");
-        final BookingPreferredAndRequiredAdapter[] customAdapter = {new BookingPreferredAndRequiredAdapter(getContext(), list)};
-        selectservicesspinner.setAdapter(customAdapter[0]);
-        selectservicesspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectservicetext.setVisibility(View.GONE);
             }
 
             @Override
@@ -795,36 +852,27 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 //        title = getArguments().getString("someTitle");
     }
 
-    //    @Override
-//    public void onBookingSave(SignupToBookingModel item) {
-//        Log.e("viewmodelvalues", "" + item.isComingBackFlag());
-//        Boolean check = item.isComingBackFlag();
-//        if (check) {
-//            BookingSendModel bookingmodel = (BookingSendModel) item.getModel();
-//            Log.e("viewmodelvalues1", "" + bookingmodel.getLastName());
-//            SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
-//                    , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
-//                    bookingmodel.getMake(), bookingmodel.getStatus(), bookingmodel.getModel(), bookingmodel.getService(), bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()), bookingmodel.getBranch(), bookingmodel.getTimeSlot(), bookingmodel.getDate());
-//        }
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.booking_fragment, container, false);
         ((DashboardActivity) getActivity()).setActivityListener(BookingFragment.this);
+        loadingimg = view.findViewById(R.id.loadingimg);
+        mainrel = view.findViewById(R.id.mainrel);
+        sp_services = view.findViewById(R.id.servicesbutton);
+        sp_services_text = view.findViewById(R.id.slectservicesterxt);
+        pleaseselectservicetext = view.findViewById(R.id.pleaseselectservicetext);
         selectmaketext = view.findViewById(R.id.selectmaketext);
         selectmodeltext = view.findViewById(R.id.selectmodeltext);
         selectyeartext = view.findViewById(R.id.selectyeartext);
         selectbranchtext = view.findViewById(R.id.selectbranchtext);
         selectpreferredtext = view.findViewById(R.id.selectpreferredtext);
-        selectservicetext = view.findViewById(R.id.selectservicetext);
         selecttimeslottext = view.findViewById(R.id.selecttimeslottext);
         nobranchtextview = view.findViewById(R.id.nobranchtextview);
         nomaketextview = view.findViewById(R.id.nomaketextview);
         nomodeltextview = view.findViewById(R.id.nomodeltextview);
         noyeartextview = view.findViewById(R.id.noyeartextview);
         nopreferredtextview = view.findViewById(R.id.nopreferredtextview);
-        noservicestextview = view.findViewById(R.id.noservicestextview);
+        noservicestextview = view.findViewById(R.id.noservicestext);
         notimetextview = view.findViewById(R.id.notimetextview);
         selecttimeslotsspinner = view.findViewById(R.id.selecttimeslotsspinner);
         firsttexterror = view.findViewById(R.id.firsttexterror);
@@ -842,7 +890,6 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         selectmodelspinner = view.findViewById(R.id.selectmodelspinner);
         selectyearspinner = view.findViewById(R.id.selectyearspinner);
         selectpreferredspinner = view.findViewById(R.id.selectpreferredspinner);
-        selectservicesspinner = view.findViewById(R.id.selectservicesspinner);
         selectdatetextview = view.findViewById(R.id.selectdatetextview);
 
         firstnameview = view.findViewById(R.id.firstnameview);
@@ -896,7 +943,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isPhoneNumberValid(phoneedittext.getText().toString())) {
+                if (!isPhoneNumberValid(getString(R.string.suadiarabiacode) + phoneedittext.getText().toString())) {
                     phonegreencheck.setVisibility(View.GONE);
                     phoneredcheck.setVisibility(View.VISIBLE);
                 } else {
@@ -981,7 +1028,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                         if (dayOfMonth < 10) {
                             finalday = "0" + String.valueOf(dayOfMonth);
                         }
-                        selectdatetextview.setText(finalday + "/" + finalmonth + "/" + finalyears);
+                        selectdatetextview.setText(finalyears + "-" + finalmonth + "-" + finalday + "T00:00:000Z");
                     }
                 }, mcurrentTime.get(Calendar.YEAR), mcurrentTime.get(Calendar.MONTH), mcurrentTime.get(Calendar.DAY_OF_MONTH));
                 mDatePicker.setTitle("Select Date");
@@ -989,12 +1036,13 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
             }
         });
         emailedittext.setText(new Const().getEmail());
-        selectdatetextview.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
+        selectdatetextview.setText(new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date()));
         selectdatetextview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 setAllEdittextFocusToFalse();
                 selectdatetextview.setFocusable(true);
+                new Helper().HideKeyboard(getActivity());
                 return false;
             }
         });
@@ -1003,16 +1051,20 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 setAllEdittextFocusToFalse();
                 selectbranchspinner.setFocusable(true);
+                new Helper().HideKeyboard(getActivity());
                 return false;
             }
         });
+
+        loadingimg.setVisibility(View.VISIBLE);
+        mainrel.setVisibility(View.GONE);
         ShowMakes();
         ShowTransmission();
         ShowYears();
         Showbranch();
         ShowPreferred();
-        ShowRequiredServices();
         ShowTimeSlots();
+        ShowServices();
         setFocusChangeListener(emailedittext);
         setFocusChangeListener(phoneedittext);
         setFocusChangeListener(firstnameedittext);
@@ -1039,7 +1091,193 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
                 return true;
             }
         });
+        sp_services.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog != null) {
+                    if (!dialog.isShowing()) {
+                        dialog.show();
+                    }
+                }
+            }
+        });
         return view;
+    }
+
+    private void ShowServices() {
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.services_dialog);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        RecyclerView recyclerView = dialog.findViewById(R.id.list);
+        EditText search_edittext = dialog.findViewById(R.id.search_edittext);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        String default_text = getContext().getResources().getString(R.string.select_services);
+        String url = new Const().getBaseUrl() + "/api/services/";
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Needle.onBackgroundThread().execute(new UiRelatedTask<ServicesAsyncModel>() {
+                    @Override
+                    protected ServicesAsyncModel doWork() {
+                        Gson gson = new Gson();
+                        ServicesModel responsedata = gson.fromJson(response, ServicesModel.class);
+                        List<Datum> responselist = responsedata.getData();
+//                        List<Item> selecteditems = new ArrayList<>();
+                        ServicesAsyncModel model = new ServicesAsyncModel();
+//                        for (int i = 0; i < responselist.size(); i++) {
+//                            selecteditems.add(new Item(responselist.get(i).getServiceCategory(), false));
+//                        }
+                        Collections.sort(responselist, new Comparator<Datum>() {
+                            public int compare(Datum obj1, Datum obj2) {
+                                // ## Ascending order
+                                return obj1.getServiceCategory().compareToIgnoreCase(obj2.getServiceCategory()); // To compare string values
+                                // return Integer.valueOf(obj1.empId).compareTo(Integer.valueOf(obj2.empId)); // To compare integer values
+
+                                // ## Descending order
+                                // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
+                                // return Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
+                            }
+                        });
+                        model.setList(responselist);
+                        model.setComplete(true);
+                        return model;
+                    }
+
+                    @Override
+                    protected void thenDoUiRelatedWork(ServicesAsyncModel result) {
+                        if (result.isComplete()) {
+                            List<Datum> list = result.getList();
+                            if (list.size() <= 0) {
+                                notimetextview.setVisibility(View.VISIBLE);
+                                selecttimeslotsspinner.setVisibility(View.GONE);
+                            } else {
+                                notimetextview.setVisibility(View.GONE);
+                                selecttimeslotsspinner.setVisibility(View.VISIBLE);
+                                adapter = new SelectableAdapter(getContext(), list, dialog, new SelectableAdapter.ItemClickListener() {
+                                    @Override
+                                    public void onItemSelected(Datum selectableItem, int position) {
+
+                                    }
+
+                                    @Override
+                                    public void onDismissDialog(List<Datum> items) {
+                                        if (items.size() == 0) {
+                                            sp_services_text.setText(default_text);
+                                        } else {
+                                            List<Datum> selectedarr = adapter.getSelectedItems();
+                                            int size = selectedarr.size();
+                                            StringBuilder ab = new StringBuilder();
+                                            for (int i = 0; i < size; i++) {
+                                                ab.append(selectedarr.get(i).getServiceCategory());
+                                                if (i != size - 1) {
+                                                    ab.append(" , ");
+                                                }
+                                            }
+                                            sp_services_text.setText(ab.toString());
+                                        }
+                                    }
+                                });
+                                recyclerView.setAdapter(adapter);
+//                                loadingimg.setVisibility(View.GONE);
+//                                mainrel.setVisibility(View.VISIBLE);
+                                fadeOutAndRevealImage(mainrel, loadingimg);
+                            }
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("responsecheckvalue1", "" + Arrays.toString(error.getStackTrace()));
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                Const constant = new Const();
+                Log.e("Emailpasswordcheck", "" + constant.getEmail() + " " + constant.getPassword());
+                String creds = String.format("%s:%s", constant.getEmail(), constant.getPassword());
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+        };
+        req.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(req, url);
+        Button clearbtn;
+        ImageButton okbtn, cancelbtn;
+        okbtn = dialog.findViewById(R.id.okbtn);
+        cancelbtn = dialog.findViewById(R.id.cancelbtn);
+        clearbtn = dialog.findViewById(R.id.clearbtn);
+        okbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        clearbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_edittext.setHint("Filter Value");
+                search_edittext.setText("");
+                adapter.setAllChecked(false);
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_edittext.setHint("Filter Value");
+                search_edittext.setText("");
+                adapter.setBackToOriginalArray(adapter.getTemparr());
+            }
+        });
+        search_edittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count == 0) {
+                    adapter.setBackToOriginalArray(adapter.getTemparr());
+                }
+                adapter.filter(s.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void fadeOutAndRevealImage(View view, View view1) {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new AccelerateInterpolator());
+        fadeIn.setDuration(1000);
+
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.VISIBLE);
+                view1.setVisibility(View.GONE);
+            }
+
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            public void onAnimationStart(Animation animation) {
+            }
+        });
+
+        view.startAnimation(fadeIn);
     }
 
     public void setFocusChangeListener(View edittext, View view) {
@@ -1116,7 +1354,7 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
         selectmodelspinner.setSelection(0);
         selectyearspinner.setSelection(0);
         selectpreferredspinner.setSelection(0);
-        selectservicesspinner.setSelection(0);
+//        selectservicesspinner.setSelection(0);
         selecttimeslotsspinner.setSelection(0);
     }
 
@@ -1129,23 +1367,22 @@ public class BookingFragment extends Fragment implements ListenFromActivity {
     }
 
     boolean isPhoneNumberValid(String number) {
-        String phonestr = "^((?:[+?0?0?966]+)(?:\\s?\\d{2})(?:\\s?\\d{7}))$";
-        return Pattern.compile(phonestr).matcher(number).matches();
-
+//        String phonestr = "^((?:[+?0?0?966]+)(?:\\s?\\d{2})(?:\\s?\\d{7}))$";
+//        return Pattern.compile(phonestr).matcher(number).matches();
+        return isPhoneNumberValid(number, "SA");
     }
-//    public boolean isPhoneNumberValid(String phoneNumber, String countryCode) {
-//        // NOTE: This should probably be a member variable.
-//        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-//
-//        try {
-//            PhoneNumber numberProto = phoneUtil.parse(phoneNumber, countryCode);
-//            return phoneUtil.isValidNumber(numberProto);
-//        } catch (NumberParseException e) {
-//            System.err.println("NumberParseException was thrown: " + e.toString());
-//        }
-//
-//        return false;
-//    }
+
+    public boolean isPhoneNumberValid(String phoneNumber, String countryCode) {
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance(getContext());
+        try {
+            Phonenumber.PhoneNumber numberProto = phoneUtil.parse(phoneNumber, countryCode);
+            return phoneUtil.isValidNumber(numberProto);
+        } catch (NumberParseException e) {
+            System.err.println("NumberParseException was thrown: " + e.toString());
+        }
+        return false;
+    }
+
     boolean isFirstNameHavingSpaceOrNot(String firstname) {
         return CharMatcher.whitespace().matchesAnyOf(firstname);
     }

@@ -40,7 +40,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.tech.denso.Activities.DashboardActivity;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Interfaces.ListenFromActivity;
 import com.tech.denso.Interfaces.Listener;
 import com.tech.denso.Item;
@@ -58,8 +62,8 @@ public class InitialWarrantyFragment extends Fragment {
     private String title;
     private int page;
     View view;
-    SelectableAdapter adapter;
-    RelativeLayout sp_services;
+
+
     TextView sp_services_text;
     EditText companynameedittext, streetedittext, cityedittext, phoneedittext, homeownernameedittext, homestreetedittext, homeownercityedittext, homeownerphoneedittext;
     MaterialButton nextbtn;
@@ -90,7 +94,7 @@ public class InitialWarrantyFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_initial_warranty, container, false);
         nextbtn = view.findViewById(R.id.nextbtn);
-        sp_services = view.findViewById(R.id.servicesbutton);
+
         companynameedittext = view.findViewById(R.id.companynameedittext);
         streetedittext = view.findViewById(R.id.streetedittext);
         cityedittext = view.findViewById(R.id.cityedittext);
@@ -114,12 +118,6 @@ public class InitialWarrantyFragment extends Fragment {
         homeownerphoneredcheck = view.findViewById(R.id.homeownerphoneredcheck);
         homeownerphonegreencheck = view.findViewById(R.id.homeownerphonegreencheck);
 
-        sp_services.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenDialog();
-            }
-        });
         phoneedittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,7 +126,7 @@ public class InitialWarrantyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isPhoneNumberValid(s.toString())) {
+                if (isPhoneNumberValid("+966"+s.toString())) {
                     phonegreencheck.setVisibility(View.VISIBLE);
                     phoneredcheck.setVisibility(View.GONE);
                     phoneview.getBackground().setColorFilter(Color.parseColor("#00C149"),
@@ -195,7 +193,7 @@ public class InitialWarrantyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isPhoneNumberValid(s.toString())) {
+                if (isPhoneNumberValid("+966"+s.toString())) {
                     homeownerphonegreencheck.setVisibility(View.VISIBLE);
                     homeownerphoneredcheck.setVisibility(View.GONE);
                     homeownerphoneview.getBackground().setColorFilter(Color.parseColor("#00C149"),
@@ -224,12 +222,15 @@ public class InitialWarrantyFragment extends Fragment {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (getActivity() != null) {
+                    new Helper().HideKeyboard(getActivity());
+                }
                 if (CheckCondition()) {
                     InitialWarrantyModel initialmodel = new InitialWarrantyModel();
                     initialmodel.setCompanyName(companynameedittext.getText().toString());
                     initialmodel.setStreet(streetedittext.getText().toString());
                     initialmodel.setCity(cityedittext.getText().toString());
-                    initialmodel.setPhoneNumber(phoneedittext.getText().toString());
+                    initialmodel.setPhoneNumber("+966" + phoneedittext.getText().toString());
                     initialmodel.setHomeOwnerName(homeownernameedittext.getText().toString());
                     initialmodel.setHomeOwnerStreet(homestreetedittext.getText().toString());
                     initialmodel.setHomeOwnerCity(homeownercityedittext.getText().toString());
@@ -248,11 +249,11 @@ public class InitialWarrantyFragment extends Fragment {
         String companyname = companynameedittext.getText().toString();
         String street = streetedittext.getText().toString();
         String city = cityedittext.getText().toString();
-        String phoneNumber = phoneedittext.getText().toString();
+        String phoneNumber = "+966" + phoneedittext.getText().toString();
         String homeOwnerName = homeownernameedittext.getText().toString();
         String homeOwnerStreet = homestreetedittext.getText().toString();
         String homeOwnerCity = homeownercityedittext.getText().toString();
-        String homeOwnerPhoneNumber = homeownerphoneedittext.getText().toString();
+        String homeOwnerPhoneNumber = "+966" + homeownerphoneedittext.getText().toString();
         if (checkIfStringisEmpty(companyname)) {
             companynameedittext.setError(getString(R.string.company_name_empty));
         }
@@ -278,11 +279,14 @@ public class InitialWarrantyFragment extends Fragment {
             homeownerphoneedittext.setError(getString(R.string.homeowner_phone_number_not_Valid));
         }
         if (!checkIfStringisEmpty(companyname) && !checkIfStringisEmpty(street) && !checkIfStringisEmpty(city)
-                && !checkIfStringisEmpty(phoneNumber) && !checkIfStringisEmpty(homeOwnerName)
+                && !checkIfStringisEmpty(phoneNumber) &&
+                isPhoneNumberValid(phoneNumber) && !checkIfStringisEmpty(homeOwnerName)
                 && !checkIfStringisEmpty(homeOwnerStreet) && !checkIfStringisEmpty(homeOwnerCity)
                 && isPhoneNumberValid(homeOwnerPhoneNumber)) {
+            Log.e("initialwarranty", "here");
             return true;
         } else {
+            Log.e("initialwarranty", "here1");
             return false;
         }
     }
@@ -296,12 +300,14 @@ public class InitialWarrantyFragment extends Fragment {
     }
 
     boolean isPhoneNumberValid(String number) {
-        if (!TextUtils.isEmpty(number)) {
-            String phonestr = "^((?:[+?0?0?966]+)(?:\\s?\\d{2})(?:\\s?\\d{7}))$";
-            return Pattern.compile(phonestr).matcher(number).matches();
-        } else {
-            return false;
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance(getContext());
+        try {
+            Phonenumber.PhoneNumber numberProto = phoneUtil.parse(number, "SA");
+            return phoneUtil.isValidNumber(numberProto);
+        } catch (NumberParseException e) {
+            System.err.println("NumberParseException was thrown: " + e.toString());
         }
+        return false;
     }
 
     public void setFocusChangeListener(EditText edittext, View view) {
@@ -314,7 +320,6 @@ public class InitialWarrantyFragment extends Fragment {
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);
                     colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
                         @Override
                         public void onAnimationUpdate(ValueAnimator animator) {
                             view.getBackground().setColorFilter((int) animator.getAnimatedValue(),
@@ -329,120 +334,16 @@ public class InitialWarrantyFragment extends Fragment {
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);
                     colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
                         @Override
                         public void onAnimationUpdate(ValueAnimator animator) {
-//                            textView.setBackgroundColor((int) animator.getAnimatedValue());
                             view.getBackground().setColorFilter((int) animator.getAnimatedValue(),
                                     PorterDuff.Mode.SRC_ATOP);
                         }
-
                     });
                     colorAnimation.start();
                 }
             }
         });
-    }
-
-    private void OpenDialog() {
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.services_dialog);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        RecyclerView recyclerView = dialog.findViewById(R.id.list);
-        EditText search_edittext = dialog.findViewById(R.id.search_edittext);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        String default_text = getContext().getResources().getString(R.string.select_services);
-        List<Item> selectableItems = generateItems();
-        if (!sp_services_text.getText().toString().equals(default_text)) {
-            String currentstr = sp_services_text.getText().toString();
-            String[] splitedarr = currentstr.split(" , ");
-            for (int i = 0; i < splitedarr.length; i++) {
-                Item checkitem = new Item(splitedarr[i].trim(), true);
-                int index = selectableItems.indexOf(checkitem);
-                if (index != -1) {
-                    selectableItems.remove(index);
-                    selectableItems.add(index, new Item(splitedarr[i], true));
-                }
-            }
-        }
-        adapter = new SelectableAdapter(getContext(), selectableItems, dialog, new SelectableAdapter.ItemClickListener() {
-            @Override
-            public void onItemSelected(Item selectableItem, int position) {
-
-            }
-
-            @Override
-            public void onDismissDialog(List<Item> items) {
-                if (items.size() == 0) {
-                    sp_services_text.setText(default_text);
-                } else {
-                    List<Item> selectedarr = adapter.getSelectedItems();
-                    int size = selectedarr.size();
-                    StringBuilder ab = new StringBuilder();
-                    for (int i = 0; i < size; i++) {
-                        ab.append(selectedarr.get(i).getName());
-                        if (i != size - 1) {
-                            ab.append(" , ");
-                        }
-                    }
-                    sp_services_text.setText(ab.toString());
-                }
-            }
-        });
-        recyclerView.setAdapter(adapter);
-        Button clearbtn;
-        ImageButton okbtn, cancelbtn;
-        okbtn = dialog.findViewById(R.id.okbtn);
-        cancelbtn = dialog.findViewById(R.id.cancelbtn);
-        clearbtn = dialog.findViewById(R.id.clearbtn);
-        okbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        clearbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search_edittext.setHint("Filter Value");
-                search_edittext.setText("");
-                adapter.setAllChecked(false);
-            }
-        });
-        cancelbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search_edittext.setHint("Filter Value");
-                search_edittext.setText("");
-                adapter.setBackToOriginalArray(adapter.getTemparr());
-            }
-        });
-        search_edittext.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count == 0) {
-                    adapter.setBackToOriginalArray(adapter.getTemparr());
-                }
-                adapter.filter(s.toString());
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        if (dialog != null) {
-            if (!dialog.isShowing()) {
-                dialog.show();
-            }
-        }
     }
 
     public List<Item> generateItems() {

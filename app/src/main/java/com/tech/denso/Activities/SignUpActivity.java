@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.tech.denso.Helper.Const;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Interfaces.CallBackModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
@@ -88,12 +89,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Helper().HideKeyboard(SignUpActivity.this);
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Helper().HideKeyboard(SignUpActivity.this);
                 if (CheckEditTextEmptyOrNot(firstname_edittext)) {
                     SetError(firstname_edittext, "FirstName Field cannot be Empty!");
                 }
@@ -284,15 +287,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         jsonBody.put("manufacturer", item.getManufacturer());
         jsonBody.put("unitModelNumber", item.getUnitModelNumber());
         jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
-        jsonBody.put("unitPartNumber", item.getUnitPartNumber());//
-        jsonBody.put("modelNumber", item.getModelNumber());//
-        jsonBody.put("serialNumber", item.getSerialNumber());
+        jsonBody.put("unitPartNumber", item.getUnitPartNumber());
+        jsonBody.put("vehicleName", item.getVehicleName());
+        jsonBody.put("vehicleModel", item.getVehicleModel());
         jsonBody.put("failureReason", item.getFailureReasonMessage());
         jsonBody.put("newPartNumber", item.getNewPartNumber());
         jsonBody.put("newPartName", item.getNewPartName());
         jsonBody.put("newSerialNumber", item.getNewSerialNumber());
         jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
-        jsonBody.put("message", item.getComments());//
+        jsonBody.put("message", item.getComments());
+        jsonBody.put("email", new Const().getEmail());
         Log.e("finaljsonobkect", "" + jsonBody.toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
@@ -302,7 +306,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 Gson gson = new Gson();
                 WarrantyClaim responsedata = gson.fromJson(response.toString(), WarrantyClaim.class);
                 if (responsedata.getMessage().equals("Warranty Claim has been Submitted Successfully!")) {
-                    Intent i = new Intent(SignUpActivity.this, SucessfullClaimActivity.class);
+                    Intent i = new Intent(SignUpActivity.this, SucessfullSignupActivity.class);
+                    i.putExtra("fromclaim", true);
                     startActivity(i);
                 }
             }
@@ -357,7 +362,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     if (dialog != null) {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, SuccessfulBookingActivity.class));
+                            startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
                             Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
                             if (loggedbol) {
                                 BookingViewModel model = new ViewModelProvider(SignUpActivity.this).get(BookingViewModel.class);

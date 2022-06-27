@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:overScrollMode="never">
 
     <RelativeLayout
@@ -26,9 +27,9 @@
                 android:id="@+id/personalinfotext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/personal_information"
                 android:textColor="#312E4F"
-                android:fontFamily="@font/poppins_medium"
                 android:textSize="14sp" />
 
             <TextView
@@ -40,8 +41,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:text="@string/company_name"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/company_name"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -182,14 +183,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phonetextview">
 
+                <TextView
+                    android:id="@+id/numbercodetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7.5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/suadiarabiacode"
+                    android:textColor="#303030"
+                    android:textSize="16sp" />
+
                 <EditText
                     android:id="@+id/phoneedittext"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
+                    android:layout_toEndOf="@+id/numbercodetext"
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="phone"
-                    android:minWidth="300dp"
+                    android:minWidth="260dp"
                     android:paddingEnd="25dp"
                     android:textColor="#303030"
                     android:textColorHint="#797979"
@@ -201,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/phoneedittext"
-                    android:layout_alignStart="@+id/phoneedittext"
+                    android:layout_alignStart="@+id/numbercodetext"
                     android:layout_alignEnd="@+id/phoneedittext"
                     android:background="@drawable/underline_textview" />
 
@@ -410,14 +422,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/homeownerphonetextview">
 
+                <TextView
+                    android:id="@+id/homeownernumbercodetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7.5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/suadiarabiacode"
+                    android:textColor="#303030"
+                    android:textSize="16sp" />
+
                 <EditText
                     android:id="@+id/homeownerphoneedittext"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
+                    android:layout_toEndOf="@+id/homeownernumbercodetext"
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="phone"
-                    android:minWidth="300dp"
+                    android:minWidth="260dp"
                     android:paddingEnd="25dp"
                     android:textColor="#303030"
                     android:textColorHint="#797979"
@@ -429,7 +452,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/homeownerphoneedittext"
-                    android:layout_alignStart="@+id/homeownerphoneedittext"
+                    android:layout_alignStart="@+id/homeownernumbercodetext"
                     android:layout_alignEnd="@+id/homeownerphoneedittext"
                     android:background="@drawable/underline_textview" />
 
@@ -454,42 +477,11 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/servicesbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/homeownerphonerel"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/multi_selection_spinner_background"
-                android:clickable="true"
-                android:focusable="true"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/slectservicesterxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="280dp"
-                    android:padding="10dp"
-                    android:text="@string/select_services"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_toEndOf="@+id/slectservicesterxt"
-                    android:src="@drawable/down_arrow_icon" />
-
-            </RelativeLayout>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/servicesbutton"
+                android:layout_below="@+id/homeownerphonerel"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/roboto"
                 android:minWidth="300dp"

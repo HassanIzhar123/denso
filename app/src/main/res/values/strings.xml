@@ -23,7 +23,7 @@
     <string name="failed_part">Failed Part</string>
     <string name="sales_order_or_invoice_number">Sales Order OR Invoice Number</string>
     <string name="manufacturer">Manufacturer</string>
-    <string name="unit_model_number">Unit Model Number</string>
+    <string name="unit_model_number">Part Receipt Voucher</string>
     <string name="unit_serial_number">Unit Serial Number</string>
     <string name="enter_message">Enter Message</string>
     <string name="specific_failure_reason">Specific Failure Reason</string>
@@ -48,7 +48,7 @@
     <string name="please_select_date">Please Select Date!</string>
     <string name="salesorder_cant_be_empty">Sales order can\'t be empty!</string>
     <string name="manufacturer_cant_be_empty">Manufacturer can\'t be empty!</string>
-    <string name="unit_model_cant_be_empty">Unit model can\'t be empty!</string>
+    <string name="unit_model_cant_be_empty">Part Receipt Voucher can\'t be empty!</string>
     <string name="unit_serial_cant_be_empty">Unit serial can\'t be empty!</string>
     <string name="message_cant_be_empty">Message can\'t be empty!</string>
     <string name="your_claim_request_has_been_submitted_successfully_and_send_a_copy_at_your_registered_email">Your claim Request has been submitted successfully and send a copy at your registered email.</string>
@@ -57,4 +57,13 @@
     <string name="model_number">Model Number</string>
     <string name="serial_number">Serial Number</string>
     <string name="comments_cant_be_empty">Comments can\'t be empty!</string>
+    <string name="suadiarabiacode">+966</string>
+    <string name="select_vehicle_model">Select Vehicle Model</string>
+    <string name="no_vehicle_models_found">No Vehicle Models Found!</string>
+    <string name="please_select_vehicle_name">Please Select Vehicle Name!</string>
+    <string name="please_select_vehicle_model">Please Select Vehicle Model!</string>
+    <string name="serail_number_cant_be_empty">Serial Number can\'t be Empty!</string>
+    <string name="unit_part_number_cant_be_empty">Unit Part Number Can\'t be Empty!</string>
+    <string name="please_select_services">Please select services!</string>
+    <string name="no_services_found">No services found!</string>
 </resources>

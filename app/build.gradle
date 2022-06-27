@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
 //    id 'android-string-extractor'
 }
+apply plugin: 'kotlin-android'
 
 android {
 //    signingConfigs {
@@ -12,12 +13,12 @@ android {
 //            keyAlias 'key0'
 //        }
 //    }
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.tech.denso"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -59,5 +60,13 @@ dependencies {
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation('io.apptik.widget:multiselectspinner:1.0.12')
     implementation('com.zsoltsafrany:needle:1.0.0')
-
+    implementation 'com.lionscribe.open.libphonenumber:libphonenumber:8.12.18.1'
+    implementation  'io.ak1:bubbletabbar:1.0.8'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
 }
+//repositories {
+//    mavenCentral()
+//}

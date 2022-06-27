@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tech.denso.Activities.DashboardActivity;
 import com.tech.denso.Adapter.WhyDensoServicesAdapter;
 import com.tech.denso.Helper.TaskRunner;
 import com.tech.denso.R;
@@ -50,9 +51,9 @@ public class ServicesFragment extends Fragment {
         new TaskRunner().executeAsync(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                ArrayList<String> servicename=new ArrayList<>();
-                ArrayList<String>serviceheader=new ArrayList<>();
-                ArrayList<String>servicedescription=new ArrayList<>();
+                ArrayList<String> servicename = new ArrayList<>();
+                ArrayList<String> serviceheader = new ArrayList<>();
+                ArrayList<String> servicedescription = new ArrayList<>();
                 servicename.add("Servicing");
                 servicename.add("Engine Service");
                 servicename.add("Suspension & Drivetrain");
@@ -72,9 +73,15 @@ public class ServicesFragment extends Fragment {
                         "From alternators to spark plugs, we can correct any faults " +
                         "or variances to restore full power to your vehicle, using industry -standard electrical system diagnostics");
                 if (servicename.size() > 0) {
-                    WhyDensoServicesAdapter adapter = new WhyDensoServicesAdapter(getContext(),servicename,serviceheader,servicedescription);
+                    WhyDensoServicesAdapter adapter = new WhyDensoServicesAdapter(getContext(), servicename, serviceheader, servicedescription);
                     servicingrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
                     servicingrecyclerview.setAdapter(adapter);
+                    adapter.setClickListener(new WhyDensoServicesAdapter.ItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            ((DashboardActivity) getActivity()).OpenPage(2);
+                        }
+                    });
                     loadingrel.setVisibility(View.GONE);
                     servicingrecyclerview.setVisibility(View.VISIBLE);
                 } else {

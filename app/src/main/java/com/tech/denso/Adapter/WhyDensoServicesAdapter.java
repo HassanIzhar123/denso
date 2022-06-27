@@ -121,7 +121,7 @@ public class WhyDensoServicesAdapter extends RecyclerView.Adapter<WhyDensoServic
         return servicename.get(id);
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+   public  void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

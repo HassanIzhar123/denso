@@ -68,6 +68,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     ImageButton showbtn, hidebtn, newshowbtn, newhidebtn, confirmshowbtn, confirmhidebtn;
     Boolean buttonbol = false, button1bol = false;
     SegmentedButton historybtn, resetpasswordbtn;
+    BookingHistoryViewAdapter adapter;
 
     public static UserFragment newInstance(int page, String title) {
         UserFragment fragmentFirst = new UserFragment();
@@ -90,7 +91,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.user_fragment, container, false);
         buttongroup = view.findViewById(R.id.buttongroup);
         historyrecyclerview = view.findViewById(R.id.historyrecyclerview);
-//        historyrecyclerview.setAdapter(null);
         resetrel = view.findViewById(R.id.resetrel);
         nodatarel = view.findViewById(R.id.nodatarel);
         loadingrel = view.findViewById(R.id.loadingrel);
@@ -112,15 +112,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         confirmhidebtn.setOnClickListener(this);
         historybtn = view.findViewById(R.id.historybtn);
         resetpasswordbtn = view.findViewById(R.id.resetpasswordbtn);
-//        if (buttongroup.getPosition() == 0) {
-//            resetrel.setVisibility(View.GONE);
-//            historyrecyclerview.setVisibility(View.VISIBLE);
-//            nodatarel.setVisibility(View.GONE);
-//        } else if (buttongroup.getPosition() == 1) {
-//            resetrel.setVisibility(View.VISIBLE);
-//            historyrecyclerview.setVisibility(View.GONE);
-//            nodatarel.setVisibility(View.GONE);
-//        }
         old_password_edittext.setTransformationMethod(new PasswordTransformationMethod());
         new_password_edittext.setTransformationMethod(new PasswordTransformationMethod());
         confirm_password_edittext.setTransformationMethod(new PasswordTransformationMethod());
@@ -149,6 +140,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     resetrel.setVisibility(View.GONE);
                     historyrecyclerview.setVisibility(View.VISIBLE);
                     nodatarel.setVisibility(View.GONE);
+                    loadingrel.setVisibility(View.VISIBLE);
                     LoadData();
                 } else if (position == 1) {
                     historyrecyclerview.setAdapter(null);
@@ -298,7 +290,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 }
                                 Log.e("datumarraycheck", "" + datums.size());
                                 if (datums.size() > 0) {
-                                    BookingHistoryViewAdapter adapter = new BookingHistoryViewAdapter(getContext(), datums);
+                                    adapter = new BookingHistoryViewAdapter(getContext(), datums);
                                     model.setComplete(true);
                                     model.setAdapter(adapter);
                                 } else {
@@ -329,7 +321,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 loadingrel.setVisibility(View.GONE);
                                 historyrecyclerview.setVisibility(View.GONE);
                                 nodatarel.setVisibility(View.VISIBLE);
-                            }else if(result.isResetPassword()){
+                            } else if (result.isResetPassword()) {
                                 nodatarel.setVisibility(View.GONE);
                                 loadingrel.setVisibility(View.GONE);
                             }
@@ -361,45 +353,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         App.getInstance().addToRequestQueue(req, url);
-//        new TaskRunner().executeAsync(new Callable<Object>() {
-//            @Override
-//            public Object call() throws Exception {
-//                if (buttongroup.getPosition() == 0) {
-//                    GetBookingData();
-//                } else {
-//                    nodatarel.setVisibility(View.GONE);
-//                    loadingrel.setVisibility(View.GONE);
-//                }
-//                return null;
-//            }
-//        }, new TaskRunner.Callback<Object>() {
-//            @Override
-//            public void onStart() {
-//                loadingrel.setVisibility(View.VISIBLE);
-//                historyrecyclerview.setVisibility(View.GONE);
-//                nodatarel.setVisibility(View.GONE);
-//            }
-//
-//            @Override
-//            public void onComplete(Object result) {
-////                new Handler().postDelayed(new Runnable() {
-////                    @Override
-////                    public void run() {
-////                        loadingrel.setVisibility(View.GONE);
-////                        historyrecyclerview.setVisibility(View.VISIBLE);
-////                        nodatarel.setVisibility(View.GONE);
-////                    }
-////                }, 3000);
-//            }
-//
-//            @Override
-//            public void onError(Exception e) {
-//                Log.e("Eceptionindialog", "" + e.toString());
-//                loadingrel.setVisibility(View.GONE);
-//                historyrecyclerview.setVisibility(View.GONE);
-//                nodatarel.setVisibility(View.VISIBLE);
-//            }
-//        });
     }
 
     private void GetBookingData() {

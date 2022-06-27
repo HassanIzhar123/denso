@@ -12,23 +12,25 @@ public class InitialWarrantyModel implements Serializable {
         this.unitPartNumber = unitPartNumber;
     }
 
-    public String getModelNumber() {
-        return modelNumber;
+    String unitPartNumber;
+
+    public String getVehicleName() {
+        return vehicleName;
     }
 
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getVehicleModel() {
+        return vehicleModel;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
-    String unitPartNumber, modelNumber, serialNumber;
+    String vehicleName,vehicleModel;
 
     String companyName;
     String street;

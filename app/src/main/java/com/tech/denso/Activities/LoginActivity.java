@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.tech.denso.Helper.Const;
+import com.tech.denso.Helper.Helper;
 import com.tech.denso.Helper.SharedPreference;
 import com.tech.denso.Models.BookingLoginModel;
 import com.tech.denso.Models.BookingsModel.BookingSendModel;
@@ -96,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Helper().HideKeyboard(LoginActivity.this);
                 Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
                 if (getIntent() != null) {
                     Log.e("onsignupclciked", "checked here");
@@ -106,18 +108,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(i);
                     finish();
                 }
-//                startActivityForResult(i,1);
             }
         });
         forgotpasswordbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Helper().HideKeyboard(LoginActivity.this);
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
         signinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Helper().HideKeyboard(LoginActivity.this);
                 if (CheckEditTextEmptyOrNot(email_edittext)) {
                     SetError(email_edittext, "Email Field cannot be Empty!");
                 }
@@ -192,7 +195,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         SubmitClaimRequest(warrantymodel);
                                         finish();
                                     } catch (Exception e) {
-                                        Log.e("","");
+                                        Log.e("", "");
                                     }
 
                                 } else {
@@ -261,14 +264,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         jsonBody.put("unitModelNumber", item.getUnitModelNumber());
         jsonBody.put("unitSerialNumber", item.getUnitSerialNumber());
         jsonBody.put("unitPartNumber", item.getUnitPartNumber());//
-        jsonBody.put("modelNumber", item.getModelNumber());//
-        jsonBody.put("serialNumber", item.getSerialNumber());
+        jsonBody.put("vehicleName", item.getVehicleName());//
+        jsonBody.put("vehicleModel", item.getVehicleModel());
         jsonBody.put("failureReason", item.getFailureReasonMessage());
         jsonBody.put("newPartNumber", item.getNewPartNumber());
         jsonBody.put("newPartName", item.getNewPartName());
         jsonBody.put("newSerialNumber", item.getNewSerialNumber());
         jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
         jsonBody.put("message", item.getComments());//
+        jsonBody.put("email", new Const().getEmail());
         Log.e("finaljsonobkect", "" + jsonBody.toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
