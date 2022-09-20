@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -21,9 +22,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:visibility="gone"
         android:layout_marginBottom="-10dp"
         android:animateLayoutChanges="true"
+        android:visibility="gone"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp">
 
@@ -38,284 +39,285 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/personalinfotext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Personal Information"
-                    android:textColor="#312E4F"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/personalinfotext"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="20dp"-->
+                <!--                    android:fontFamily="@font/poppins_medium"-->
+                <!--                    android:text="Personal Information"-->
+                <!--                    android:textColor="#312E4F"-->
+                <!--                    android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/firstnametextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/personalinfotext"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="First name"
-                    android:textColor="#797979"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/firstnametextview"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/personalinfotext"-->
+                <!--                    android:layout_marginTop="20dp"-->
+                <!--                    android:fontFamily="@font/poppins_regular"-->
+                <!--                    android:text="First name"-->
+                <!--                    android:textColor="#797979"-->
+                <!--                    android:textSize="12sp" />-->
 
-                <RelativeLayout
-                    android:id="@+id/firstnamerel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/firstnametextview">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/firstnamerel"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/firstnametextview">-->
 
-                    <EditText
-                        android:id="@+id/firstnameedittext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:background="@null"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="First Name"
-                        android:minWidth="300dp"
-                        android:textColor="#303030"
-                        android:textColorHint="#797979"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                        android:textSize="16sp" />
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/firstnameedittext"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="42dp"-->
+                <!--                        android:background="@null"-->
+                <!--                        android:fontFamily="@font/poppins_regular"-->
+                <!--                        android:hint="First Name"-->
+                <!--                        android:minWidth="300dp"-->
+                <!--                        android:textColor="#303030"-->
+                <!--                        android:textColorHint="#797979"-->
+                <!--                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"-->
+                <!--                        android:textSize="16sp" />-->
 
-                    <View
-                        android:id="@+id/firstnameview"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/firstnameedittext"
-                        android:layout_alignStart="@+id/firstnameedittext"
-                        android:layout_alignEnd="@+id/firstnameedittext"
-                        android:background="@drawable/underline_textview" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/firstnameview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/firstnameedittext"-->
+                <!--                        android:layout_alignStart="@+id/firstnameedittext"-->
+                <!--                        android:layout_alignEnd="@+id/firstnameedittext"-->
+                <!--                        android:background="@drawable/underline_textview" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/firsttexterror"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/firstnamerel"
-                    android:layout_marginStart="5dp"
-                    android:text="There should be no space in first name"
-                    android:textColor="#8C8984"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/firsttexterror"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/firstnamerel"-->
+                <!--                    android:layout_marginStart="5dp"-->
+                <!--                    android:text="There should be no space in first name"-->
+                <!--                    android:textColor="#8C8984"-->
+                <!--                    android:textSize="10sp"-->
+                <!--                    android:visibility="gone" />-->
 
-                <TextView
-                    android:id="@+id/lastnametextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/firsttexterror"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Last name"
-                    android:textColor="#797979"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/lastnametextview"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/firsttexterror"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:fontFamily="@font/poppins_regular"-->
+                <!--                    android:text="Last name"-->
+                <!--                    android:textColor="#797979"-->
+                <!--                    android:textSize="12sp" />-->
 
-                <RelativeLayout
-                    android:id="@+id/lastnamerel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lastnametextview">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/lastnamerel"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/lastnametextview"-->
+                <!--                    android:layout_alignEnd="@+id/firstnamerel">-->
 
-                    <EditText
-                        android:id="@+id/lastnameedittext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:background="@null"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Last Name"
-                        android:minWidth="300dp"
-                        android:textColor="#303030"
-                        android:textColorHint="#797979"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                        android:textSize="16sp" />
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/lastnameedittext"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="42dp"-->
+                <!--                        android:background="@null"-->
+                <!--                        android:fontFamily="@font/poppins_regular"-->
+                <!--                        android:hint="Last Name"-->
+                <!--                        android:textColor="#303030"-->
+                <!--                        android:textColorHint="#797979"-->
+                <!--                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"-->
+                <!--                        android:textSize="16sp" />-->
 
-                    <View
-                        android:id="@+id/lastnameview"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/lastnameedittext"
-                        android:layout_alignStart="@+id/lastnameedittext"
-                        android:layout_alignEnd="@+id/lastnameedittext"
-                        android:background="@drawable/underline_textview" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/lastnameview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/lastnameedittext"-->
+                <!--                        android:layout_alignStart="@+id/lastnameedittext"-->
+                <!--                        android:layout_alignEnd="@+id/lastnameedittext"-->
+                <!--                        android:background="@drawable/underline_textview" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/lasttexterror"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lastnamerel"
-                    android:text="There should be no space in last name"
-                    android:textColor="#8C8984"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/lasttexterror"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/lastnamerel"-->
+                <!--                    android:text="There should be no space in last name"-->
+                <!--                    android:textColor="#8C8984"-->
+                <!--                    android:textSize="10sp"-->
+                <!--                    android:visibility="gone" />-->
 
-                <TextView
-                    android:id="@+id/emailtextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lasttexterror"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Email"
-                    android:textColor="#797979"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/emailtextview"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/lasttexterror"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:fontFamily="@font/poppins_regular"-->
+                <!--                    android:text="Email"-->
+                <!--                    android:textColor="#797979"-->
+                <!--                    android:textSize="12sp" />-->
 
-                <RelativeLayout
-                    android:id="@+id/emailrel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/emailtextview">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/emailrel"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/emailtextview"-->
+                <!--                    android:layout_alignEnd="@+id/lastnamerel">-->
 
-                    <EditText
-                        android:id="@+id/emailedittext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:background="@null"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Email"
-                        android:minWidth="300dp"
-                        android:paddingEnd="25dp"
-                        android:textColor="#303030"
-                        android:textColorHint="#797979"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                        android:textSize="16sp" />
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/emailedittext"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="42dp"-->
+                <!--                        android:background="@null"-->
+                <!--                        android:fontFamily="@font/poppins_regular"-->
+                <!--                        android:hint="Email"-->
+                <!--                        android:paddingEnd="25dp"-->
+                <!--                        android:textColor="#303030"-->
+                <!--                        android:textColorHint="#797979"-->
+                <!--                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"-->
+                <!--                        android:textSize="16sp" />-->
 
-                    <View
-                        android:id="@+id/emailview"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/emailedittext"
-                        android:layout_alignStart="@+id/emailedittext"
-                        android:layout_alignEnd="@+id/emailedittext"
-                        android:background="@drawable/underline_textview" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/emailview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/emailedittext"-->
+                <!--                        android:layout_alignStart="@+id/emailedittext"-->
+                <!--                        android:layout_alignEnd="@+id/emailedittext"-->
+                <!--                        android:background="@drawable/underline_textview" />-->
 
-                    <ImageView
-                        android:id="@+id/emailgreencheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="-23dp"
-                        android:layout_toEndOf="@+id/emailedittext"
-                        android:src="@drawable/green_check_box"
-                        android:visibility="gone" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/emailgreencheck"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginStart="-23dp"-->
+                <!--                        android:layout_toEndOf="@+id/emailedittext"-->
+                <!--                        android:src="@drawable/green_check_box"-->
+                <!--                        android:visibility="gone" />-->
 
-                    <ImageView
-                        android:id="@+id/emailredcheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="-23dp"
-                        android:layout_toEndOf="@+id/emailedittext"
-                        android:src="@drawable/red_corss_check_icon" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/emailredcheck"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginStart="-23dp"-->
+                <!--                        android:layout_toEndOf="@+id/emailedittext"-->
+                <!--                        android:src="@drawable/red_corss_check_icon" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/phonenumbertextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/emailrel"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Phone number"
-                    android:textColor="#797979"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/phonenumbertextview"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/emailrel"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:fontFamily="@font/poppins_regular"-->
+                <!--                    android:text="Phone number"-->
+                <!--                    android:textColor="#797979"-->
+                <!--                    android:textSize="12sp" />-->
 
-                <RelativeLayout
-                    android:id="@+id/phonerel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/phonenumbertextview">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/phonerel"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/phonenumbertextview"-->
+                <!--                    android:layout_alignEnd="@+id/emailrel">-->
 
-                    <TextView
-                        android:id="@+id/numbercodetext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="7.5dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/suadiarabiacode"
-                        android:textColor="#303030"
-                        android:textSize="16sp" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/numbercodetext"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="50dp"-->
+                <!--                        android:layout_marginTop="7.5dp"-->
+                <!--                        android:fontFamily="@font/poppins_regular"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:text="@string/suadiarabiacode"-->
+                <!--                        android:textColor="#303030"-->
+                <!--                        android:textSize="16sp" />-->
 
-                    <EditText
-                        android:id="@+id/phoneedittext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/numbercodetext"
-                        android:background="@null"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="phone"
-                        android:minWidth="255dp"
-                        android:paddingEnd="25dp"
-                        android:textColor="#303030"
-                        android:textColorHint="#797979"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                        android:textSize="16sp" />
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/phoneedittext"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="42dp"-->
+                <!--                        android:layout_alignTop="@+id/numbercodetext"-->
+                <!--                        android:layout_alignBottom="@+id/numbercodetext"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:layout_toEndOf="@+id/numbercodetext"-->
+                <!--                        android:background="@null"-->
+                <!--                        android:fontFamily="@font/poppins_regular"-->
+                <!--                        android:inputType="phone"-->
+                <!--                        android:paddingEnd="25dp"-->
+                <!--                        android:textColor="#303030"-->
+                <!--                        android:textColorHint="#797979"-->
+                <!--                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"-->
+                <!--                        android:textSize="16sp" />-->
 
-                    <View
-                        android:id="@+id/phoneview"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/phoneedittext"
-                        android:layout_alignStart="@+id/phoneedittext"
-                        android:layout_alignEnd="@+id/phoneedittext"
-                        android:background="@drawable/underline_textview" />
+                <!--                    <View-->
+                <!--                        android:id="@+id/phoneview"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_below="@+id/phoneedittext"-->
+                <!--                        android:layout_alignStart="@+id/numbercodetext"-->
+                <!--                        android:layout_alignEnd="@+id/phoneedittext"-->
+                <!--                        android:background="@drawable/underline_textview" />-->
 
-                    <ImageView
-                        android:id="@+id/phonegreencheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="-23dp"
-                        android:layout_toEndOf="@+id/phoneedittext"
-                        android:src="@drawable/green_check_box"
-                        android:visibility="gone" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/phonegreencheck"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignEnd="@+id/phoneedittext"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginEnd="8dp"-->
+                <!--                        android:src="@drawable/green_check_box"-->
+                <!--                        android:visibility="gone" />-->
 
-                    <ImageView
-                        android:id="@+id/phoneredcheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="-23dp"
-                        android:layout_toEndOf="@+id/phoneedittext"
-                        android:src="@drawable/red_corss_check_icon" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/phoneredcheck"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignEnd="@+id/phoneedittext"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginEnd="8dp"-->
+                <!--                        android:src="@drawable/red_corss_check_icon" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/plustext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/phonerel"
-                    android:text="Enter Number with Plus(+)"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/plustext"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@+id/phonerel"-->
+                <!--                    android:text="Enter Number with Plus(+)"-->
+                <!--                    android:textSize="10sp"-->
+                <!--                    android:visibility="gone" />-->
 
                 <TextView
                     android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/plustext"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Vehicle Information"
                     android:textColor="#312E4F"
                     android:textSize="12sp" />
 
                 <RelativeLayout
                     android:id="@+id/allmakesrel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text">
 
                     <Spinner
                         android:id="@+id/selectmakespinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="All Makes"
@@ -327,7 +329,7 @@
                     <View
                         android:id="@+id/selectmakeview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectmakespinner"
                         android:layout_alignStart="@+id/selectmakespinner"
                         android:layout_alignEnd="@+id/selectmakespinner"
@@ -360,9 +362,9 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selectmakespinner"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectmakespinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
@@ -372,19 +374,19 @@
                     android:id="@+id/allmodelsrel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/allmakesrel">
+                    android:layout_below="@+id/allmakesrel"
+                    android:layout_alignEnd="@+id/allmakesrel">
 
                     <Spinner
                         android:id="@+id/selectmodelspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
+                        android:entries="@array/spinnerItems"
                         android:hint="All Models"
-                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#303030" />
@@ -414,7 +416,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="3dp"
                         android:background="@drawable/spinner_background"
                         android:padding="15dp"
                         android:text="No Models Found!"
@@ -425,9 +426,8 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selectmodelspinner"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectmodelspinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
@@ -437,18 +437,17 @@
                     android:id="@+id/yearmodelrel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/allmodelsrel">
+                    android:layout_below="@+id/allmodelsrel"
+                    android:layout_alignEnd="@+id/allmodelsrel">
 
                     <Spinner
                         android:id="@+id/selectyearspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
-                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#303030" />
@@ -456,7 +455,7 @@
                     <View
                         android:id="@+id/selectyearview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectyearspinner"
                         android:layout_alignStart="@+id/selectyearspinner"
                         android:layout_alignEnd="@+id/selectyearspinner"
@@ -489,9 +488,9 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selectyearspinner"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectyearspinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
@@ -501,19 +500,18 @@
                     android:id="@+id/selectbranchrel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/yearmodelrel">
+                    android:layout_below="@+id/yearmodelrel"
+                    android:layout_alignEnd="@+id/yearmodelrel">
 
                     <Spinner
                         android:id="@+id/selectbranchspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#303030" />
@@ -521,7 +519,7 @@
                     <View
                         android:id="@+id/selectbranchview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectbranchspinner"
                         android:layout_alignStart="@+id/selectbranchspinner"
                         android:layout_alignEnd="@+id/selectbranchspinner"
@@ -543,7 +541,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="3dp"
                         android:background="@drawable/spinner_background"
                         android:padding="15dp"
                         android:text="No Branch Found!"
@@ -554,9 +551,8 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selectbranchspinner"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectbranchspinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
@@ -566,19 +562,18 @@
                     android:id="@+id/selectpreferredrel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/selectbranchrel">
+                    android:layout_below="@+id/selectbranchrel"
+                    android:layout_alignEnd="@+id/selectbranchrel">
 
                     <Spinner
                         android:id="@+id/selectpreferredspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#303030" />
@@ -586,7 +581,7 @@
                     <View
                         android:id="@+id/selectpreferredview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectpreferredspinner"
                         android:layout_alignStart="@+id/selectpreferredspinner"
                         android:layout_alignEnd="@+id/selectpreferredspinner"
@@ -619,83 +614,19 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selectpreferredspinner"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-35dp"
-                        android:layout_toEndOf="@+id/selectpreferredspinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
                 </RelativeLayout>
 
-                <!--                <RelativeLayout-->
-                <!--                    android:id="@+id/selectservicesrel"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_below="@+id/selectpreferredrel">-->
-
-                <!--                    <Spinner-->
-                <!--                        android:id="@+id/selectservicesspinner"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="50dp"-->
-                <!--                        android:layout_marginStart="-16dp"-->
-                <!--                        android:layout_marginTop="3dp"-->
-                <!--                        android:layout_marginEnd="3dp"-->
-                <!--                        android:layout_marginBottom="3dp"-->
-                <!--                        android:background="@drawable/spinner_background"-->
-                <!--                        android:hint="Branch"-->
-                <!--                        android:minWidth="300dp"-->
-                <!--                        android:overlapAnchor="false"-->
-                <!--                        android:paddingEnd="25dp"-->
-                <!--                        android:textColor="#303030" />-->
-
-                <!--                    <View-->
-                <!--                        android:id="@+id/selectservicesview"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="2dp"-->
-                <!--                        android:layout_below="@+id/selectservicesspinner"-->
-                <!--                        android:layout_alignStart="@+id/selectservicesspinner"-->
-                <!--                        android:layout_alignEnd="@+id/selectservicesspinner"-->
-                <!--                        android:background="@drawable/underline_textview" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/selectservicetext"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_below="@+id/selectservicesspinner"-->
-                <!--                        android:layout_marginTop="2dp"-->
-                <!--                        android:text="Please Select Service!"-->
-                <!--                        android:textColor="#B71C1C"-->
-                <!--                        android:textSize="10sp"-->
-                <!--                        android:visibility="gone" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/noservicestextview"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_centerVertical="true"-->
-                <!--                        android:layout_marginStart="3dp"-->
-                <!--                        android:background="@drawable/spinner_background"-->
-                <!--                        android:padding="15dp"-->
-                <!--                        android:text="No Branch Found!"-->
-                <!--                        android:textColor="#8C8984"-->
-                <!--                        android:textSize="10sp"-->
-                <!--                        android:visibility="gone" />-->
-
-                <!--                    <ImageView-->
-                <!--                        android:layout_width="30dp"-->
-                <!--                        android:layout_height="30dp"-->
-                <!--                        android:layout_centerVertical="true"-->
-                <!--                        android:layout_marginStart="-35dp"-->
-                <!--                        android:layout_toEndOf="@+id/selectservicesspinner"-->
-                <!--                        android:scaleType="centerInside"-->
-                <!--                        android:src="@drawable/union" />-->
-
-                <!--                </RelativeLayout>-->
                 <RelativeLayout
                     android:id="@+id/servicesbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selectpreferredrel"
+                    android:layout_alignEnd="@+id/selectpreferredrel"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/multi_selection_spinner_background"
                     android:clickable="true"
@@ -703,16 +634,24 @@
 
                     <TextView
                         android:id="@+id/slectservicesterxt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:minWidth="262dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp"
                         android:text="@string/select_services"
-                        android:textColor="#303030"
+                        android:textColor="#797979"
                         android:textSize="15sp" />
+
+                    <View
+                        android:id="@+id/selectservicesview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/slectservicesterxt"
+                        android:layout_alignStart="@+id/slectservicesterxt"
+                        android:layout_alignEnd="@+id/dropdownimg"
+                        android:background="@drawable/underline_textview" />
 
                     <TextView
                         android:id="@+id/noservicestext"
@@ -729,11 +668,12 @@
                         android:visibility="gone" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/dropdownimg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/slectservicesterxt"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:layout_toEndOf="@+id/slectservicesterxt"
+                        android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
                 </RelativeLayout>
@@ -754,16 +694,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/pleaseselectservicetext"
+                    android:layout_alignEnd="@+id/servicesbutton"
                     android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/selectdatetextview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="center_vertical"
                         android:hint="Date"
-                        android:minWidth="300dp"
                         android:paddingEnd="25dp"
                         android:textColor="#797979"
                         android:textSize="16sp" />
@@ -771,7 +711,7 @@
                     <View
                         android:id="@+id/selectdateview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selectdatetextview"
                         android:layout_alignStart="@+id/selectdatetextview"
                         android:layout_alignEnd="@+id/selectdatetextview"
@@ -782,7 +722,6 @@
                         android:layout_height="30dp"
                         android:layout_below="@+id/selectdatetextview"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-25dp"
                         android:layout_toEndOf="@+id/selectdatetextview"
                         android:scaleType="centerInside"
                         android:src="@drawable/union"
@@ -795,19 +734,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selectdaterel"
+                    android:layout_alignEnd="@+id/selectdaterel"
                     android:layout_marginTop="10dp">
 
                     <Spinner
                         android:id="@+id/selecttimeslotsspinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
                         android:layout_marginStart="-16dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginEnd="3dp"
                         android:layout_marginBottom="3dp"
                         android:background="@drawable/spinner_background"
                         android:hint="Branch"
-                        android:minWidth="300dp"
                         android:overlapAnchor="false"
                         android:paddingEnd="25dp"
                         android:textColor="#303030" />
@@ -815,7 +753,7 @@
                     <View
                         android:id="@+id/selecttimeslotview"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_below="@+id/selecttimeslotsspinner"
                         android:layout_alignStart="@+id/selecttimeslotsspinner"
                         android:layout_alignEnd="@+id/selecttimeslotsspinner"
@@ -848,9 +786,8 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignEnd="@+id/selecttimeslotsspinner"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="-25dp"
-                        android:layout_toEndOf="@+id/selecttimeslotsspinner"
                         android:scaleType="centerInside"
                         android:src="@drawable/union" />
 
@@ -860,8 +797,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selecttimerel"
+                    android:layout_alignEnd="@+id/selecttimerel"
+                    android:layout_marginTop="5dp"
                     android:background="#FFF2C9"
-                    android:minWidth="300dp"
+                    android:gravity="center"
+                    android:maxWidth="320dp"
                     android:padding="10dp"
                     android:text="Please note that the date and time you requested may not be available. We will contact you to confirm your actual appointment details"
                     android:textColor="#BC9449"
@@ -872,7 +812,7 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.cardview.widget.CardView>
-<!--main layout will be visible later because of data loading unitl this laoding is shown-->
+    <!--main layout will be visible later because of data loading unitl this laoding is shown-->
     <RelativeLayout
         android:id="@+id/loadingimg"
         android:layout_width="wrap_content"

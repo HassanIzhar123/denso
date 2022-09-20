@@ -22,6 +22,9 @@ import com.tech.denso.R;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
+import needle.Needle;
+import needle.UiRelatedTask;
+
 //public class ServicesFragment extends Fragment {
 //    View v;
 //
@@ -48,22 +51,24 @@ public class ServicesFragment extends Fragment {
     }
 
     private void DisplayPackagesData() {
-        new TaskRunner().executeAsync(new Callable<Object>() {
+        loadingrel.setVisibility(View.VISIBLE);
+        servicingrecyclerview.setVisibility(View.GONE);
+        Needle.onBackgroundThread().execute(new UiRelatedTask<ServicesFragmentModel>() {
             @Override
-            public Object call() throws Exception {
+            protected ServicesFragmentModel doWork() {
                 ArrayList<String> servicename = new ArrayList<>();
                 ArrayList<String> serviceheader = new ArrayList<>();
                 ArrayList<String> servicedescription = new ArrayList<>();
-                servicename.add("Servicing");
+                servicename.add("AC Servicing");
                 servicename.add("Engine Service");
                 servicename.add("Suspension & Drivetrain");
                 servicename.add("Electrical & Electronics");
                 serviceheader.add("Quality maintenance to extend the life of your vehicle");
-                serviceheader.add("Engine reapir & replacement with performance check");
+                serviceheader.add("Engine repair & replacement with performance check");
                 serviceheader.add("Precision alignment for smooth & stable handling");
                 serviceheader.add("Complete electrical system check-up & repair");
                 servicedescription.add("We offer periodic vehicle maintenance using Demo ports to ensure miles of hassle-free performance All repairs and parts are Offer. MP a Warranty.");
-                servicedescription.add("Our experlenced team utilizes professional car diagnostic tools to detect any issue, and conduct repairs on any make ancl malel of vehicles. ");
+                servicedescription.add("Our experienced team utilizes professional car diagnostic tools to detect any issue, and conduct repairs on any make ancl malel of vehicles. ");
                 servicedescription.add("Do you have an issue with your steering or suspension? " +
                         "Drive-in tor a quick alignment check. We will ensure " +
                         "precision alignment so that you can enjoy a safe and " +
@@ -72,6 +77,14 @@ public class ServicesFragment extends Fragment {
                 servicedescription.add("Complete electrical system check-up & repair " +
                         "From alternators to spark plugs, we can correct any faults " +
                         "or variances to restore full power to your vehicle, using industry -standard electrical system diagnostics");
+            return new ServicesFragmentModel(servicename,serviceheader,servicedescription);
+            }
+
+            @Override
+            protected void thenDoUiRelatedWork(ServicesFragmentModel model) {
+                ArrayList<String>servicename=model.getServicesname();
+                ArrayList<String>serviceheader=model.getServiceheader();
+                ArrayList<String>servicedescription=model.getServicedescription();
                 if (servicename.size() > 0) {
                     WhyDensoServicesAdapter adapter = new WhyDensoServicesAdapter(getContext(), servicename, serviceheader, servicedescription);
                     servicingrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -88,33 +101,75 @@ public class ServicesFragment extends Fragment {
                     loadingrel.setVisibility(View.GONE);
                     servicingrecyclerview.setVisibility(View.GONE);
                 }
-                return null;
-            }
-        }, new TaskRunner.Callback<Object>() {
-            @Override
-            public void onStart() {
-                loadingrel.setVisibility(View.VISIBLE);
-                servicingrecyclerview.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onComplete(Object result) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingrel.setVisibility(View.GONE);
-                        servicingrecyclerview.setVisibility(View.VISIBLE);
-                    }
-                }, 3000);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                Log.e("Eceptionindialog", "" + e.toString());
-                loadingrel.setVisibility(View.GONE);
-                servicingrecyclerview.setVisibility(View.VISIBLE);
             }
         });
+//        new TaskRunner().executeAsync(new Callable<Object>() {
+//            @Override
+//            public Object call() throws Exception {
+//                ArrayList<String> servicename = new ArrayList<>();
+//                ArrayList<String> serviceheader = new ArrayList<>();
+//                ArrayList<String> servicedescription = new ArrayList<>();
+//                servicename.add("AC Servicing");
+//                servicename.add("Engine Service");
+//                servicename.add("Suspension & Drivetrain");
+//                servicename.add("Electrical & Electronics");
+//                serviceheader.add("Quality maintenance to extend the life of your vehicle");
+//                serviceheader.add("Engine repair & replacement with performance check");
+//                serviceheader.add("Precision alignment for smooth & stable handling");
+//                serviceheader.add("Complete electrical system check-up & repair");
+//                servicedescription.add("We offer periodic vehicle maintenance using Demo ports to ensure miles of hassle-free performance All repairs and parts are Offer. MP a Warranty.");
+//                servicedescription.add("Our experienced team utilizes professional car diagnostic tools to detect any issue, and conduct repairs on any make ancl malel of vehicles. ");
+//                servicedescription.add("Do you have an issue with your steering or suspension? " +
+//                        "Drive-in tor a quick alignment check. We will ensure " +
+//                        "precision alignment so that you can enjoy a safe and " +
+//                        "smooth ride as well as benefit from long-lasting tires and " +
+//                        "improved fuel efficiency");
+//                servicedescription.add("Complete electrical system check-up & repair " +
+//                        "From alternators to spark plugs, we can correct any faults " +
+//                        "or variances to restore full power to your vehicle, using industry -standard electrical system diagnostics");
+//                if (servicename.size() > 0) {
+//                    WhyDensoServicesAdapter adapter = new WhyDensoServicesAdapter(getContext(), servicename, serviceheader, servicedescription);
+//                    servicingrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+//                    servicingrecyclerview.setAdapter(adapter);
+//                    adapter.setClickListener(new WhyDensoServicesAdapter.ItemClickListener() {
+//                        @Override
+//                        public void onItemClick(View view, int position) {
+//                            ((DashboardActivity) getActivity()).OpenPage(2);
+//                        }
+//                    });
+//                    loadingrel.setVisibility(View.GONE);
+//                    servicingrecyclerview.setVisibility(View.VISIBLE);
+//                } else {
+//                    loadingrel.setVisibility(View.GONE);
+//                    servicingrecyclerview.setVisibility(View.GONE);
+//                }
+//                return null;
+//            }
+//        }, new TaskRunner.Callback<Object>() {
+//            @Override
+//            public void onStart() {
+//                loadingrel.setVisibility(View.VISIBLE);
+//                servicingrecyclerview.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onComplete(Object result) {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        loadingrel.setVisibility(View.GONE);
+//                        servicingrecyclerview.setVisibility(View.VISIBLE);
+//                    }
+//                }, 3000);
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                Log.e("Eceptionindialog", "" + e.toString());
+//                loadingrel.setVisibility(View.GONE);
+//                servicingrecyclerview.setVisibility(View.VISIBLE);
+//            }
+//        });
     }
 }
 

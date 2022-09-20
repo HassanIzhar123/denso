@@ -32,10 +32,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.tech.denso.Activities.DashboardActivity;
-import com.tech.denso.Adapter.BookingBranchSpinnerAdapter;
 import com.tech.denso.Adapter.WarrantyModelSpinnerAdapter;
 import com.tech.denso.Adapter.WarrantyNameSpinnerAdapter;
-import com.tech.denso.Helper.App;
+import com.tech.App;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.Helper;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
@@ -50,6 +49,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -253,6 +254,12 @@ public class NextWarrantyFragment extends Fragment {
                         Vehicles responsedata = gson.fromJson(response, Vehicles.class);
                         VehiclesModel model = new VehiclesModel();
                         list.addAll(responsedata.getData());
+                        Collections.sort(list, new Comparator<com.tech.denso.Models.Vehicles.VehicleName.Datum>() {
+                            @Override
+                            public int compare(com.tech.denso.Models.Vehicles.VehicleName.Datum o1, com.tech.denso.Models.Vehicles.VehicleName.Datum o2) {
+                                return o1.getVehicleType().compareToIgnoreCase(o2.getVehicleType());
+                            }
+                        });
                         model.setList(list);
                         model.setComplete(true);
                         return model;
@@ -299,6 +306,15 @@ public class NextWarrantyFragment extends Fragment {
         App.getInstance().addToRequestQueue(req, url);
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     private void ShowVehicleModel() {
         List<Datum> list = new ArrayList();
         com.tech.denso.Models.Vehicles.VehicleModel.Datum datum = new com.tech.denso.Models.Vehicles.VehicleModel.Datum();
@@ -335,6 +351,18 @@ public class NextWarrantyFragment extends Fragment {
                         com.tech.denso.Models.Vehicles.VehicleModel.VehiclesModel responsedata = gson.fromJson(response, com.tech.denso.Models.Vehicles.VehicleModel.VehiclesModel.class);
                         VehiclesModelModel model = new VehiclesModelModel();
                         list.addAll(responsedata.getData());
+//                        Collections.sort(list, new Comparator<com.tech.denso.Models.Vehicles.VehicleModel.Datum>() {
+//                            @Override
+//                            public int compare(com.tech.denso.Models.Vehicles.VehicleModel.Datum o1, com.tech.denso.Models.Vehicles.VehicleModel.Datum o2) {
+//                                if (isNumeric(o1.getModelYear())) {
+//                                    return Integer.parseInt(o1.getModelYear()) == Integer.parseInt(o2.getModelYear());
+//                                } else {
+//                                    return 0;
+//                                }
+//
+//                                return o1.getVehicleType().compareToIgnoreCase(o2.getVehicleType());
+//                            }
+//                        });
                         model.setList(list);
                         model.setComplete(true);
                         return model;
@@ -469,7 +497,7 @@ public class NextWarrantyFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    int colorFrom = Color.parseColor("#FAFAFA");
+                    int colorFrom = Color.parseColor("#AAAAAA");
                     int colorTo = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);
@@ -484,7 +512,7 @@ public class NextWarrantyFragment extends Fragment {
                     });
                     colorAnimation.start();
                 } else {
-                    int colorTo = Color.parseColor("#FAFAFA");
+                    int colorTo = Color.parseColor("#AAAAAA");
                     int colorFrom = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".Activities.SignUpActivity">
 
     <RelativeLayout
@@ -50,8 +51,9 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
 
                 <ImageView
                     android:id="@+id/logoicon"
@@ -63,65 +65,138 @@
 
                 <EditText
                     android:id="@+id/firstname_edittext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_below="@+id/logoicon"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp"
-                    android:hint="First Name"
+                    android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
+                    android:hint="First Name"
+                    android:minWidth="300dp"
                     android:padding="10dp"
                     android:textColor="#0F0A39"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/lastname_edittext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_below="@+id/firstname_edittext"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp"
-                    android:hint="Last Name"
+                    android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
+                    android:hint="Last Name"
+                    android:minWidth="300dp"
                     android:padding="10dp"
                     android:textColor="#0F0A39"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/email_edittext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_below="@+id/lastname_edittext"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp"
-                    android:hint="Enter Email"
+                    android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
+                    android:hint="Enter Email"
+                    android:minWidth="300dp"
                     android:padding="10dp"
                     android:textColor="#0F0A39"
-                    android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                    android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:id="@+id/PhoneNumberRel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/email_edittext"
+                    android:layout_alignStart="@+id/email_edittext"
+                    android:layout_alignEnd="@+id/email_edittext"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/login_edittext_background"
+                    android:elevation="10dp">
+
+                    <TextView
+                        android:id="@+id/numbercodetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="@string/suadiarabiacode"
+                        android:textColor="#0F0A39"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/phone_edittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_alignTop="@+id/numbercodetext"
+                        android:layout_alignBottom="@+id/numbercodetext"
+                        android:layout_toEndOf="@+id/numbercodetext"
+                        android:background="@null"
+                        android:elevation="10dp"
+                        android:ems="10"
+                        android:fontFamily="@font/roboto_medium"
+                        android:minWidth="250dp"
+                        android:textColor="#0F0A39"
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/phonegreencheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/phone_edittext"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/green_check_box"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/phoneredcheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/phone_edittext"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/red_corss_check_icon" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/password_edittext_rel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/email_edittext"
+                    android:layout_below="@+id/PhoneNumberRel"
+                    android:layout_alignEnd="@+id/PhoneNumberRel"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
-                    android:elevation="10dp">
+                    android:elevation="10dp"
+                    android:ems="10"
+                    android:minWidth="300dp">
 
                     <EditText
                         android:id="@+id/password_edittext"
@@ -131,16 +206,16 @@
                         android:background="@null"
                         android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:hint="Enter Password"
+                        android:padding="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="50dp"
                         android:paddingBottom="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textSize="16sp"
-                        android:padding="10dp"
                         android:textColor="#0F0A39"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:id="@+id/passwordbtnrel"
@@ -162,9 +237,9 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginEnd="10dp"
-                            android:visibility="gone"
                             android:background="?selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_hide" />
+                            android:src="@drawable/ic_hide"
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
@@ -175,9 +250,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/password_edittext_rel"
-                    android:layout_marginStart="30dp"
+                    android:layout_alignStart="@+id/password_edittext_rel"
+                    android:layout_alignEnd="@+id/password_edittext_rel"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
                     android:background="@drawable/login_edittext_background"
                     android:elevation="10dp">
 
@@ -189,16 +265,16 @@
                         android:background="@null"
                         android:backgroundTint="@android:color/holo_red_light"
                         android:elevation="10dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:hint="Confirm Password"
+                        android:padding="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="50dp"
                         android:paddingBottom="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textSize="16sp"
-                        android:padding="10dp"
                         android:textColor="#0F0A39"
-                        android:textCursorDrawable="@drawable/edittext_cursor_drawable" />
+                        android:textCursorDrawable="@drawable/edittext_cursor_drawable"
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:id="@+id/confirmbtnrel"
@@ -220,9 +296,9 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginEnd="10dp"
-                            android:visibility="gone"
                             android:background="?selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_hide" />
+                            android:src="@drawable/ic_hide"
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
@@ -230,24 +306,27 @@
 
                 <RelativeLayout
                     android:id="@+id/signupbtnrel"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/confirm_password_edittext_rel"
-                    android:layout_marginStart="30dp"
+                    android:layout_alignStart="@+id/confirm_password_edittext_rel"
+                    android:layout_alignEnd="@+id/confirm_password_edittext_rel"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
-                    android:layout_marginEnd="30dp"
                     android:background="@drawable/round_btn_background"
-                    android:elevation="10dp">
+                    android:elevation="10dp"
+                    android:ems="10"
+                    android:minWidth="300dp">
 
                     <Button
                         android:id="@+id/signupbtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackgroundBorderless"
-                        android:text="Sign Up"
-                        android:textSize="18sp"
                         android:fontFamily="@font/roboto"
-                        android:textAlignment="center" />
+                        android:text="Sign Up"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -257,6 +336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/signupbtnrel"
                     android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp">
 
                     <RelativeLayout
@@ -284,10 +364,10 @@
                             android:layout_centerHorizontal="true"
                             android:layout_toEndOf="@+id/alreadytext"
                             android:background="?selectableItemBackgroundBorderless"
-                            android:text="Sign In"
-                            android:textSize="14sp"
                             android:fontFamily="@font/roboto_bold"
-                            android:textColor="#FF2548" />
+                            android:text="Sign In"
+                            android:textColor="#FF2548"
+                            android:textSize="14sp" />
 
                     </RelativeLayout>
 

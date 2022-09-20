@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tech.denso">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,14 +14,15 @@
         <package android:name="com.whatsapp" />
     </queries>
     <application
-        android:name=".Helper.App"
+        android:name="com.tech.App"
         android:allowBackup="true"
         android:icon="@drawable/dj_logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/dj_logo"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.Denso"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:supportsRtl">
         <activity
             android:name=".Activities.SucessfullSignupActivity"
             android:exported="false"
@@ -70,7 +72,8 @@
             android:name=".Activities.DashboardActivity"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:theme="@style/AppFullScreenTheme" />
+            android:theme="@style/AppFullScreenTheme" >
+        </activity>
         <activity
             android:name=".Activities.SignUpActivity"
             android:exported="true"

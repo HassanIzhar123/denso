@@ -18,10 +18,15 @@ public class SucessfullSignupActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                if (getIntent().getBooleanExtra("fromclaim", false)) {
-                    startActivity(new Intent(SucessfullSignupActivity.this,
-                            SucessfullClaimActivity.class));
-                } else {
+                if (getIntent().getStringExtra("fromclaim") != null) {
+                    if (getIntent().getStringExtra("fromclaim").equals("true")) {
+                        startActivity(new Intent(SucessfullSignupActivity.this,
+                                SucessfullClaimActivity.class));
+                    } else if (getIntent().getStringExtra("fromclaim").equals("false")) {
+                        startActivity(new Intent(SucessfullSignupActivity.this,
+                                SuccessfulBookingActivity.class));
+                    }
+                } else if (getIntent().getStringExtra("frombooking") != null && getIntent().getStringExtra("frombooking").equals("true")) {
                     startActivity(new Intent(SucessfullSignupActivity.this,
                             SuccessfulBookingActivity.class));
                 }

@@ -1,52 +1,16 @@
 package com.tech.denso.Fragments;
 
-import static com.tech.denso.Helper.Helper.getListener;
-
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.tech.denso.CustomViews.NonSwipeableViewPager;
-import com.tech.denso.Interfaces.ListenFromActivity;
-import com.tech.denso.Interfaces.Listener;
-import com.tech.denso.Item;
-import com.tech.denso.MultiSpinner;
 import com.tech.denso.R;
-import com.tech.denso.SelectableAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WarrantyFragment extends Fragment {
     private String title;

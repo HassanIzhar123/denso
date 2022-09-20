@@ -22,7 +22,7 @@ public class WhyDensoServices extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_whydenso, container, false);
-        String url = "https://djauto-service.com/whydensoservices/";
+        String url = "https://djautoac.com/#/whydensoservices/";
         WebView wv1 = (WebView) v.findViewById(R.id.webview);
         wv1.setWebViewClient(new MyBrowser(v.findViewById(R.id.progress)));
         wv1.getSettings().setLoadsImagesAutomatically(true);

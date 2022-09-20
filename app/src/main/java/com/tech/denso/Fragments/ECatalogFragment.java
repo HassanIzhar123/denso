@@ -24,7 +24,7 @@ public class ECatalogFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_ecatalog
                 , container, false);
-        String url = "https://djauto-service.com/ecatalog/";
+        String url = "https://djautoac.com/#/ecatalog/";
         WebView wv1 = (WebView) v.findViewById(R.id.webview);
         wv1.setWebViewClient(new MyBrowser(v.findViewById(R.id.progress)));
         wv1.getSettings().setLoadsImagesAutomatically(true);

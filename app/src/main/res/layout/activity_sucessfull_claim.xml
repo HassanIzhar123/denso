@@ -54,6 +54,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
+                android:gravity="center"
                 android:text="@string/your_claim_request_has_been_submitted_successfully_and_send_a_copy_at_your_registered_email"
                 android:textAlignment="center"
                 android:textSize="16sp" />

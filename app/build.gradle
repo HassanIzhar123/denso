@@ -62,10 +62,17 @@ dependencies {
     implementation('com.zsoltsafrany:needle:1.0.0')
     implementation 'com.lionscribe.open.libphonenumber:libphonenumber:8.12.18.1'
     implementation  'io.ak1:bubbletabbar:1.0.8'
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.0.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v7:0.5.0'
+    implementation('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar') {
+        transitive = true
+    }
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v9:0.4.0'
+    implementation "com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0"
 }
 //repositories {
 //    mavenCentral()

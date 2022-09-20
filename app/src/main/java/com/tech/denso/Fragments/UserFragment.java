@@ -34,10 +34,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.tech.denso.Adapter.BookingHistoryViewAdapter;
-import com.tech.denso.Helper.App;
+import com.tech.App;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.SharedPreference;
-import com.tech.denso.Helper.TaskRunner;
 import com.tech.denso.Models.BookingsModel.BookingsModel;
 import com.tech.denso.Models.BookingsModel.Datum;
 import com.tech.denso.Models.ChangePassword.ChangePasswordModel;
@@ -51,7 +50,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import needle.Needle;
 import needle.UiRelatedTask;
@@ -284,8 +282,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 List<Datum> datums = new ArrayList<>();
                                 List<Datum> data = responsedata.getData();
                                 for (int i = 0; i < data.size(); i++) {
-                                    if (data.get(i).getEmail().equals(new Const().getEmail())) {
-                                        datums.add(data.get(i));
+                                    if (new Const().getEmail() != null) {
+                                        if (data.get(i).getEmail() != null && data.get(i).getEmail().equals(new Const().getEmail())) {
+                                            datums.add(data.get(i));
+                                        }
+                                    } else {
+                                        break;
                                     }
                                 }
                                 Log.e("datumarraycheck", "" + datums.size());

@@ -5,11 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -17,7 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -32,6 +39,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.tech.denso.Adapter.NavigationRecyclerAdapter;
+import com.tech.denso.CustomViews.MapViewPager;
 import com.tech.denso.Fragments.B2BLoginFragment;
 import com.tech.denso.Fragments.BookingFragment;
 import com.tech.denso.Fragments.ContactFragment;
@@ -73,7 +81,8 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     //    CardView othercard;
     com.tech.denso.CustomViews.SmoothBottomBar bottomBar;
     //    BottomNavigationView bottomBar;
-    ViewPager viewpager;
+    MapViewPager viewpager;
+    //    ViewPager viewpager;
     RelativeLayout logoutrel, myhistoryrel, loginrel;
     public static ImageButton sendbtn;
     SendData sendData;
@@ -114,6 +123,23 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        //        View view = this.getWindow().getDecorView().findViewById(android.R.id.content);
+//        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
+//            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            // Apply the insets as a margin to the view. Here the system is setting
+//            // only the bottom, left, and right dimensions, but apply whichever insets are
+//            // appropriate to your layout. You can also update the view padding
+//            // if that's more appropriate.
+//            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+//            mlp.leftMargin = insets.left;
+//            mlp.bottomMargin = insets.bottom;
+//            mlp.rightMargin = insets.right;
+//            v.setLayoutParams(mlp);
+//
+//            // Return CONSUMED if you don't want want the window insets to keep being
+//            // passed down to descendant views.
+//            return WindowInsetsCompat.CONSUMED;
+//        });
         nametext = findViewById(R.id.nametext);
         if (null != activityListener) {
             activityListener.doSomethingInFragment();
@@ -255,49 +281,49 @@ public class DashboardActivity extends AppCompatActivity implements CallBackMode
                                 backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Why Denso Services?")) {
                                 DashboardActivity.titletextview.setText("WHY DENSO SERVICES");
-//                                open_Webpage("https://djauto-service.com/whydensoservices");
-//                                backbtn.setVisibility(View.GONE);
-                                LoadFragment(DashboardActivity.this, new WhyDensoServices());
-                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                                bottombarrel.setVisibility(View.GONE);
-                                sendbtn.setVisibility(View.GONE);
+                                open_Webpage("https://djautoac.com/#/whydensoservices");
                                 backbtn.setVisibility(View.GONE);
+//                                LoadFragment(DashboardActivity.this, new WhyDensoServices());
+//                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                                bottombarrel.setVisibility(View.GONE);
+//                                sendbtn.setVisibility(View.GONE);
+//                                backbtn.setVisibility(View.GONE);
                             } else if (value.equals("B2B Login")) {
                                 DashboardActivity.titletextview.setText("B2B LOGIN");
-//                                open_Webpage("https://shop.dj-auto.com/");
-//                                backbtn.setVisibility(View.GONE);
-                                LoadFragment(DashboardActivity.this, new B2BLoginFragment());
-                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                                bottombarrel.setVisibility(View.GONE);
-                                sendbtn.setVisibility(View.GONE);
+                                open_Webpage("https://shop.dj-auto.com/");
                                 backbtn.setVisibility(View.GONE);
+//                                LoadFragment(DashboardActivity.this, new B2BLoginFragment());
+//                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                                bottombarrel.setVisibility(View.GONE);
+//                                sendbtn.setVisibility(View.GONE);
+//                                backbtn.setVisibility(View.GONE);
                             } else if (value.equals("E-Catalog")) {
                                 DashboardActivity.titletextview.setText("E-CATALOG");
-//                                open_Webpage("https://djauto-service.com/ecatalog/");
-//                                backbtn.setVisibility(View.GONE);
-                                LoadFragment(DashboardActivity.this, new ECatalogFragment());
-                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                                bottombarrel.setVisibility(View.GONE);
-                                sendbtn.setVisibility(View.GONE);
+                                open_Webpage("https://djautoac.com/#/ecatalog/");
                                 backbtn.setVisibility(View.GONE);
+//                                LoadFragment(DashboardActivity.this, new ECatalogFragment());
+//                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                                bottombarrel.setVisibility(View.GONE);
+//                                sendbtn.setVisibility(View.GONE);
+//                                backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Our Gallery")) {
                                 DashboardActivity.titletextview.setText("OUR GALLERY");
-//                                open_Webpage("https://djauto-service.com/gallery/");
-//                                backbtn.setVisibility(View.GONE);
-                                LoadFragment(DashboardActivity.this, new GalleryFragment());
-                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                                bottombarrel.setVisibility(View.GONE);
-                                sendbtn.setVisibility(View.GONE);
+                                open_Webpage("https://djautoac.com/#/gallery/");
                                 backbtn.setVisibility(View.GONE);
+//                                LoadFragment(DashboardActivity.this, new GalleryFragment());
+//                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                                bottombarrel.setVisibility(View.GONE);
+//                                sendbtn.setVisibility(View.GONE);
+//                                backbtn.setVisibility(View.GONE);
                             } else if (value.equals("Contact")) {
                                 DashboardActivity.titletextview.setText("CONTACT");
-//                                open_Webpage("https://djauto-service.com/contact");
-//                                backbtn.setVisibility(View.GONE);
-                                LoadFragment(DashboardActivity.this, new ContactFragment());
-                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
-                                bottombarrel.setVisibility(View.GONE);
-                                sendbtn.setVisibility(View.GONE);
+                                open_Webpage("https://djautoac.com/#/contact");
                                 backbtn.setVisibility(View.GONE);
+//                                LoadFragment(DashboardActivity.this, new ContactFragment());
+//                                findViewById(R.id.framelayout).setVisibility(View.VISIBLE);
+//                                bottombarrel.setVisibility(View.GONE);
+//                                sendbtn.setVisibility(View.GONE);
+//                                backbtn.setVisibility(View.GONE);
                             }
                             new Helper().HideKeyboard(DashboardActivity.this);
                         }

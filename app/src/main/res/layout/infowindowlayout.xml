@@ -43,8 +43,8 @@
             android:id="@+id/middlelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/exitbtn"
-            android:layout_below="@+id/middleline">
+            android:layout_below="@+id/middleline"
+            android:layout_toStartOf="@+id/exitbtn">
 
             <RelativeLayout
                 android:id="@+id/maprel"
@@ -57,7 +57,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/sqaure_background"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_map" />
+                    android:src="@drawable/marker_pin" />
 
                 <TextView
                     android:id="@+id/maptext"

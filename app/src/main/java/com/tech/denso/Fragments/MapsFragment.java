@@ -1,9 +1,12 @@
 package com.tech.denso.Fragments;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,14 +19,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -32,23 +39,31 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.LocationComponentOptions;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
+import com.tech.denso.Activities.DashboardActivity;
 import com.tech.denso.Adapter.CustomAdapter;
-import com.tech.denso.Helper.App;
+import com.tech.App;
 import com.tech.denso.Helper.Const;
-import com.tech.denso.Helper.CustomInfoWindowAdapter;
 import com.tech.denso.Models.Locations.Datum;
 import com.tech.denso.Models.Locations.LocationsModel;
 import com.tech.denso.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,19 +75,22 @@ import needle.Needle;
 import needle.UiRelatedTask;
 
 public class MapsFragment extends Fragment {
-    MapView mMapView;
-    private GoogleMap googleMap;
+    //    MapView mapView;
+//    private GoogleMap googleMap;
     Dialog dialog;
     RelativeLayout loadingrel;
     AppCompatSpinner branchspinner;
     ImageButton spinneropener;
     EditText search_branch_edittext;
-    ArrayList<CameraUpdate> cameraarray = new ArrayList<>();
+    //    ArrayList<CameraUpdate> cameraarray = new ArrayList<>();
     boolean spinnerbol = false;
     List<com.tech.denso.Models.Locations.Datum> datumstemp = new ArrayList<>();
     ArrayList<com.tech.denso.Models.Locations.Datum> finalarr = new ArrayList<>();
     TextView nobranchtext;
     CardView whatsappbtn;
+    MapView mapView;
+    MarkerViewManager markerViewManager;
+    MapboxMap mapBox;
 
     public static MapsFragment newInstance(int page, String title) {
         MapsFragment fragmentFirst = new MapsFragment();
@@ -92,6 +110,8 @@ public class MapsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        String mapBoxToken = "pk.eyJ1IjoiZGphdXRvIiwiYSI6ImNsNmRhYWNxMzBjdXgzZ292OW9iM2cxdnIifQ.t5zv8DMKl_6hpFMWckqUvQ";
+        Mapbox.getInstance(requireActivity(), mapBoxToken);
         View view = inflater.inflate(R.layout.maps_fragment, container, false);
         whatsappbtn = view.findViewById(R.id.whatsappbtn);
         loadingrel = view.findViewById(R.id.loadingrel);
@@ -99,9 +119,11 @@ public class MapsFragment extends Fragment {
         spinneropener = view.findViewById(R.id.spinneropener);
         nobranchtext = view.findViewById(R.id.nobranchtext);
         search_branch_edittext = view.findViewById(R.id.search_branch_edittext);
-        mMapView = (MapView) view.findViewById(R.id.mapView);
+//        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView = (com.mapbox.mapboxsdk.maps.MapView) view.findViewById(R.id.mapview);
+        mapView.onCreate(savedInstanceState);
         loadingrel.setVisibility(View.VISIBLE);
-        mMapView.setVisibility(View.GONE);
+        mapView.setVisibility(View.GONE);
         String url = new Const().getBaseUrl() + "/api/locations/";
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -136,7 +158,7 @@ public class MapsFragment extends Fragment {
                             nobranchtext.setVisibility(View.GONE);
                             branchspinner.setVisibility(View.VISIBLE);
                             loadingrel.setVisibility(View.GONE);
-                            mMapView.setVisibility(View.VISIBLE);
+                            mapView.setVisibility(View.VISIBLE);
                             branchspinner.setAdapter(result.getAdapter());
                             branchspinner.setDropDownWidth(branchspinner.getWidth());
                             List<Datum> datums = result.getDatums();
@@ -175,17 +197,8 @@ public class MapsFragment extends Fragment {
                                                 @Override
                                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                     if (spinnerbol) {
-                                                        if (googleMap != null) {
-                                                            if (search_branch_edittext.getText().toString().isEmpty()) {
-                                                                LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
-                                                                CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                                            } else {
-                                                                LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
-                                                                CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                                            }
-                                                        }
+                                                        LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
+                                                        mapBox.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15f));
                                                         spinnerbol = false;
                                                     }
                                                 }
@@ -214,17 +227,8 @@ public class MapsFragment extends Fragment {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     if (spinnerbol) {
-                                        if (googleMap != null) {
-                                            if (search_branch_edittext.getText().toString().isEmpty()) {
-                                                LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
-                                                CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                            } else {
-                                                LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
-                                                CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                            }
-                                        }
+                                        LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
+                                        mapBox.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15f));
                                         spinnerbol = false;
                                     }
                                 }
@@ -245,7 +249,7 @@ public class MapsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 loadingrel.setVisibility(View.GONE);
-                mMapView.setVisibility(View.VISIBLE);
+                mapView.setVisibility(View.VISIBLE);
             }
         }) {
             @Override
@@ -275,7 +279,7 @@ public class MapsFragment extends Fragment {
 //            @Override
 //            public void onStart() {
 //                loadingrel.setVisibility(View.VISIBLE);
-//                mMapView.setVisibility(View.GONE);
+//                mapView.setVisibility(View.GONE);
 //            }
 //
 //            @Override
@@ -284,7 +288,7 @@ public class MapsFragment extends Fragment {
 //                    @Override
 //                    public void run() {
 //                        loadingrel.setVisibility(View.GONE);
-//                        mMapView.setVisibility(View.VISIBLE);
+//                        mapView.setVisibility(View.VISIBLE);
 //                    }
 //                }, 3000);
 //            }
@@ -293,7 +297,7 @@ public class MapsFragment extends Fragment {
 //            public void onError(Exception e) {
 //                Log.e("Eceptionindialog", "" + e.toString());
 //                loadingrel.setVisibility(View.GONE);
-//                mMapView.setVisibility(View.VISIBLE);
+//                mapView.setVisibility(View.VISIBLE);
 //            }
 //        });
 
@@ -315,7 +319,7 @@ public class MapsFragment extends Fragment {
                     i.setData(Uri.parse(url));
                     startActivity(i);
                 } catch (PackageManager.NameNotFoundException e) {
-                    Toast.makeText(getContext(), "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Whatsapp app is not installed in your phone", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -323,34 +327,273 @@ public class MapsFragment extends Fragment {
         return view;
     }
 
-    private void InitializeGoogleMaps(Bundle savedInstanceState, List<com.tech.denso.Models.Locations.Datum> responsedata) {
-        mMapView.onCreate(savedInstanceState);
-        mMapView.onResume(); // needed to get the map to display immediately
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
 
-        mMapView.getMapAsync(new OnMapReadyCallback() {
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mapView != null) {
+            mapView.onPause();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mapView != null) {
+            mapView.onSaveInstanceState(outState);
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if (mapView != null) {
+            mapView.onLowMemory();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (markerViewManager != null) {
+            markerViewManager.onDestroy();
+        }
+        if (mapView != null) {
+            mapView.onDestroy();
+        }
+    }
+
+    private void InitializeGoogleMaps(Bundle savedInstanceState, List<com.tech.denso.Models.Locations.Datum> responsedata) {
+//        mapView.onCreate(savedInstanceState);
+//        mapView.onResume(); // needed to get the map to display immediately
+//        try {
+//            MapsInitializer.initialize(getActivity().getApplicationContext());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        mapView.getMapAsync(new com.mapbox.mapboxsdk.maps.OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                googleMap.setMyLocationEnabled(true);
-                for (int i = 0; i < responsedata.size(); i++) {
-                    LatLng pos = new LatLng(responsedata.get(i).getLatitude(), responsedata.get(i).getLongitude());
-                    MarkerOptions marker = new MarkerOptions().position(pos).title("Marker Title").snippet("Marker Description");
-                    googleMap.addMarker(marker).setTag(i);
-                    if (i == 0) {
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                mapBox = mapboxMap;
+                mapBox.getUiSettings().setAttributionEnabled(false);
+                mapBox.getUiSettings().setLogoEnabled(false);
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        // Create and customize the LocationComponent's options
+                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(getContext())
+                                .trackingGesturesManagement(true)
+                                .accuracyColor(ContextCompat.getColor(getContext(), R.color.black))
+                                .build();
+                        LocationComponentActivationOptions locationComponentActivationOptions = LocationComponentActivationOptions.builder(getContext(), style)
+                                .locationComponentOptions(customLocationComponentOptions)
+                                .build();
+                        LocationComponent component = mapboxMap.getLocationComponent();
+                        component.activateLocationComponent(locationComponentActivationOptions);
+
+                        component.setLocationComponentEnabled(true);
+                        component.setCameraMode(CameraMode.TRACKING);
+                        component.setRenderMode(RenderMode.COMPASS);
+                        for (int i = 0; i < responsedata.size(); i++) {
+                            IconFactory iconFactory = IconFactory.getInstance(getContext());
+                            Icon icon = iconFactory.fromResource(R.drawable.map_marker);
+                            if (i == 0) {
+                                mapboxMap.setCameraPosition(new com.mapbox.mapboxsdk.camera.CameraPosition.Builder()
+                                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(responsedata.get(i).getLatitude(), responsedata.get(i).getLongitude()))
+                                        .zoom(12.0)
+                                        .build());
+                            }
+                            mapboxMap.addMarker(new com.mapbox.mapboxsdk.annotations.MarkerOptions()
+                                    .position(new com.mapbox.mapboxsdk.geometry.LatLng(responsedata.get(i).getLatitude(), responsedata.get(i).getLongitude()))
+                                    .setSnippet(String.valueOf(i))
+                                    .setIcon(icon)
+                                    .title("Marker title"));
+                        }
                     }
-                }
-                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getContext(), responsedata));
+                });
+//                mapboxMap.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
+//                    @Nullable
+//                    @org.jetbrains.annotations.Nullable
+//                    @Override
+//                    public View getInfoWindow(@NonNull @NotNull Marker marker) {
+//                        markerViewManager = new MarkerViewManager(mapView, mapboxMap);
+//                        View customView = LayoutInflater.from(getContext()).inflate(R.layout.mapbox_marker_layout, null);
+//                        customView.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+//                        TextView factory_name = customView.findViewById(R.id.factory_name);
+//                        TextView country_name = customView.findViewById(R.id.country_name);
+//                        ImageButton next = customView.findViewById(R.id.togotonext);
+//                        int position = Integer.parseInt(marker.getSnippet());
+//                        factory_name.setText(factoriesconfigurations.get(position).getFactoryName());
+//                        country_name.setText(factoriesconfigurations.get(position).getLocation());
+//                        next.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                String url = comparefactories.get(position).getUrl();
+//                                String[] urlsplit = url.split("^https?://");
+//                                String domain = urlsplit[1];
+//                                urlsplit[1] = "tt" + urlsplit[1];
+//                                url = "https://" + urlsplit[1];
+//                                url = url.replace(".thingtrax", "apibeta.thingtrax");
+//                                BASE_URL = url;
+//                                Const.Factory = String.valueOf(factoriesconfigurations.get(position).getFactoryId());
+//                                Log.e("urclcheckval", "" + url + " " + Const.Factory/*+" "+ Arrays.toString(remainingspit)*/);
+//                                SilentLoginAndOpen(domain, url);
+//                            }
+//                        });
+//                        return customView;
+//                    }
+//                });
+                mapBox.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
+                    @Nullable
+                    @org.jetbrains.annotations.Nullable
+                    @Override
+                    public View getInfoWindow(@NonNull @NotNull Marker marker) {
+                        markerViewManager = new MarkerViewManager(mapView, mapBox);
+                        View view = LayoutInflater.from(getContext()).inflate(R.layout.infowindowlayout, null);
+                        view.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+                        int position = Integer.parseInt(marker.getSnippet());
+                        String title = marker.getTitle();
+                        TextView cityName = (TextView) view.findViewById(R.id.cityname);
+                        TextView mapText = (TextView) view.findViewById(R.id.maptext);
+                        TextView timetext = (TextView) view.findViewById(R.id.timetext);
+                        TextView calltext = (TextView) view.findViewById(R.id.calltext);
+                        RelativeLayout bookingbtn = (RelativeLayout) view.findViewById(R.id.bookingbtn);
+                        RelativeLayout emailrel = (RelativeLayout) view.findViewById(R.id.emailrel);
+                        RelativeLayout directionbtn = (RelativeLayout) view.findViewById(R.id.directionbtn);
+                        ImageButton exitbtn = (ImageButton) view.findViewById(R.id.exitbtn);
+                        cityName.setText(responsedata.get(position).getBranchName());
+                        mapText.setText(responsedata.get(position).getAddress());
+                        timetext.setText(getContext().getResources().getString(R.string.openingtime) + responsedata.get(position).getOpeningSaturday() + getContext().getResources().getString(R.string.to) + responsedata.get(position).getTillThursday());
+                        calltext.setText(String.valueOf(responsedata.get(position).getPhoneNumber()));
+                        bookingbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mapboxMap.getMarkers().get(position).hideInfoWindow();
+                                ((DashboardActivity) getActivity()).OpenPage(0);
+                                BookingFragment.selectBranchSpinner(responsedata.get(position).getId());
+                            }
+                        });
+                        emailrel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mapboxMap.getMarkers().get(position).hideInfoWindow();
+                                Intent i = new Intent(Intent.ACTION_SEND);
+                                i.setType("message/rfc822");
+                                i.putExtra(Intent.EXTRA_EMAIL, new String[]{responsedata.get(position).getEmail()});
+//                                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+//                                i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                                try {
+                                    startActivity(Intent.createChooser(i, "Send mail..."));
+                                } catch (android.content.ActivityNotFoundException ex) {
+                                    Toast.makeText(getContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                                }
+//                                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//                                emailIntent.putExtra(Intent.CATEGORY_APP_EMAIL, responsedata.get(position).getEmail());
+//                                emailIntent.putExtra(Intent.EXTRA_EMAIL, responsedata.get(position).getEmail());
+//                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//                                emailIntent.setType("text/plain");
+//                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "content");
+//                                final PackageManager pm = getContext().getPackageManager();
+//                                final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+//                                ResolveInfo best = null;
+//                                for (final ResolveInfo info : matches) {
+//                                    Log.e("gmailpackagename", "" + info.activityInfo.name.toLowerCase());
+//                                    if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+//                                        best = info;
+//                                }
+//                                if (best != null) {
+//                                    emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+//                                }
+//                                getContext().startActivity(emailIntent);
+//                                String[] TO = {""};
+//                                String[] CC = {""};
+//                                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//                                emailIntent.setData(Uri.parse("mailto:"+responsedata.get(position).getEmail()));
+//                                emailIntent.setType("text/plain");
+//                                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//                                emailIntent.putExtra(Intent.EXTRA_CC, CC);
+//                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+//                                emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+//                                try {
+//                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//                                    Log.i("FinishedSendingEmail", "here");
+//                                } catch (android.content.ActivityNotFoundException ex) {
+//                                    Toast.makeText(getContext(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+//                                }
+                            }
+                        });
+                        directionbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mapboxMap.getMarkers().get(position).hideInfoWindow();
+                                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                    Toast.makeText(getContext(), "Please enable location permission!", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    Location lastKnownLocation = mapboxMap.getLocationComponent().getLastKnownLocation();
+                                    if (lastKnownLocation != null) {
+                                        double lastLatitude = lastKnownLocation.getLatitude();
+                                        double lastLongitude = lastKnownLocation.getLongitude();
+                                        String uri = "http://maps.google.com/maps?saddr=" + lastLatitude + "," + lastLongitude + "&daddr=" + responsedata.get(position).getLongitude() + "," + responsedata.get(position).getLatitude();
+                                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                                        getContext().startActivity(intent);
+                                    }
+                                }
+                            }
+                        });
+                        exitbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mapboxMap.getMarkers().get(position).hideInfoWindow();
+                            }
+                        });
+                        return view;
+                    }
+                });
+//        mapView.getMapAsync(new OnMapReadyCallback() {
+//            @Override
+//            public void onMapReady(GoogleMap mMap) {
+//                googleMap = mMap;
+//                // For showing a move to my location button
+//                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+//                googleMap.setMyLocationEnabled(true);
+//                for (int i = 0; i < responsedata.size(); i++) {
+//                    LatLng pos = new LatLng(responsedata.get(i).getLatitude(), responsedata.get(i).getLongitude());
+//                    MarkerOptions marker = new MarkerOptions().position(pos).title("Marker Title").snippet("Marker Description");
+//                    googleMap.addMarker(marker).setTag(i);
+//                    if (i == 0) {
+//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+//                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                    }
+//                }
+//                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getContext(), responsedata));
+//            }
+//        });
             }
         });
     }
@@ -358,30 +601,30 @@ public class MapsFragment extends Fragment {
 //    @Override
 //    public void onResume() {
 //        super.onResume();
-//        if (mMapView != null) {
-//            mMapView.onResume();
+//        if (mapView != null) {
+//            mapView.onResume();
 //        }
 //    }
 //
 //    @Override
 //    public void onPause() {
 //        super.onPause();
-//        if (mMapView != null)
-//            mMapView.onPause();
+//        if (mapView != null)
+//            mapView.onPause();
 //    }
 //
 //    @Override
 //    public void onDestroy() {
 //        super.onDestroy();
-//        if (mMapView != null)
-//            mMapView.onDestroy();
+//        if (mapView != null)
+//            mapView.onDestroy();
 //    }
 //
 //    @Override
 //    public void onLowMemory() {
 //        super.onLowMemory();
-//        if (mMapView != null)
-//            mMapView.onLowMemory();
+//        if (mapView != null)
+//            mapView.onLowMemory();
 //    }
 
     private void GetLocationData(Bundle savedInstanceState) {
@@ -440,17 +683,17 @@ public class MapsFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         if (spinnerbol) {
-                                            if (googleMap != null) {
-                                                if (search_branch_edittext.getText().toString().isEmpty()) {
-                                                    LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
-                                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                                } else {
-                                                    LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
-                                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                                }
-                                            }
+//                                            if (googleMap != null) {
+//                                                if (search_branch_edittext.getText().toString().isEmpty()) {
+//                                                    LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
+//                                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+//                                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                                                } else {
+//                                                    LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
+//                                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+//                                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                                                }
+//                                            }
                                             spinnerbol = false;
                                         }
                                     }
@@ -479,17 +722,17 @@ public class MapsFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         if (spinnerbol) {
-                            if (googleMap != null) {
-                                if (search_branch_edittext.getText().toString().isEmpty()) {
-                                    LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
-                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                } else {
-                                    LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
-                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
-                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                }
-                            }
+//                            if (googleMap != null) {
+//                                if (search_branch_edittext.getText().toString().isEmpty()) {
+//                                    LatLng pos = new LatLng(datums.get(position).getLatitude(), datums.get(position).getLongitude());
+//                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+//                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                                } else {
+//                                    LatLng pos = new LatLng(finalarr.get(position).getLatitude(), finalarr.get(position).getLongitude());
+//                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+//                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                                }
+//                            }
                             spinnerbol = false;
                         }
                     }

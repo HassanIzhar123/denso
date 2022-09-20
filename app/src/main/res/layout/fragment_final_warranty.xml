@@ -36,10 +36,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
+                android:ems="10"
+                android:minWidth="300dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:text="@string/new_part_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/new_part_number"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -50,11 +52,12 @@
                 android:layout_below="@+id/newparttextview"
                 android:background="@null"
                 android:inputType="phone"
+                android:ems="10"
                 android:minWidth="300dp"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/newpartview"
@@ -89,10 +92,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/new_part_name"
+                android:ems="10"
+                android:minWidth="300dp"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/new_part_name"
                 android:textColor="#797979"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/newserialnumberedittext"
@@ -100,12 +105,13 @@
                 android:layout_height="42dp"
                 android:layout_below="@+id/newpartnumbertextview"
                 android:background="@null"
+                android:ems="10"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
                 android:textColor="#303030"
                 android:textColorHint="#303030"
                 android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/newserialnumberview"
@@ -127,9 +133,11 @@
                 android:id="@+id/newserialnumbertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ems="10"
+                android:minWidth="300dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/new_serial_number"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/new_serial_number"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -140,6 +148,7 @@
                 android:layout_below="@+id/newserialnumbertextview"
                 android:background="@null"
                 android:inputType="phone"
+                android:ems="10"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
                 android:textColor="#303030"
@@ -168,8 +177,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/new_part_invoice_number"
+                android:ems="10"
+                android:minWidth="300dp"
                 android:fontFamily="@font/poppins_regular"
+                android:text="@string/new_part_invoice_number"
                 android:textColor="#797979"
                 android:textSize="12sp" />
 
@@ -180,6 +191,7 @@
                 android:layout_below="@+id/newpartinvoincetextview"
                 android:background="@null"
                 android:inputType="phone"
+                android:ems="10"
                 android:minWidth="300dp"
                 android:paddingEnd="25dp"
                 android:textColor="#303030"
@@ -204,10 +216,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/newpartinvoincerel"
             android:layout_marginTop="20dp"
-            android:text="@string/additional_comments"
+            android:ems="10"
+            android:minWidth="300dp"
             android:fontFamily="@font/poppins_medium"
+            android:text="@string/additional_comments"
             android:textColor="#0F0A39"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/messagetext"
@@ -215,9 +229,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/additionalcommentstext"
             android:layout_marginTop="10dp"
-            android:text="@string/enter_message"
             android:fontFamily="@font/poppins_regular"
+            android:text="@string/enter_message"
             android:textColor="#797979"
+            android:ems="10"
+            android:minWidth="300dp"
             android:textSize="12sp" />
 
         <EditText
@@ -240,8 +256,7 @@
             android:textColor="#303030"
             android:textColorHint="#303030"
             android:textCursorDrawable="@drawable/edittext_cursor_drawable"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/notetext"
@@ -266,7 +281,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/roboto"
-            android:minWidth="300dp"
+            android:ems="10"
+                android:minWidth="300dp"
             android:text="@string/submit_claim"
             android:textSize="16sp"
             android:textStyle="bold"

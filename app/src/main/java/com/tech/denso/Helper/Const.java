@@ -6,7 +6,8 @@ public class Const {
         return BaseUrl;
     }
 
-    String BaseUrl = "http://45.153.48.165:8085";
+//    String BaseUrl = "http://45.153.48.165:8085";
+    String BaseUrl = "https://djautoac.com";
 
     public String getEmail() {
         return Email;

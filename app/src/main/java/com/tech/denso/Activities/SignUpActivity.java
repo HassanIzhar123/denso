@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,6 +31,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.tech.denso.Helper.Const;
 import com.tech.denso.Helper.Helper;
 import com.tech.denso.Helper.SharedPreference;
@@ -55,8 +62,9 @@ import needle.UiRelatedTask;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView signinbtn;
     Button signupbtn;
-    EditText firstname_edittext, lastname_edittext, email_edittext, password_edittext, confirm_password_edittext;
-    ImageButton showbtn, hidebtn, confirmshowbtn, confirmhidebtn;
+    EditText firstname_edittext, lastname_edittext, phone_edittext, email_edittext, password_edittext, confirm_password_edittext;
+    ImageButton showbtn, hidebtn, confirmshowbtn, confirmhidebtn, backbtn;
+    ImageView phoneredcheck, phonegreencheck;
 
     @Override
     public void onBackPressed() {
@@ -71,6 +79,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
         firstname_edittext = findViewById(R.id.firstname_edittext);
         lastname_edittext = findViewById(R.id.lastname_edittext);
+        phone_edittext = findViewById(R.id.phone_edittext);
+        phonegreencheck = findViewById(R.id.phonegreencheck);
+        phoneredcheck = findViewById(R.id.phoneredcheck);
         email_edittext = findViewById(R.id.email_edittext);
         password_edittext = findViewById(R.id.password_edittext);
         confirm_password_edittext = findViewById(R.id.confirm_password_edittext);
@@ -80,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         hidebtn = findViewById(R.id.hidebtn);
         confirmshowbtn = findViewById(R.id.confirmshowbtn);
         confirmhidebtn = findViewById(R.id.confirmhidebtn);
+        backbtn = findViewById(R.id.backbtn);
         showbtn.setOnClickListener(this);
         hidebtn.setOnClickListener(this);
         confirmshowbtn.setOnClickListener(this);
@@ -91,6 +103,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 new Helper().HideKeyboard(SignUpActivity.this);
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
         signupbtn.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +124,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if (CheckEditTextEmptyOrNot(email_edittext)) {
                     SetError(email_edittext, "Email Field cannot be Empty!");
                 }
+                if (!isPhoneNumberValid(getString(R.string.suadiarabiacode) + phone_edittext.getText().toString())) {
+                    phonegreencheck.setVisibility(View.GONE);
+                    phoneredcheck.setVisibility(View.VISIBLE);
+                }
                 if (!isEmailValid(email_edittext.getText().toString().trim().replaceAll(" ", ""))) {
                     SetError(email_edittext, "Email is not Correct!");
                 }
@@ -120,13 +142,51 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     SetError(confirm_password_edittext, "Password is not Matching!");
                 }
                 if (!CheckEditTextEmptyOrNot(firstname_edittext) && !CheckEditTextEmptyOrNot(lastname_edittext)
-                        && !CheckEditTextEmptyOrNot(email_edittext) && isEmailValid(email_edittext.getText().toString().trim().replaceAll(" ", "")) && !CheckEditTextEmptyOrNot(password_edittext) && !CheckEditTextEmptyOrNot(confirm_password_edittext)
+                        && !CheckEditTextEmptyOrNot(email_edittext) && (isPhoneNumberValid(getString(R.string.suadiarabiacode) + phone_edittext.getText().toString()))
+                        && isEmailValid(email_edittext.getText().toString().trim().replaceAll(" ", "")) && !CheckEditTextEmptyOrNot(password_edittext) && !CheckEditTextEmptyOrNot(confirm_password_edittext)
                         && password_edittext.getText().toString().equals(confirm_password_edittext.getText().toString())) {
                     SignUp(firstname_edittext.getText().toString().trim().replaceAll(" ", ""), lastname_edittext.getText().toString().trim().replaceAll(" ", ""),
                             email_edittext.getText().toString().trim().replaceAll(" ", ""), password_edittext.getText().toString());
                 }
             }
         });
+        phone_edittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isPhoneNumberValid(getString(R.string.suadiarabiacode) + phone_edittext.getText().toString())) {
+                    phonegreencheck.setVisibility(View.GONE);
+                    phoneredcheck.setVisibility(View.VISIBLE);
+                } else {
+                    phonegreencheck.setVisibility(View.VISIBLE);
+                    phoneredcheck.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    boolean isPhoneNumberValid(String number) {
+        return isPhoneNumberValid(number, "SA");
+    }
+
+    public boolean isPhoneNumberValid(String phoneNumber, String countryCode) {
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance(getApplicationContext());
+        try {
+            Phonenumber.PhoneNumber numberProto = phoneUtil.parse(phoneNumber, countryCode);
+            return phoneUtil.isValidNumber(numberProto);
+        } catch (NumberParseException e) {
+            System.err.println("NumberParseException was thrown: " + e.toString());
+        }
+        return false;
     }
 
     public String getCurrentUTCTime() {
@@ -153,12 +213,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             jsonBody.put("lastName", lastname);
             jsonBody.put("email", email);
             jsonBody.put("password", password);
+            jsonBody.put("phoneNumber", getString(R.string.suadiarabiacode) + phone_edittext.getText().toString());
             jsonBody.put("type", "customer");
             jsonBody.put("__v", 0);
+            Log.e("signuppaylaod", "" + jsonBody.toString());
             final String requestBody = jsonBody.toString();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    Log.e("signupresponse", "" + response);
                     Needle.onBackgroundThread().execute(new UiRelatedTask<SignAsyncUpModel>() {
                         @Override
                         protected SignAsyncUpModel doWork() {
@@ -181,15 +244,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         new Const().setFirstname(firstname);
                                         new Const().setLastname(lastname);
                                         new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setBoolean("LoggedIn", true);
-                                        dialog.cancel();
+                                        dialog.dismiss();
                                         if (getIntent().getBooleanExtra("clickedonuser", false)) {
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Firstname", firstname);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Lastname", lastname);
                                             BookingSendModel bookingmodel = (BookingSendModel) getIntent().getSerializableExtra("signupbookingmodel");
-                                            SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
-                                                    , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+                                            SendBooking(new Const().getEmail(),
                                                     bookingmodel.getMake(), bookingmodel.getStatus(),
                                                     bookingmodel.getModel(), bookingmodel.getService(),
                                                     bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()),
@@ -207,7 +269,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
-                                        } else {
+                                        } else if (getIntent().getStringExtra("singleSignupActivity") != null &&
+                                                getIntent().getStringExtra("singleSignupActivity").equals("true")) {
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Email", email);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Password", password);
                                             new SharedPreference(getApplicationContext(), getApplicationContext().toString()).setString("Firstname", firstname);
@@ -222,7 +285,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         }
                                     } else if (responsedata.getMessage().equals("Customer already registered")) {
                                         Toast.makeText(getApplicationContext(), "" + responsedata.getMessage(), Toast.LENGTH_SHORT).show();
-                                        dialog.cancel();
+                                        dialog.dismiss();
                                     }
                                 }
                             } else {
@@ -247,6 +310,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
             }) {
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    int mStatusCode = response.statusCode;
+                    Log.e("statucodesignuo", "" + mStatusCode);
+                    return super.parseNetworkResponse(response);
+                }
+
                 @Override
                 public String getBodyContentType() {
                     return "application/json; charset=utf-8";
@@ -307,7 +377,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 WarrantyClaim responsedata = gson.fromJson(response.toString(), WarrantyClaim.class);
                 if (responsedata.getMessage().equals("Warranty Claim has been Submitted Successfully!")) {
                     Intent i = new Intent(SignUpActivity.this, SucessfullSignupActivity.class);
-                    i.putExtra("fromclaim", true);
+                    i.putExtra("fromclaim", "true");
                     startActivity(i);
                 }
             }
@@ -327,7 +397,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         requestQueue.add(jsonOblect);
     }
 
-    private void SendBooking(String firstname, String lastname, String email, String phonenumber, String vehicleType, String waitingStatus, String transmission,
+    private void SendBooking(String email, String vehicleType, String waitingStatus, String transmission,
                              String serviceDetails, String model, Boolean isListed, String branchName, String bookingTime, String bookingDate) {
         try {
             Dialog dialog = new Dialog(SignUpActivity.this);
@@ -343,10 +413,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             jsonBody.put("bookingTime", bookingTime);
             jsonBody.put("branchName", branchName);
             jsonBody.put("email", email);
-            jsonBody.put("firstName", firstname);
+//            jsonBody.put("firstName", firstname);
             jsonBody.put("isListed", String.valueOf(isListed));
-            jsonBody.put("lastName", lastname);
-            jsonBody.put("phoneNumber", phonenumber);
+//            jsonBody.put("lastName", lastname);
+//            jsonBody.put("phoneNumber", phonenumber);
             jsonBody.put("serviceDetails", serviceDetails);
             jsonBody.put("transmission", transmission);
             jsonBody.put("vehicleType", vehicleType);
@@ -362,7 +432,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     if (dialog != null) {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, SucessfullSignupActivity.class));
+                            Intent i = new Intent(SignUpActivity.this, SucessfullSignupActivity.class);
+                            i.putExtra("frombooking", "true");
+                            startActivity(i);
                             Boolean loggedbol = new SharedPreference(getApplicationContext(), getApplicationContext().toString()).getPreferenceBoolean("LoggedIn");
                             if (loggedbol) {
                                 BookingViewModel model = new ViewModelProvider(SignUpActivity.this).get(BookingViewModel.class);

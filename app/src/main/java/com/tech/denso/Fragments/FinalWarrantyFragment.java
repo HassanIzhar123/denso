@@ -126,6 +126,16 @@ public class FinalWarrantyFragment extends Fragment {
                 }
             }
         });
+        message_edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    message_edittext.setBackgroundResource(R.drawable.selected_warranty_failure_edittext_background);
+                } else {
+                    message_edittext.setBackgroundResource(R.drawable.warranty_failure_edittext_background);
+                }
+            }
+        });
         return view;
     }
 
@@ -156,7 +166,7 @@ public class FinalWarrantyFragment extends Fragment {
         jsonBody.put("newSerialNumber", item.getNewSerialNumber());
         jsonBody.put("newPartInvoiceNumber", item.getNewPartInvoice());
         jsonBody.put("message", item.getComments());//
-        jsonBody.put("email", item.getComments());//
+        jsonBody.put("email", new Const().getEmail());//
         Log.e("finaljsonobkect", "" + jsonBody.toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
@@ -228,7 +238,7 @@ public class FinalWarrantyFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    int colorFrom = Color.parseColor("#FAFAFA");
+                    int colorFrom = Color.parseColor("#AAAAAA");
                     int colorTo = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);
@@ -243,7 +253,7 @@ public class FinalWarrantyFragment extends Fragment {
                     });
                     colorAnimation.start();
                 } else {
-                    int colorTo = Color.parseColor("#FAFAFA");
+                    int colorTo = Color.parseColor("#AAAAAA");
                     int colorFrom = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);

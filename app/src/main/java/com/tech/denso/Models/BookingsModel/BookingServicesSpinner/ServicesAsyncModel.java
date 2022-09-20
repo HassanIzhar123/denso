@@ -1,8 +1,5 @@
 package com.tech.denso.Models.BookingsModel.BookingServicesSpinner;
 
-import com.tech.denso.Item;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServicesAsyncModel {

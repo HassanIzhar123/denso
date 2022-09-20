@@ -14,6 +14,8 @@
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimaryDark">#ed1a3b</item>
+        <item name="colorAccent">@color/main_Red_Color</item>
+        <item name="colorPrimary">@color/main_Red_Color</item>
     </style>
 
     <style name="noactionbar" parent="AppTheme.NoActionBar">
@@ -42,7 +44,13 @@
     <style name="WhiteCheck">
         <item name="colorAccent">#fff</item>
     </style>
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/main_Red_Color</item>
-    </style>
+<!--    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">-->
+<!--        <item name="colorAccent">@color/main_Red_Color</item>-->
+<!--    </style>-->
+<!--    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">-->
+<!--        <item name="android:colorAccent">@color/main_Red_Color</item>-->
+
+<!--        &lt;!&ndash; No need to override 'datePickerStyle' &ndash;&gt;-->
+<!--        &lt;!&ndash; <item name="android:datePickerStyle">@style/MyDatePickerStyle</item> &ndash;&gt;-->
+<!--    </style>-->
 </resources>

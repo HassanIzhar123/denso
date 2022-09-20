@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.tech.denso.Models.Services.Datum;
 import com.tech.denso.R;
 
@@ -44,32 +45,39 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String servicename = mData.get(position).getServiceName();
-        holder.headertext.setText(servicename);
-        if (position == 0) {
-            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
-            holder.serviceimg.setImageResource(R.drawable.group_9614);
-        } else if (position == 1) {
-            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
-            holder.serviceimg.setImageResource(R.drawable.group_9605);
-        } else if (position == 2) {
-            holder.btnrel.setBackgroundResource(R.drawable.red_round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#FFFFFF"));
-            holder.serviceimg.setImageResource(R.drawable.group_9608);
-        } else if (position == 3) {
-            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
-            holder.serviceimg.setImageResource(R.drawable.electrical0services_icon);
+        if (mData.get(position).isAnotherRel()) {
+            holder.bannerrel.setVisibility(View.VISIBLE);
+            holder.mainrel.setVisibility(View.GONE);
         } else {
-            holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
-            holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
-        }
+            holder.bannerrel.setVisibility(View.GONE);
+            holder.mainrel.setVisibility(View.VISIBLE);
+            String servicename = mData.get(position).getServiceName();
+            holder.headertext.setText(servicename);
+            if (position == 0) {
+                holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
+                holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
+                holder.serviceimg.setImageResource(R.drawable.group_9614);
+            } else if (position == 1) {
+                holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
+                holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
+                holder.serviceimg.setImageResource(R.drawable.group_9605);
+            } else if (position == 2) {
+                holder.btnrel.setBackgroundResource(R.drawable.red_round_button_background);
+                holder.bookbtn.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.serviceimg.setImageResource(R.drawable.group_9608);
+            } else if (position == 3) {
+                holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
+                holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
+                holder.serviceimg.setImageResource(R.drawable.electrical0services_icon);
+            } else {
+                holder.btnrel.setBackgroundResource(R.drawable.round_button_background);
+                holder.bookbtn.setTextColor(Color.parseColor("#ED1A3B"));
+            }
 //        String htmlText = mData.get(position).getServiceCategory()
 //                .replace("//","<font color='#c5c5c5'>"+"//" +"</font>");
 //        holder.descriptiontext.setText(Html.fromHtml(htmlText));
-        holder.descriptiontext.setText(mData.get(position).getServiceCategory());
+            holder.descriptiontext.setText(mData.get(position).getServiceCategory());
+        }
     }
 
     @Override
@@ -77,11 +85,12 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
         return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView headertext, descriptiontext;
         Button bookbtn;
+        MaterialButton booknowbtn;
         ImageView serviceimg;
-        RelativeLayout btnrel;
+        RelativeLayout btnrel, mainrel, bannerrel;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -89,13 +98,24 @@ public class ServicingViewAdapter extends RecyclerView.Adapter<ServicingViewAdap
             serviceimg = itemView.findViewById(R.id.serviceimg);
             descriptiontext = itemView.findViewById(R.id.descriptiontext);
             bookbtn = itemView.findViewById(R.id.bookbtn);
+            booknowbtn = itemView.findViewById(R.id.booknowbtn);
             btnrel = itemView.findViewById(R.id.btnrel);
-            bookbtn.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            mainrel = itemView.findViewById(R.id.mainrel);
+            bannerrel = itemView.findViewById(R.id.bannerrel);
+            bookbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mClickListener != null)
+                        mClickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
+            booknowbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mClickListener != null)
+                        mClickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
         }
     }
 

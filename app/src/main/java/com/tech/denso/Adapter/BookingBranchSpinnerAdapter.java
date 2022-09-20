@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.tech.denso.Models.Locations.Datum;
 import com.tech.denso.R;
 
 import java.util.List;
@@ -20,6 +21,10 @@ public class BookingBranchSpinnerAdapter extends BaseAdapter {
         this.context = context;
         this.datums = datums;
         inflter = (LayoutInflater.from(context));
+    }
+
+    public List<Datum> getDatums() {
+        return datums;
     }
 
     @Override

@@ -101,12 +101,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
                 if (getIntent() != null) {
                     Log.e("onsignupclciked", "checked here");
-                    i.putExtra("clickedonuser", getIntent().getBooleanExtra("bookingfromfragment", false));
-                    i.putExtra("signupbookingmodel", getIntent().getSerializableExtra("bookingmodel"));
-                    i.putExtra("warrantyclickedonuser", getIntent().getBooleanExtra("warrantyfromfragment", false));
-                    i.putExtra("signupwarrantymodel", getIntent().getSerializableExtra("warrantymodel"));
+                    if (getIntent().getSerializableExtra("bookingmodel") != null) {
+                        i.putExtra("clickedonuser", getIntent().getBooleanExtra("bookingfromfragment", false));
+                        i.putExtra("signupbookingmodel", getIntent().getSerializableExtra("bookingmodel"));
+                    } else if (getIntent().getSerializableExtra("warrantymodel") != null) {
+                        i.putExtra("warrantyclickedonuser", getIntent().getBooleanExtra("warrantyfromfragment", false));
+                        i.putExtra("signupwarrantymodel", getIntent().getSerializableExtra("warrantymodel"));
+                    } else {
+                        i.putExtra("singleSignupActivity", "true");
+                    }
                     startActivity(i);
-                    finish();
+//                    finish();
                 }
             }
         });
@@ -182,8 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Boolean warrantyfromfragment = getIntent().getBooleanExtra("warrantyfromfragment", false);
                                 if (bookingfromfragment) {
                                     BookingSendModel bookingmodel = (BookingSendModel) getIntent().getSerializableExtra("bookingmodel");
-                                    SendBooking(bookingmodel.getFirstName(), bookingmodel.getLastName()
-                                            , bookingmodel.getEmail(), bookingmodel.getPhoneNumber(),
+                                    SendBooking(bookingmodel.getEmail(),
                                             bookingmodel.getMake(), bookingmodel.getStatus(),
                                             bookingmodel.getModel(), bookingmodel.getService(),
                                             bookingmodel.getYear(), Boolean.valueOf(bookingmodel.getIsListed()),
@@ -302,7 +306,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         requestQueue.add(jsonOblect);
     }
 
-    private void SendBooking(String firstname, String lastname, String email, String phonenumber, String vehicleType, String waitingStatus, String transmission,
+    private void SendBooking(String email, String vehicleType, String waitingStatus, String transmission,
                              String serviceDetails, String model, Boolean isListed, String branchName, String bookingTime, String bookingDate) {
         try {
             Dialog dialog = new Dialog(LoginActivity.this);
@@ -318,10 +322,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             jsonBody.put("bookingTime", bookingTime);
             jsonBody.put("branchName", branchName);
             jsonBody.put("email", email);
-            jsonBody.put("firstName", firstname);
+//            jsonBody.put("firstName", firstname);
             jsonBody.put("isListed", String.valueOf(isListed));
-            jsonBody.put("lastName", lastname);
-            jsonBody.put("phoneNumber", phonenumber);
+//            jsonBody.put("lastName", lastname);
+//            jsonBody.put("phoneNumber", phonenumber);
             jsonBody.put("serviceDetails", serviceDetails);
             jsonBody.put("transmission", transmission);
             jsonBody.put("vehicleType", vehicleType);

@@ -1,12 +1,6 @@
 package com.tech.denso.Fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,30 +13,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.tech.denso.Activities.DashboardActivity;
-import com.tech.denso.Adapter.BookingHistoryViewAdapter;
 import com.tech.denso.Adapter.ServicingViewAdapter;
-import com.tech.denso.Helper.App;
+import com.tech.App;
 import com.tech.denso.Helper.Const;
-import com.tech.denso.Helper.TaskRunner;
-import com.tech.denso.Models.BookingsModel.BookingsModel;
 import com.tech.denso.Models.Services.Datum;
 import com.tech.denso.Models.Services.ServicesModel;
 import com.tech.denso.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import needle.Needle;
 import needle.UiRelatedTask;
@@ -128,6 +117,9 @@ public class ServicingFragment extends Fragment {
                     protected void thenDoUiRelatedWork(ServicingAsyncModel result) {
                         List<Datum> list = result.getList();
                         if (list.size() > 0) {
+                            Datum dat=new Datum();
+                            dat.setAnotherRel(true);
+                            list.set(0,dat);
                             ServicingViewAdapter adapter = new ServicingViewAdapter(getContext(), list);
                             servicingrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
                             servicingrecyclerview.setAdapter(adapter);
@@ -155,6 +147,12 @@ public class ServicingFragment extends Fragment {
                 servicingrecyclerview.setVisibility(View.GONE);
             }
         }) {
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                Log.e("statuscodevaluececk",""+mStatusCode);
+                return super.parseNetworkResponse(response);
+            }
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();

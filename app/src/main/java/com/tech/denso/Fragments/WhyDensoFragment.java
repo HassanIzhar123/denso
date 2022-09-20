@@ -1,42 +1,16 @@
 package com.tech.denso.Fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
 import com.tech.denso.Activities.DashboardActivity;
-import com.tech.denso.Adapter.ServicingViewAdapter;
-import com.tech.denso.Adapter.WhyDensoServicesAdapter;
-import com.tech.denso.Helper.App;
-import com.tech.denso.Helper.Const;
-import com.tech.denso.Helper.TaskRunner;
-import com.tech.denso.Models.PackagesModel.Datum;
-import com.tech.denso.Models.PackagesModel.PackagesModel;
-import com.tech.denso.Models.Services.ServicesModel;
 import com.tech.denso.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Callable;
 
 public class WhyDensoFragment extends Fragment {
     View v;

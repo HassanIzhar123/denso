@@ -7,23 +7,24 @@
     <string name="emailerror">Email Field cannot be Empty!</string>
     <string name="phonenumbererror">Phone Number Field cannot be Empty!</string>
     <string name="BookingFragment_nobrancherror">There is no branch! you can not set any booking</string>
-    <string name="city_state_zip">City/State/Zip</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="city_state_zip">State/Zip</string>
+    <string name="phone_number1">Phone Number 1</string>
+    <string name="phone_number2">Phone Number 2</string>
     <string name="or">————————— OR —————————</string>
     <string name="there_should_be_no_space_in_last_name">There should be no space in last name</string>
     <string name="there_should_be_no_space_in_first_name">There should be no space in last name</string>
-    <string name="street">Street</string>
-    <string name="company_name">Company Name</string>
+    <string name="street">Street 1</string>
+    <string name="street2">Street 2</string>
+    <string name="company_name">Company Name/Shop Name</string>
     <string name="personal_information">Personal Information</string>
-    <string name="homeowner_name">Homeowner Name</string>
+    <string name="homeowner_name">Customer No/Owner Name</string>
     <string name="select_services">Select Services</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_initial_warranty_next">Next</string>
     <string name="failed_part">Failed Part</string>
-    <string name="sales_order_or_invoice_number">Sales Order OR Invoice Number</string>
+    <string name="sales_order_or_invoice_number">Invoice Number</string>
     <string name="manufacturer">Manufacturer</string>
-    <string name="unit_model_number">Part Receipt Voucher</string>
+    <string name="unit_model_number">Part Receipt Voucher:Damage/Warranty no (4747)</string>
     <string name="unit_serial_number">Unit Serial Number</string>
     <string name="enter_message">Enter Message</string>
     <string name="specific_failure_reason">Specific Failure Reason</string>
@@ -66,4 +67,10 @@
     <string name="unit_part_number_cant_be_empty">Unit Part Number Can\'t be Empty!</string>
     <string name="please_select_services">Please select services!</string>
     <string name="no_services_found">No services found!</string>
+    <string name="customername">Customer Name/Shop Name</string>
+    <string name="street1">Street 1 </string>
+    <string name="city">City</string>
+    <string name="hurry_up">Hurry Up!</string>
+    <string name="air_conditioning_service_maintenance_and_repair">Air Conditioning Service, Maintenance and Repair:</string>
+    <string name="free_health_text">Free Health Checks, Air-conditioning Anti-bacterial clean, air-conditioning re-gas, Checking Freon level, Detection of leaks in the system, Inspection of hoses condition, Inspection of seals condition.</string>
 </resources>

@@ -1,83 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"  android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
+    <RelativeLayout
+        android:id="@+id/mainrel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:padding="20dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
 
             <RelativeLayout
-                android:id="@+id/headerrel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:padding="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/headerrel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/headertext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Services"
+                        android:textColor="#262A33"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/serviceimg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/group_9614" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/descriptiontext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/headerrel"
+                    android:layout_alignEnd="@+id/headerrel"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineHeight="25dp"
+                    android:text="Description"
+                    android:textColor="#262A33"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/btnrel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-25dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_button_background"
+            android:elevation="10dp">
+
+            <Button
+                android:id="@+id/bookbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Book Now"
+                android:textColor="#FE0025"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bannerrel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mancard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="#FFEF81"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/headertext"
+                    android:id="@+id/hurryuptext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toStartOf="@+id/mainpic"
+                    android:fontFamily="@font/renitta"
+                    android:text="@string/hurry_up"
+                    android:textColor="#ED1A3B"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/man_headertext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Services"
-                    android:textColor="#262A33"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:layout_below="@+id/hurryuptext"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toStartOf="@+id/mainpic"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/air_conditioning_service_maintenance_and_repair"
+                    android:textColor="#303030"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/man_descriptiontext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/man_headertext"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_toStartOf="@+id/mainpic"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/free_health_text"
+                    android:textColor="#0F0A39"
+                    android:textSize="12sp" />
 
                 <ImageView
-                    android:id="@+id/serviceimg"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/mainpic"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_map" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/mainpicture" />
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/descriptiontext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/headerrel"
-                android:layout_marginTop="20dp"
-                android:text="Description"
-                android:textColor="#262A33"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
-
-    <RelativeLayout
-        android:id="@+id/btnrel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-25dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/round_button_background"
-        android:elevation="10dp">
-
-        <Button
-            android:id="@+id/bookbtn"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/booknowbtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
+            android:layout_height="55dp"
+            android:layout_below="@+id/mancard"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-30dp"
+            app:cornerRadius="30dp"
+            app:backgroundTint="#ED1A3B"
+            android:elevation="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="Book Now"
-            android:textColor="#FE0025"
+            android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
     </RelativeLayout>

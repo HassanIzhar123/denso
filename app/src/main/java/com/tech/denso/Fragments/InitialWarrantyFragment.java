@@ -1,42 +1,23 @@
 package com.tech.denso.Fragments;
 
-import static com.tech.denso.Helper.Helper.getListener;
-
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -45,17 +26,13 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import com.tech.denso.Activities.DashboardActivity;
 import com.tech.denso.Helper.Helper;
-import com.tech.denso.Interfaces.ListenFromActivity;
-import com.tech.denso.Interfaces.Listener;
-import com.tech.denso.Item;
+import com.tech.denso.Models.InitialWarrantyFragment.Item;
 import com.tech.denso.Models.InitialWarrantyFragment.InitialWarrantyModel;
 import com.tech.denso.R;
-import com.tech.denso.SelectableAdapter;
 import com.tech.denso.ViewModels.InitialViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class InitialWarrantyFragment extends Fragment {
 
@@ -129,54 +106,13 @@ public class InitialWarrantyFragment extends Fragment {
                 if (isPhoneNumberValid("+966"+s.toString())) {
                     phonegreencheck.setVisibility(View.VISIBLE);
                     phoneredcheck.setVisibility(View.GONE);
-                    phoneview.getBackground().setColorFilter(Color.parseColor("#00C149"),
+                    phoneview.getBackground().setColorFilter(Color.parseColor("#AAAAAA"),
                             PorterDuff.Mode.SRC_ATOP);
-
-//                    int colorTo = Color.parseColor("#00C149");
-//                    int color =getResources().getColor(android.R.color.holo_red_light);
-//                    Drawable background = view.getBackground();
-//                    if (background instanceof ColorDrawable) {
-//                        color = ((ColorDrawable) background).getColor();
-//                    }
-//                    Log.e("colorchevkalue",""+color);
-//                    int colorFrom = color;
-//                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-//                    colorAnimation.setDuration(250);
-//                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                        @Override
-//                        public void onAnimationUpdate(ValueAnimator animator) {
-//                            Log.e("coloranimationcheck", "here");
-//                            phoneview.getBackground().setColorFilter((int) animator.getAnimatedValue(),
-//                                    PorterDuff.Mode.SRC_ATOP);
-//                        }
-//
-//                    });
-//                    colorAnimation.start();
                 } else {
                     phonegreencheck.setVisibility(View.GONE);
                     phoneredcheck.setVisibility(View.VISIBLE);
                     phoneview.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_red_light),
                             PorterDuff.Mode.SRC_ATOP);
-//                    int color = Color.parseColor("#00C149");
-//                    Drawable background = view.getBackground();
-//                    if (background instanceof ColorDrawable) {
-//                        color = ((ColorDrawable) background).getColor();
-//                    }
-//                    Log.e("colorchevkalue1",""+color);
-//                    int colorFrom = color;
-//                    int colorTo = getResources().getColor(android.R.color.holo_red_light);
-//                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-//                    colorAnimation.setDuration(250);
-//                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                        @Override
-//                        public void onAnimationUpdate(ValueAnimator animator) {
-//                            Log.e("coloranimationcheck1", "here");
-//                            phoneview.getBackground().setColorFilter((int) animator.getAnimatedValue(),
-//                                    PorterDuff.Mode.SRC_ATOP);
-//                        }
-//
-//                    });
-//                    colorAnimation.start();
                 }
             }
 
@@ -196,7 +132,7 @@ public class InitialWarrantyFragment extends Fragment {
                 if (isPhoneNumberValid("+966"+s.toString())) {
                     homeownerphonegreencheck.setVisibility(View.VISIBLE);
                     homeownerphoneredcheck.setVisibility(View.GONE);
-                    homeownerphoneview.getBackground().setColorFilter(Color.parseColor("#00C149"),
+                    homeownerphoneview.getBackground().setColorFilter(Color.parseColor("#AAAAAA"),
                             PorterDuff.Mode.SRC_ATOP);
                 } else {
                     homeownerphonegreencheck.setVisibility(View.GONE);
@@ -315,7 +251,7 @@ public class InitialWarrantyFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    int colorFrom = Color.parseColor("#FAFAFA");
+                    int colorFrom = Color.parseColor("#AAAAAA");
                     int colorTo = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);
@@ -329,7 +265,7 @@ public class InitialWarrantyFragment extends Fragment {
                     });
                     colorAnimation.start();
                 } else {
-                    int colorTo = Color.parseColor("#FAFAFA");
+                    int colorTo = Color.parseColor("#AAAAAA");
                     int colorFrom = getResources().getColor(android.R.color.holo_red_light);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                     colorAnimation.setDuration(250);

@@ -31,18 +31,52 @@ public class BookingHistoryViewAdapter extends RecyclerView.Adapter<BookingHisto
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.ordervaluetext.setText(mData.get(position).getId());
-        holder.datevaluetext.setText(mData.get(position).getBookingDate().split("T")[0]);
-        holder.timevaluetext.setText(mData.get(position).getBookingTime().split("Z")[0]);
-        if (mData.get(position).getServiceDetails().equals("")) {
-            holder.bookservicevaluetext.setText("-");
-        } else {
-            holder.bookservicevaluetext.setText(mData.get(position).getServiceDetails());
+        if (mData.get(position) != null) {
+            if (mData.get(position).getId() != null && !mData.get(position).getId().equals("null")) {
+                holder.ordervaluetext.setText(mData.get(position).getId());
+            } else {
+                holder.ordervaluetext.setText("-");
+            }
+            if (mData.get(position).getBookingDate() != null && !mData.get(position).getBookingDate().equals("null")) {
+                holder.datevaluetext.setText(mData.get(position).getBookingDate().split("T")[0]);
+            } else {
+                holder.datevaluetext.setText("-");
+            }
+            if (mData.get(position).getBookingTime() != null && !mData.get(position).getBookingTime().equals("null")) {
+                holder.timevaluetext.setText(mData.get(position).getBookingTime().split("Z")[0]);
+            } else {
+                holder.timevaluetext.setText("-");
+            }
+            if (mData.get(position).getServiceDetails().equals("")) {
+                holder.bookservicevaluetext.setText("-");
+            } else {
+                if (mData.get(position).getServiceDetails() != null && !mData.get(position).getServiceDetails().equals("null")) {
+                    holder.bookservicevaluetext.setText(mData.get(position).getServiceDetails());
+                } else {
+                    holder.bookservicevaluetext.setText("-");
+                }
+            }
+            if (mData.get(position).getVehicleType() != null && !mData.get(position).getVehicleType().equals("null")) {
+                holder.makevaluetext.setText(mData.get(position).getVehicleType());
+            } else {
+                holder.makevaluetext.setText("-");
+            }
+            if (mData.get(position).getModel() != null && !mData.get(position).getModel().equals("null")) {
+                holder.yearvaluetext.setText(mData.get(position).getModel());
+            } else {
+                holder.yearvaluetext.setText("-");
+            }
+            if (mData.get(position).getTransmission() != null && !mData.get(position).getTransmission().equals("null")) {
+                holder.transmissionvaluetext.setText(mData.get(position).getTransmission());
+            } else {
+                holder.transmissionvaluetext.setText("-");
+            }
+            if (mData.get(position).getBranchName() != null && !mData.get(position).getBranchName().equals("null")) {
+                holder.branchvaluetext.setText(mData.get(position).getBranchName());
+            } else {
+                holder.branchvaluetext.setText("-");
+            }
         }
-        holder.makevaluetext.setText(mData.get(position).getVehicleType());
-        holder.yearvaluetext.setText(mData.get(position).getModel());
-        holder.transmissionvaluetext.setText(mData.get(position).getTransmission());
-        holder.branchvaluetext.setText(mData.get(position).getBranchName());
     }
 
     @Override

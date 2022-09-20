@@ -6,6 +6,19 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Datum {
+    public boolean isAnotherRel() {
+        return anotherRel;
+    }
+
+    public void setAnotherRel(boolean anotherRel) {
+        this.anotherRel = anotherRel;
+    }
+
+    boolean anotherRel=false;
+    public Datum() {
+
+    }
+
     public Datum(String id, String createDate, String serviceName, String serviceCategory, int v) {
         this.id = id;
         this.createDate = createDate;

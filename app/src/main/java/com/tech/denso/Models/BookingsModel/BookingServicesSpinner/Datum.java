@@ -2,7 +2,6 @@ package com.tech.denso.Models.BookingsModel.BookingServicesSpinner;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.tech.denso.Item;
 
 public class Datum {
     private boolean isSelected = false;
